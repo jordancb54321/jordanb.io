@@ -1,0 +1,245 @@
+:root {
+  color-scheme: dark;
+  --bg: #09131d;
+  --bg-accent: #12263a;
+  --panel: rgba(8, 18, 29, 0.9);
+  --panel-border: rgba(174, 226, 255, 0.14);
+  --text: #e9f5ff;
+  --muted: #98b4c7;
+  --highlight: #ff9b42;
+  --highlight-soft: rgba(255, 155, 66, 0.15);
+  --button-secondary: rgba(255, 255, 255, 0.08);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255, 155, 66, 0.18), transparent 28%),
+    radial-gradient(circle at right center, rgba(69, 189, 255, 0.18), transparent 24%),
+    linear-gradient(135deg, #08121c, #10202f 52%, #09131d);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(320px, 380px) 1fr;
+  gap: 1.25rem;
+  min-height: 100vh;
+  padding: 1.25rem;
+}
+
+.control-panel,
+.viewer {
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  background: var(--panel);
+  backdrop-filter: blur(24px);
+  box-shadow: var(--shadow);
+}
+
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--highlight);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--muted);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: var(--highlight);
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1;
+}
+
+h2 {
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
+
+.intro,
+.tips p {
+  color: var(--muted);
+}
+
+.controls {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.controls label,
+.controls fieldset {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.controls fieldset {
+  margin: 0;
+}
+
+.controls legend {
+  padding: 0 0.35rem;
+  color: var(--muted);
+}
+
+.controls input[type="range"] {
+  width: 100%;
+}
+
+.controls input[type="number"],
+.controls select {
+  width: 100%;
+  padding: 0.72rem 0.8rem;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.inline-field {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.button-row,
+.viewer-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+button {
+  padding: 0.8rem 1rem;
+  border: 0;
+  border-radius: 999px;
+  color: #08131d;
+  background: linear-gradient(135deg, #ffb25f, #ff8141);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(255, 129, 65, 0.22);
+}
+
+button.secondary {
+  color: var(--text);
+  background: var(--button-secondary);
+}
+
+button:disabled {
+  cursor: progress;
+  opacity: 0.65;
+}
+
+.status-panel dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.status-panel div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.status-panel div:last-child {
+  border-bottom: 0;
+}
+
+.status-panel dt {
+  color: var(--muted);
+}
+
+.viewer {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 1rem;
+}
+
+.viewer-toolbar {
+  justify-content: space-between;
+  padding: 0.4rem 0.3rem 1rem;
+  color: var(--muted);
+}
+
+.canvas-frame {
+  position: relative;
+  flex: 1;
+  min-height: 60vh;
+  overflow: hidden;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+    rgba(1, 6, 12, 0.92);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+canvas.is-dragging {
+  cursor: grabbing;
+}
+
+@media (max-width: 960px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas-frame {
+    min-height: 50vh;
+  }
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fractal Renderer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="control-panel">
+      <div>
+        <a class="back-link" href="../index.html">Back to portfolio</a>
+        <p class="eyebrow">Interactive Explorer</p>
+        <h1>Fractal Renderer</h1>
+        <p class="intro">
+          Render Mandelbrot, Julia, and Burning Ship fractals with live controls, mouse navigation, and PNG export.
+        </p>
+      </div>
+
+      <form id="controls" class="controls">
+        <label>
+          Fractal
+          <select id="fractalType" name="fractalType">
+            <option value="mandelbrot">Mandelbrot</option>
+            <option value="julia">Julia</option>
+            <option value="burningShip">Burning Ship</option>
+            <option value="tricorn">Tricorn</option>
+            <option value="multibrot3">Multibrot Cubic</option>
+            <option value="celtic">Celtic Mandelbrot</option>
+            <option value="buffalo">Buffalo</option>
+          </select>
+        </label>
+
+        <label>
+          Preset
+          <select id="presetSelect" name="presetSelect"></select>
+        </label>
+
+        <label>
+          Max iterations
+          <input id="iterations" name="iterations" type="range" min="50" max="2500" step="10" value="500">
+          <span id="iterationsValue">500</span>
+        </label>
+
+        <label>
+          Escape radius
+          <input id="escapeRadius" name="escapeRadius" type="range" min="2" max="32" step="0.5" value="4">
+          <span id="escapeRadiusValue">4.0</span>
+        </label>
+
+        <label>
+          Color strength
+          <input id="colorCycles" name="colorCycles" type="range" min="0.2" max="6" step="0.1" value="1.6">
+          <span id="colorCyclesValue">1.6</span>
+        </label>
+
+        <label>
+          Resolution scale
+          <input id="resolutionScale" name="resolutionScale" type="range" min="0.25" max="1.5" step="0.05" value="1">
+          <span id="resolutionScaleValue">1.00x</span>
+        </label>
+
+        <label>
+          Palette
+          <select id="palette" name="palette">
+            <option value="ember">Ember</option>
+            <option value="lagoon">Lagoon</option>
+            <option value="ice">Ice</option>
+            <option value="neon">Neon</option>
+            <option value="mono">Mono</option>
+            <option value="sunset">Sunset</option>
+            <option value="aurora">Aurora</option>
+            <option value="lava">Lava</option>
+            <option value="forest">Forest</option>
+            <option value="royal">Royal</option>
+            <option value="candy">Candy</option>
+            <option value="oceanic">Oceanic</option>
+          </select>
+        </label>
+
+        <label class="inline-field">
+          <input id="smoothColoring" name="smoothColoring" type="checkbox" checked>
+          Smooth coloring
+        </label>
+
+        <fieldset class="julia-fields">
+          <legend>Julia Constant</legend>
+          <label>
+            Real
+            <input id="juliaReal" name="juliaReal" type="number" step="0.001" value="-0.8">
+          </label>
+          <label>
+            Imaginary
+            <input id="juliaImag" name="juliaImag" type="number" step="0.001" value="0.156">
+          </label>
+        </fieldset>
+
+        <div class="button-row">
+          <button type="button" id="renderButton">Render</button>
+          <button type="button" id="resetViewButton" class="secondary">Reset view</button>
+          <button type="button" id="downloadButton" class="secondary">Save PNG</button>
+        </div>
+      </form>
+
+      <section class="tips">
+        <h2>Navigation</h2>
+        <p>Scroll to zoom, drag to pan, double-click to zoom in, and shift + double-click to zoom out.</p>
+      </section>
+
+      <section class="status-panel">
+        <h2>Status</h2>
+        <dl>
+          <div>
+            <dt>Center</dt>
+            <dd id="centerValue">0.000000, 0.000000</dd>
+          </div>
+          <div>
+            <dt>Zoom</dt>
+            <dd id="zoomValue">1.00x</dd>
+          </div>
+          <div>
+            <dt>Render</dt>
+            <dd id="renderStatus">Idle</dd>
+          </div>
+        </dl>
+      </section>
+    </aside>
+
+    <main class="viewer">
+      <div class="viewer-toolbar">
+        <button type="button" id="fitViewButton" class="secondary">Fit canvas</button>
+        <span id="canvasInfo">0 x 0</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas id="fractalCanvas" aria-label="Fractal renderer canvas"></canvas>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
