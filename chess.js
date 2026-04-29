@@ -18,6 +18,9 @@
   var depthWarningEl = document.getElementById("depth-warning");
   var newGameEl = document.getElementById("new-game");
   var flipBoardEl = document.getElementById("flip-board");
+  var engineWorker = null;
+  var engineRequestId = 0;
+  var engineThinking = false;
 
   var pieceValues = {
     p: 100,
@@ -549,7 +552,83 @@
     updateStatus();
   }
 
+  function createEngineWorker() {
+    if (typeof Worker === "undefined") {
+      return null;
+    }
+
+    try {
+      var worker = new Worker("chess-engine-worker.js");
+
+      worker.onmessage = function (event) {
+        var data = event.data;
+
+        if (!data || data.requestId !== engineRequestId) {
+          return;
+        }
+
+        engineThinking = false;
+
+        if (data.error) {
+          engineStateEl.textContent = "Worker failed; using fallback";
+          window.setTimeout(runSynchronousEngineMove, 20);
+          return;
+        }
+
+        applyEngineResult(data);
+      };
+
+      worker.onerror = function () {
+        engineThinking = false;
+        engineWorker = null;
+        engineStateEl.textContent = "Worker unavailable; using fallback";
+        window.setTimeout(runSynchronousEngineMove, 20);
+      };
+
+      return worker;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function applyEngineResult(result) {
+    if (game.game_over() || game.turn() !== "b") {
+      return;
+    }
+
+    if (result.move) {
+      game.move(result.move);
+      syncBoard();
+    }
+
+    if (game.game_over()) {
+      engineStateEl.textContent = "Game over";
+    } else if (result.book) {
+      engineStateEl.textContent = "Book move";
+    } else {
+      engineStateEl.textContent = "Searched " + Number(result.nodes || 0).toLocaleString() + " positions";
+    }
+  }
+
+  function runSynchronousEngineMove() {
+    if (game.game_over() || game.turn() !== "b") {
+      engineStateEl.textContent = game.game_over() ? "Game over" : "Waiting";
+      return;
+    }
+
+    var bestMove = getBestMove(searchDepth);
+    applyEngineResult({
+      move: bestMove,
+      nodes: nodesSearched,
+      book: nodesSearched === 0
+    });
+  }
+
   function onDragStart(source, piece) {
+    if (engineThinking) {
+      return false;
+    }
+
     if (game.game_over()) {
       return false;
     }
@@ -597,27 +676,39 @@
       return;
     }
 
+    engineThinking = true;
     engineStateEl.textContent = "Thinking at depth " + searchDepth;
 
-    window.setTimeout(function () {
-      var bestMove = getBestMove(searchDepth);
+    if (!engineWorker) {
+      engineWorker = createEngineWorker();
+    }
 
-      if (bestMove) {
-        game.move(bestMove);
-        syncBoard();
-      }
+    if (!engineWorker) {
+      window.setTimeout(function () {
+        engineThinking = false;
+        runSynchronousEngineMove();
+      }, 20);
+      return;
+    }
 
-      if (game.game_over()) {
-        engineStateEl.textContent = "Game over";
-      } else if (nodesSearched === 0) {
-        engineStateEl.textContent = "Book move";
-      } else {
-        engineStateEl.textContent = "Searched " + nodesSearched.toLocaleString() + " positions";
-      }
-    }, 20);
+    engineRequestId += 1;
+    engineWorker.postMessage({
+      requestId: engineRequestId,
+      fen: game.fen(),
+      history: game.history(),
+      depth: searchDepth
+    });
   }
 
   function resetGame() {
+    engineRequestId += 1;
+    engineThinking = false;
+
+    if (engineWorker) {
+      engineWorker.terminate();
+      engineWorker = createEngineWorker();
+    }
+
     game.reset();
     engineStateEl.textContent = "Waiting";
     syncBoard();
@@ -631,6 +722,8 @@
     onDrop: onDrop,
     onSnapEnd: onSnapEnd
   });
+
+  engineWorker = createEngineWorker();
 
   window.addEventListener("resize", function () {
     board.resize();

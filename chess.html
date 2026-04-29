@@ -22,7 +22,7 @@
         <span class="brand-mark" aria-hidden="true">JB</span>
         <div>
           <p class="eyebrow">Interactive project</p>
-          <a class="brand-name" href="index.html">penis</a>
+          <a class="brand-name" href="index.html">Jordan Betts</a>
         </div>
       </div>
 
@@ -67,6 +67,7 @@
             <li>Minimax search with alpha-beta pruning and move ordering</li>
             <li>Quiescence search for tactical capture sequences</li>
             <li>Material, piece-square, pawn-structure, and development scoring</li>
+            <li>Web Worker search so deeper analysis does not block the board</li>
             <li>Adjustable search depth and live game status</li>
           </ul>
         </aside>
@@ -112,7 +113,7 @@
             <p class="panel-label">How it works</p>
             <p class="status-copy">
               You play White. After your move, the engine evaluates legal replies
-              and chooses one using a lightweight search tuned for a static site.
+              and chooses one in a background worker tuned for a static site.
             </p>
           </div>
         </div>
