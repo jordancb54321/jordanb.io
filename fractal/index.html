@@ -3,14 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fractal Renderer</title>
+  <title>Jordan Betts | Fractal Renderer</title>
+  <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">JB</span>
+        <div>
+          <p class="eyebrow">Interactive project</p>
+          <a class="brand-name" href="../index.html">Jordan Betts</a>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#stack">Stack</a>
+        <a href="../chess.html">Chess</a>
+        <a href="../sorting.html">Sorting</a>
+        <a href="./" aria-current="page">Fractal</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="app-shell">
     <aside class="control-panel">
       <div>
-        <a class="back-link" href="../index.html">Back to portfolio</a>
         <p class="eyebrow">Interactive Explorer</p>
         <h1>Fractal Renderer</h1>
         <p class="intro">
@@ -127,7 +150,7 @@
       </section>
     </aside>
 
-    <main class="viewer">
+    <section class="viewer" aria-label="Fractal preview">
       <div class="viewer-toolbar">
         <button type="button" id="fitViewButton" class="secondary">Fit canvas</button>
         <span id="canvasInfo">0 x 0</span>
@@ -135,8 +158,8 @@
       <div class="canvas-frame">
         <canvas id="fractalCanvas" aria-label="Fractal renderer canvas"></canvas>
       </div>
-    </main>
-  </div>
+    </section>
+  </main>
 
   <script src="app.js"></script>
 </body>
