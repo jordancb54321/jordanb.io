@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jordan Betts | Chess Engine Demo</title>
+  <meta
+    name="description"
+    content="A browser-based chess demo by Jordan Betts featuring a custom JavaScript engine and interactive board."
+  >
+  <meta name="theme-color" content="#f4f7f1">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="vendor/chessboard-1.0.0.min.css">
+  <link rel="stylesheet" href="chess.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">JB</span>
+        <div>
+          <p class="eyebrow">Interactive project</p>
+          <a class="brand-name" href="index.html">Jordan Betts</a>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#stack">Stack</a>
+        <a href="chess.html" aria-current="page">Chess</a>
+        <a href="sorting.html">Sorting</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section chess-hero">
+      <div class="wrap chess-hero-grid">
+        <div>
+          <p class="eyebrow">Custom JavaScript build</p>
+          <h1>Chess engine demo with a browser-first UI.</h1>
+          <p class="lead">
+            This page uses <code>chess.js</code> for legal move generation and a
+            custom minimax engine written in plain JavaScript. The board UI is
+            rendered with <code>chessboard.js</code> so the page stays static and
+            easy to host.
+          </p>
+
+          <div class="hero-actions">
+            <button class="button button-primary" id="new-game" type="button">
+              New game
+            </button>
+            <button class="button button-secondary" id="flip-board" type="button">
+              Flip board
+            </button>
+          </div>
+        </div>
+
+        <aside class="hero-panel chess-summary" aria-label="Engine summary">
+          <p class="panel-label">Engine profile</p>
+          <ul class="panel-list">
+            <li>Minimax search with alpha-beta pruning and move ordering</li>
+            <li>Quiescence search for tactical capture sequences</li>
+            <li>Material, piece-square, pawn-structure, and development scoring</li>
+            <li>Adjustable search depth and live game status</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section chess-section">
+      <div class="wrap chess-layout">
+        <div class="card chess-board-card">
+          <div id="board" class="chess-board" aria-label="Interactive chess board"></div>
+        </div>
+
+        <div class="card chess-sidebar">
+          <div class="status-group">
+            <p class="panel-label">Status</p>
+            <p id="status" class="status-copy">Loading board...</p>
+          </div>
+
+          <div class="status-grid">
+            <div>
+              <p class="panel-label">Engine</p>
+              <p id="engine-state" class="status-copy">Waiting</p>
+            </div>
+            <div>
+              <p class="panel-label">Search depth</p>
+              <label class="depth-control" for="depth">
+                <input id="depth" type="range" min="1" max="5" value="2">
+                <span id="depth-value">2 ply</span>
+              </label>
+            </div>
+          </div>
+
+          <p class="performance-warning" id="depth-warning" hidden>
+            Higher depth means a stronger search, but it can slow the engine noticeably on some devices.
+          </p>
+
+          <div class="move-history-wrap">
+            <p class="panel-label">Move history</p>
+            <ol id="move-history" class="move-history" aria-live="polite"></ol>
+          </div>
+
+          <div class="notes">
+            <p class="panel-label">How it works</p>
+            <p class="status-copy">
+              You play White. After your move, the engine evaluates legal replies
+              and chooses one using a lightweight search tuned for a static site.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>Static page, custom engine logic, no build step required.</p>
+      <a href="index.html">Back to portfolio</a>
+    </div>
+  </footer>
+
+  <script src="vendor/jquery-3.7.1.min.js"></script>
+  <script src="vendor/chess.min.js"></script>
+  <script src="vendor/chessboard-1.0.0.min.js"></script>
+  <script src="chess.js"></script>
+</body>
+</html>

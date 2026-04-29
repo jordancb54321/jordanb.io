@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jordan Betts | Sorting Visualizer</title>
+  <meta
+    name="description"
+    content="A browser-based sorting visualizer by Jordan Betts showing different sorting algorithms running in real time."
+  >
+  <meta name="theme-color" content="#f4f7f1">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="sorting.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">JB</span>
+        <div>
+          <p class="eyebrow">Interactive project</p>
+          <a class="brand-name" href="index.html">Jordan Betts</a>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#stack">Stack</a>
+        <a href="chess.html">Chess</a>
+        <a href="sorting.html" aria-current="page">Sorting</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section sorting-hero">
+      <div class="wrap sorting-hero-grid">
+        <div>
+          <p class="eyebrow">Algorithm visualizer</p>
+          <h1>Watch classic sorting algorithms work through the same data.</h1>
+          <p class="lead">
+            This page generates a random array and animates how different
+            algorithms compare, swap, and place values over time. It stays fully
+            static, with all rendering and logic handled in plain JavaScript.
+          </p>
+
+          <div class="hero-actions">
+            <button class="button button-primary" id="shuffle" type="button">
+              Shuffle array
+            </button>
+            <button class="button button-secondary" id="run-selected" type="button">
+              Run selected
+            </button>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="Visualizer summary">
+          <p class="panel-label">Included algorithms</p>
+          <ul class="panel-list">
+            <li>Bubble sort</li>
+            <li>Selection sort</li>
+            <li>Insertion sort</li>
+            <li>Merge sort</li>
+            <li>Quick sort</li>
+            <li>Heap sort</li>
+            <li>Shell sort</li>
+            <li>Radix sort</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section sorting-section">
+      <div class="wrap sorting-controls-wrap">
+        <div class="card sorting-controls">
+          <div>
+            <p class="panel-label">Array size</p>
+            <label class="control-label" for="array-size">
+              <input id="array-size" type="range" min="12" max="96" value="28">
+              <span id="array-size-value">28 bars</span>
+            </label>
+          </div>
+
+          <div>
+            <p class="panel-label">Animation speed</p>
+            <label class="control-label" for="speed">
+              <input id="speed" type="range" min="1" max="100" value="45">
+              <span id="speed-value">45 ms</span>
+            </label>
+          </div>
+
+          <div>
+            <p class="panel-label">Algorithms to run</p>
+            <div class="algorithm-actions">
+              <button class="button button-secondary algorithm-button is-selected" data-algorithm="bubble" aria-pressed="true" type="button">
+                Bubble
+              </button>
+              <button class="button button-secondary algorithm-button is-selected" data-algorithm="selection" aria-pressed="true" type="button">
+                Selection
+              </button>
+              <button class="button button-secondary algorithm-button is-selected" data-algorithm="insertion" aria-pressed="true" type="button">
+                Insertion
+              </button>
+              <button class="button button-secondary algorithm-button is-selected" data-algorithm="merge" aria-pressed="true" type="button">
+                Merge
+              </button>
+              <button class="button button-secondary algorithm-button" data-algorithm="quick" aria-pressed="false" type="button">
+                Quick
+              </button>
+              <button class="button button-secondary algorithm-button" data-algorithm="heap" aria-pressed="false" type="button">
+                Heap
+              </button>
+              <button class="button button-secondary algorithm-button" data-algorithm="shell" aria-pressed="false" type="button">
+                Shell
+              </button>
+              <button class="button button-secondary algorithm-button" data-algorithm="radix" aria-pressed="false" type="button">
+                Radix
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <p class="panel-label">Sound effects</p>
+            <label class="toggle-control" for="sound-toggle">
+              <input id="sound-toggle" type="checkbox">
+              <span>Play tones during comparisons and writes</span>
+            </label>
+          </div>
+        </div>
+        <p class="performance-warning" id="performance-warning" hidden>
+          High bar counts and very fast animation can look great, but they may lag on some devices.
+        </p>
+      </div>
+    </section>
+
+    <section class="section sorting-section sorting-section-tight">
+      <div class="wrap sorting-grid" id="sorting-grid">
+        <article class="card algorithm-card" data-panel="bubble">
+          <div class="algorithm-header">
+            <div>
+              <p class="panel-label">Bubble sort</p>
+              <h2>Bubble</h2>
+            </div>
+            <p class="algorithm-status" id="status-bubble">Ready</p>
+          </div>
+          <div class="algorithm-metrics">
+            <p id="time-bubble">Time: --</p>
+            <p id="memory-bubble">Memory: --</p>
+          </div>
+          <p class="algorithm-explanation">
+            Bubble sort repeatedly compares neighboring values and swaps them when
+            they are out of order, slowly pushing larger values to the end.
+          </p>
+          <button class="button button-secondary code-toggle" data-code-toggle="bubble" type="button" aria-expanded="false">
+            Show code
+          </button>
+          <div class="code-panel" id="code-panel-bubble" hidden>
+            <ol class="code-list" id="code-bubble"></ol>
+          </div>
+          <div class="bars" id="bars-bubble" aria-label="Bubble sort visualizer"></div>
+        </article>
+
+        <article class="card algorithm-card" data-panel="selection">
+          <div class="algorithm-header">
+            <div>
+              <p class="panel-label">Selection sort</p>
+              <h2>Selection</h2>
+            </div>
+            <p class="algorithm-status" id="status-selection">Ready</p>
+          </div>
+          <div class="algorithm-metrics">
+            <p id="time-selection">Time: --</p>
+            <p id="memory-selection">Memory: --</p>
+          </div>
+          <p class="algorithm-explanation">
+            Selection sort scans the remaining unsorted values to find the
+            smallest item, then places it into the next sorted position.
+          </p>
+          <button class="button button-secondary code-toggle" data-code-toggle="selection" type="button" aria-expanded="false">
+            Show code
+          </button>
+          <div class="code-panel" id="code-panel-selection" hidden>
+            <ol class="code-list" id="code-selection"></ol>
+          </div>
+          <div class="bars" id="bars-selection" aria-label="Selection sort visualizer"></div>
+        </article>
+
+        <article class="card algorithm-card" data-panel="insertion">
+          <div class="algorithm-header">
+            <div>
+              <p class="panel-label">Insertion sort</p>
+              <h2>Insertion</h2>
+            </div>
+            <p class="algorithm-status" id="status-insertion">Ready</p>
+          </div>
+          <div class="algorithm-metrics">
+            <p id="time-insertion">Time: --</p>
+            <p id="memory-insertion">Memory: --</p>
+          </div>
+          <p class="algorithm-explanation">
+            Insertion sort builds a sorted section from left to right, inserting
+            each new value into the correct place among the items before it.
+          </p>
+          <button class="button button-secondary code-toggle" data-code-toggle="insertion" type="button" aria-expanded="false">
+            Show code
+          </button>
+          <div class="code-panel" id="code-panel-insertion" hidden>
+            <ol class="code-list" id="code-insertion"></ol>
+          </div>
+          <div class="bars" id="bars-insertion" aria-label="Insertion sort visualizer"></div>
+        </article>
+
+        <article class="card algorithm-card" data-panel="merge">
+          <div class="algorithm-header">
+            <div>
+              <p class="panel-label">Merge sort</p>
+              <h2>Merge</h2>
+            </div>
+            <p class="algorithm-status" id="status-merge">Ready</p>
+          </div>
+          <div class="algorithm-metrics">
+            <p id="time-merge">Time: --</p>
+            <p id="memory-merge">Memory: --</p>
+          </div>
+          <p class="algorithm-explanation">
+            Merge sort splits the array into smaller pieces, sorts those pieces,
+            and then merges them back together in order.
+          </p>
+          <button class="button button-secondary code-toggle" data-code-toggle="merge" type="button" aria-expanded="false">
+            Show code
+          </button>
+          <div class="code-panel" id="code-panel-merge" hidden>
+            <ol class="code-list" id="code-merge"></ol>
+          </div>
+          <div class="bars" id="bars-merge" aria-label="Merge sort visualizer"></div>
+        </article>
+
+        <article class="card algorithm-card" data-panel="quick">
+          <div class="algorithm-header">
+            <div>
+              <p class="panel-label">Quick sort</p>
+              <h2>Quick</h2>
+            </div>
+            <p class="algorithm-status" id="status-quick">Ready</p>
+          </div>
+          <div class="algorithm-metrics">
+            <p id="time-quick">Time: --</p>
+            <p id="memory-quick">Memory: --</p>
+          </div>
+          <p class="algorithm-explanation">
+            Quick sort chooses a pivot, partitions smaller and larger values
+            around it, and then recursively sorts each side.
+          </p>
+          <button class="button button-secondary code-toggle" data-code-toggle="quick" type="button" aria-expanded="false">
+            Show code
+          </button>
+          <div class="code-panel" id="code-panel-quick" hidden>
+            <ol class="code-list" id="code-quick"></ol>
+          </div>
+          <div class="bars" id="bars-quick" aria-label="Quick sort visualizer"></div>
+        </article>
+
+        <article class="card algorithm-card" data-panel="heap">
+          <div class="algorithm-header">
+            <div>
+              <p class="panel-label">Heap sort</p>
+              <h2>Heap</h2>
+            </div>
+            <p class="algorithm-status" id="status-heap">Ready</p>
+          </div>
+          <div class="algorithm-metrics">
+            <p id="time-heap">Time: --</p>
+            <p id="memory-heap">Memory: --</p>
+          </div>
+          <p class="algorithm-explanation">
+            Heap sort organizes values into a max heap, repeatedly removes the
+            largest value, and places it at the end of the array.
+          </p>
+          <button class="button button-secondary code-toggle" data-code-toggle="heap" type="button" aria-expanded="false">
+            Show code
+          </button>
+          <div class="code-panel" id="code-panel-heap" hidden>
+            <ol class="code-list" id="code-heap"></ol>
+          </div>
+          <div class="bars" id="bars-heap" aria-label="Heap sort visualizer"></div>
+        </article>
+
+        <article class="card algorithm-card" data-panel="shell">
+          <div class="algorithm-header">
+            <div>
+              <p class="panel-label">Shell sort</p>
+              <h2>Shell</h2>
+            </div>
+            <p class="algorithm-status" id="status-shell">Ready</p>
+          </div>
+          <div class="algorithm-metrics">
+            <p id="time-shell">Time: --</p>
+            <p id="memory-shell">Memory: --</p>
+          </div>
+          <p class="algorithm-explanation">
+            Shell sort improves insertion sort by first comparing values across
+            larger gaps, then reducing the gap until the array is fully sorted.
+          </p>
+          <button class="button button-secondary code-toggle" data-code-toggle="shell" type="button" aria-expanded="false">
+            Show code
+          </button>
+          <div class="code-panel" id="code-panel-shell" hidden>
+            <ol class="code-list" id="code-shell"></ol>
+          </div>
+          <div class="bars" id="bars-shell" aria-label="Shell sort visualizer"></div>
+        </article>
+
+        <article class="card algorithm-card" data-panel="radix">
+          <div class="algorithm-header">
+            <div>
+              <p class="panel-label">Radix sort</p>
+              <h2>Radix</h2>
+            </div>
+            <p class="algorithm-status" id="status-radix">Ready</p>
+          </div>
+          <div class="algorithm-metrics">
+            <p id="time-radix">Time: --</p>
+            <p id="memory-radix">Memory: --</p>
+          </div>
+          <p class="algorithm-explanation">
+            Radix sort groups numbers by individual digits from least
+            significant to most significant instead of comparing values directly.
+          </p>
+          <button class="button button-secondary code-toggle" data-code-toggle="radix" type="button" aria-expanded="false">
+            Show code
+          </button>
+          <div class="code-panel" id="code-panel-radix" hidden>
+            <ol class="code-list" id="code-radix"></ol>
+          </div>
+          <div class="bars" id="bars-radix" aria-label="Radix sort visualizer"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>Static visualizer page with animated algorithm demos.</p>
+      <a href="index.html">Back to portfolio</a>
+    </div>
+  </footer>
+
+  <script src="sorting.js"></script>
+</body>
+</html>
