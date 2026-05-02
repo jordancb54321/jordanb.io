@@ -464,17 +464,23 @@ function getBestMove(depth, history) {
 
   var moves = getOrderedMoves({ verbose: true });
   var bestMove = null;
-  var bestScore = Infinity;
+  var maximizingRoot = game.turn() === "w";
+  var bestScore = maximizingRoot ? -Infinity : Infinity;
   transpositionTable = {};
   nodesSearched = 0;
 
   for (var i = 0; i < moves.length; i += 1) {
     var move = moves[i];
     game.move(move);
-    var score = minimax(depth - 1, -Infinity, Infinity, true);
+    var score = minimax(depth - 1, -Infinity, Infinity, game.turn() === "w");
     game.undo();
 
-    if (score < bestScore) {
+    if (maximizingRoot && score > bestScore) {
+      bestScore = score;
+      bestMove = move;
+    }
+
+    if (!maximizingRoot && score < bestScore) {
       bestScore = score;
       bestMove = move;
     }

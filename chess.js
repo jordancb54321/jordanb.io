@@ -6,9 +6,18 @@
   var game = new Chess();
   var board = null;
   var searchDepth = 2;
-  var quiescenceDepth = 4;
-  var transpositionTable = {};
-  var nodesSearched = 0;
+  var stockfishMoveTime = 500;
+  var botBattle = false;
+  var engines = {
+    w: "custom",
+    b: "custom"
+  };
+
+  var activeRequestId = 0;
+  var engineThinking = false;
+  var customWorker = null;
+  var stockfish = null;
+  var botMoveTimer = null;
 
   var statusEl = document.getElementById("status");
   var engineStateEl = document.getElementById("engine-state");
@@ -18,489 +27,170 @@
   var depthWarningEl = document.getElementById("depth-warning");
   var newGameEl = document.getElementById("new-game");
   var flipBoardEl = document.getElementById("flip-board");
-  var engineWorker = null;
-  var engineRequestId = 0;
-  var engineThinking = false;
-
-  var pieceValues = {
-    p: 100,
-    n: 320,
-    b: 330,
-    r: 500,
-    q: 900,
-    k: 20000
-  };
-
-  var centerSquares = {
-    d4: true,
-    e4: true,
-    d5: true,
-    e5: true
-  };
-
-  var extendedCenterSquares = {
-    c3: true,
-    d3: true,
-    e3: true,
-    f3: true,
-    c4: true,
-    d4: true,
-    e4: true,
-    f4: true,
-    c5: true,
-    d5: true,
-    e5: true,
-    f5: true,
-    c6: true,
-    d6: true,
-    e6: true,
-    f6: true
-  };
-
-  var openingBook = {
-    "": ["e5", "c5", "e6", "c6"],
-    "e4": ["e5", "c5", "e6", "c6"],
-    "d4": ["d5", "Nf6"],
-    "Nf3": ["d5", "Nf6"],
-    "c4": ["e5", "Nf6"]
-  };
-
-  var pieceSquareTables = {
-    p: [
-      0, 0, 0, 0, 0, 0, 0, 0,
-      50, 50, 50, 50, 50, 50, 50, 50,
-      10, 10, 20, 30, 30, 20, 10, 10,
-      5, 5, 10, 25, 25, 10, 5, 5,
-      0, 0, 0, 20, 20, 0, 0, 0,
-      5, -5, -10, 0, 0, -10, -5, 5,
-      5, 10, 10, -20, -20, 10, 10, 5,
-      0, 0, 0, 0, 0, 0, 0, 0
-    ],
-    n: [
-      -50, -40, -30, -30, -30, -30, -40, -50,
-      -40, -20, 0, 5, 5, 0, -20, -40,
-      -30, 5, 10, 15, 15, 10, 5, -30,
-      -30, 0, 15, 20, 20, 15, 0, -30,
-      -30, 5, 15, 20, 20, 15, 5, -30,
-      -30, 0, 10, 15, 15, 10, 0, -30,
-      -40, -20, 0, 0, 0, 0, -20, -40,
-      -50, -40, -30, -30, -30, -30, -40, -50
-    ],
-    b: [
-      -20, -10, -10, -10, -10, -10, -10, -20,
-      -10, 0, 0, 0, 0, 0, 0, -10,
-      -10, 0, 5, 10, 10, 5, 0, -10,
-      -10, 5, 5, 10, 10, 5, 5, -10,
-      -10, 0, 10, 10, 10, 10, 0, -10,
-      -10, 10, 10, 10, 10, 10, 10, -10,
-      -10, 5, 0, 0, 0, 0, 5, -10,
-      -20, -10, -10, -10, -10, -10, -10, -20
-    ],
-    r: [
-      0, 0, 0, 5, 5, 0, 0, 0,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      -5, 0, 0, 0, 0, 0, 0, -5,
-      5, 10, 10, 10, 10, 10, 10, 5,
-      0, 0, 0, 0, 0, 0, 0, 0
-    ],
-    q: [
-      -20, -10, -10, -5, -5, -10, -10, -20,
-      -10, 0, 0, 0, 0, 0, 0, -10,
-      -10, 0, 5, 5, 5, 5, 0, -10,
-      -5, 0, 5, 5, 5, 5, 0, -5,
-      0, 0, 5, 5, 5, 5, 0, -5,
-      -10, 5, 5, 5, 5, 5, 0, -10,
-      -10, 0, 5, 0, 0, 0, 0, -10,
-      -20, -10, -10, -5, -5, -10, -10, -20
-    ],
-    k: [
-      -30, -40, -40, -50, -50, -40, -40, -30,
-      -30, -40, -40, -50, -50, -40, -40, -30,
-      -30, -40, -40, -50, -50, -40, -40, -30,
-      -30, -40, -40, -50, -50, -40, -40, -30,
-      -20, -30, -30, -40, -40, -30, -30, -20,
-      -10, -20, -20, -20, -20, -20, -20, -10,
-      20, 20, 0, 0, 0, 0, 20, 20,
-      20, 30, 10, 0, 0, 10, 30, 20
-    ]
-  };
-
-  function squareToIndex(square) {
-    var file = square.charCodeAt(0) - 97;
-    var rank = parseInt(square.charAt(1), 10);
-    return (8 - rank) * 8 + file;
-  }
-
-  function mirroredIndex(index) {
-    var rank = Math.floor(index / 8);
-    var file = index % 8;
-    return (7 - rank) * 8 + file;
-  }
-
-  function getFenKey() {
-    return game.fen().split(" ").slice(0, 4).join(" ");
-  }
-
-  function squareFile(square) {
-    return square.charCodeAt(0) - 97;
-  }
-
-  function squareRank(square) {
-    return parseInt(square.charAt(1), 10);
-  }
-
-  function isPassedPawn(square, color, pawnsByColor) {
-    var file = squareFile(square);
-    var rank = squareRank(square);
-    var enemy = color === "w" ? "b" : "w";
-    var enemyPawns = pawnsByColor[enemy];
-
-    for (var i = 0; i < enemyPawns.length; i += 1) {
-      var enemyFile = squareFile(enemyPawns[i]);
-      var enemyRank = squareRank(enemyPawns[i]);
-
-      if (Math.abs(enemyFile - file) > 1) {
-        continue;
-      }
-
-      if (color === "w" && enemyRank > rank) {
-        return false;
-      }
-
-      if (color === "b" && enemyRank < rank) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  function evaluatePawnStructure(pawnsByColor) {
-    var total = 0;
-
-    ["w", "b"].forEach(function (color) {
-      var sign = color === "w" ? 1 : -1;
-      var pawns = pawnsByColor[color];
-      var files = {};
-
-      pawns.forEach(function (square) {
-        var file = squareFile(square);
-        files[file] = (files[file] || 0) + 1;
-      });
-
-      pawns.forEach(function (square) {
-        var file = squareFile(square);
-        var rank = squareRank(square);
-        var hasLeftNeighbor = files[file - 1] > 0;
-        var hasRightNeighbor = files[file + 1] > 0;
-
-        if (files[file] > 1) {
-          total -= sign * 12;
-        }
-
-        if (!hasLeftNeighbor && !hasRightNeighbor) {
-          total -= sign * 10;
-        }
-
-        if (isPassedPawn(square, color, pawnsByColor)) {
-          var progress = color === "w" ? rank - 2 : 7 - rank;
-          total += sign * (18 + progress * 8);
-        }
-      });
-    });
-
-    return total;
-  }
-
-  function evaluateCastlingRights() {
-    var fenParts = game.fen().split(" ");
-    var rights = fenParts[2];
-    var total = 0;
-
-    if (rights.indexOf("K") !== -1 || rights.indexOf("Q") !== -1) {
-      total += 18;
-    }
-
-    if (rights.indexOf("k") !== -1 || rights.indexOf("q") !== -1) {
-      total -= 18;
-    }
-
-    return total;
-  }
-
-  function evaluateBoardPosition() {
-    if (game.in_checkmate()) {
-      return game.turn() === "w" ? -999999 : 999999;
-    }
-
-    if (game.in_draw() || game.in_stalemate() || game.in_threefold_repetition()) {
-      return 0;
-    }
-
-    var boardState = game.board();
-    var total = 0;
-    var bishopCount = { w: 0, b: 0 };
-    var pawnsByColor = { w: [], b: [] };
-    var developedMinorPieces = { w: 0, b: 0 };
-
-    for (var rank = 0; rank < 8; rank += 1) {
-      for (var file = 0; file < 8; file += 1) {
-        var piece = boardState[rank][file];
-
-        if (!piece) {
-          continue;
-        }
-
-        var square = String.fromCharCode(97 + file) + (8 - rank);
-        var index = squareToIndex(square);
-        var table = pieceSquareTables[piece.type];
-        var positional = piece.color === "w" ? table[index] : table[mirroredIndex(index)];
-        var material = pieceValues[piece.type] + positional;
-        var sign = piece.color === "w" ? 1 : -1;
-
-        if (piece.type === "b") {
-          bishopCount[piece.color] += 1;
-        }
-
-        if (piece.type === "p") {
-          pawnsByColor[piece.color].push(square);
-        }
-
-        if ((piece.type === "n" || piece.type === "b") && (piece.color === "w" ? rank < 7 : rank > 0)) {
-          developedMinorPieces[piece.color] += 1;
-        }
-
-        if (centerSquares[square]) {
-          material += 12;
-        } else if (extendedCenterSquares[square]) {
-          material += 5;
-        }
-
-        total += sign * material;
-      }
-    }
-
-    if (bishopCount.w >= 2) {
-      total += 35;
-    }
-
-    if (bishopCount.b >= 2) {
-      total -= 35;
-    }
-
-    total += (developedMinorPieces.w - developedMinorPieces.b) * 10;
-    total += evaluatePawnStructure(pawnsByColor);
-    total += evaluateCastlingRights();
-
-    if (game.in_check()) {
-      total += game.turn() === "w" ? -40 : 40;
-    }
-
-    return total;
-  }
-
-  function scoreMove(move) {
-    var score = 0;
-
-    if (move.captured) {
-      score += 10000 + pieceValues[move.captured] - pieceValues[move.piece] / 10;
-    }
-
-    if (move.promotion) {
-      score += pieceValues[move.promotion] || 800;
-    }
-
-    if (centerSquares[move.to]) {
-      score += 35;
-    } else if (extendedCenterSquares[move.to]) {
-      score += 12;
-    }
-
-    if (move.flags && move.flags.indexOf("k") !== -1) {
-      score += 80;
-    }
-
-    if (move.flags && move.flags.indexOf("q") !== -1) {
-      score += 70;
-    }
-
-    game.move(move);
-
-    if (game.in_check()) {
-      score += 600;
-    }
-
-    game.undo();
-    return score;
-  }
-
-  function getOrderedMoves(options) {
-    return game.moves(options || { verbose: true }).sort(function (a, b) {
-      return scoreMove(b) - scoreMove(a);
-    });
-  }
-
-  function quiescence(alpha, beta, maximizingPlayer, depth) {
-    nodesSearched += 1;
-
-    var standPat = evaluateBoardPosition();
-
-    if (depth === 0 || game.game_over()) {
-      return standPat;
-    }
-
-    if (maximizingPlayer) {
-      if (standPat >= beta) {
-        return beta;
-      }
-
-      alpha = Math.max(alpha, standPat);
-    } else {
-      if (standPat <= alpha) {
-        return alpha;
-      }
-
-      beta = Math.min(beta, standPat);
-    }
-
-    var tacticalMoves = getOrderedMoves({ verbose: true }).filter(function (move) {
-      return move.captured || move.promotion;
-    });
-
-    for (var i = 0; i < tacticalMoves.length; i += 1) {
-      game.move(tacticalMoves[i]);
-      var score = quiescence(alpha, beta, !maximizingPlayer, depth - 1);
-      game.undo();
-
-      if (maximizingPlayer) {
-        alpha = Math.max(alpha, score);
-      } else {
-        beta = Math.min(beta, score);
-      }
-
-      if (beta <= alpha) {
-        break;
-      }
-    }
-
-    return maximizingPlayer ? alpha : beta;
-  }
-
-  function minimax(depth, alpha, beta, maximizingPlayer) {
-    nodesSearched += 1;
-
-    if (depth === 0 || game.game_over()) {
-      return quiescence(alpha, beta, maximizingPlayer, quiescenceDepth);
-    }
-
-    var fenKey = getFenKey();
-    var cached = transpositionTable[fenKey];
-
-    if (cached && cached.depth >= depth) {
-      return cached.score;
-    }
-
-    var moves = getOrderedMoves({ verbose: true });
-    var bestScore;
-    var searchedAllMoves = true;
-
-    if (maximizingPlayer) {
-      var maxEval = -Infinity;
-
-      for (var i = 0; i < moves.length; i += 1) {
-        game.move(moves[i]);
-        var evalScore = minimax(depth - 1, alpha, beta, false);
-        game.undo();
-        maxEval = Math.max(maxEval, evalScore);
-        alpha = Math.max(alpha, evalScore);
-
-        if (beta <= alpha) {
-          searchedAllMoves = false;
-          break;
-        }
-      }
-
-      bestScore = maxEval;
-    } else {
-      var minEval = Infinity;
-
-      for (var j = 0; j < moves.length; j += 1) {
-        game.move(moves[j]);
-        var replyScore = minimax(depth - 1, alpha, beta, true);
-        game.undo();
-        minEval = Math.min(minEval, replyScore);
-        beta = Math.min(beta, replyScore);
-
-        if (beta <= alpha) {
-          searchedAllMoves = false;
-          break;
-        }
-      }
-
-      bestScore = minEval;
-    }
-
-    if (searchedAllMoves) {
-      transpositionTable[fenKey] = {
-        depth: depth,
-        score: bestScore
-      };
-    }
-
-    return bestScore;
-  }
-
-  function getBookMove() {
-    var history = game.history();
-    var key = history.join(" ");
-    var choices = openingBook[key];
-
-    if (!choices || choices.length === 0) {
+  var blackEngineEl = document.getElementById("black-engine");
+  var whiteEngineEl = document.getElementById("white-engine");
+  var botBattleEl = document.getElementById("bot-battle");
+  var stockfishTimeEl = document.getElementById("stockfish-time");
+  var stockfishTimeValueEl = document.getElementById("stockfish-time-value");
+
+  function createCustomWorker() {
+    if (typeof Worker === "undefined") {
       return null;
     }
 
-    var legalMoves = game.moves({ verbose: true });
-    var preferred = choices[Math.floor(Math.random() * choices.length)];
-
-    for (var i = 0; i < legalMoves.length; i += 1) {
-      if (legalMoves[i].san === preferred) {
-        return legalMoves[i];
-      }
+    try {
+      return new Worker("chess-engine-worker.js");
+    } catch (error) {
+      return null;
     }
-
-    return null;
   }
 
-  function getBestMove(depth) {
-    var bookMove = getBookMove();
+  function createStockfishEngine() {
+    var worker = null;
+    var ready = false;
+    var loading = false;
+    var queue = [];
+    var active = null;
 
-    if (bookMove) {
-      nodesSearched = 0;
-      return bookMove;
-    }
-
-    var moves = getOrderedMoves({ verbose: true });
-    var bestMove = null;
-    var bestScore = Infinity;
-    transpositionTable = {};
-    nodesSearched = 0;
-
-    for (var i = 0; i < moves.length; i += 1) {
-      var move = moves[i];
-      game.move(move);
-      var score = minimax(depth - 1, -Infinity, Infinity, true);
-      game.undo();
-
-      if (score < bestScore) {
-        bestScore = score;
-        bestMove = move;
+    function send(command) {
+      if (worker) {
+        worker.postMessage(command);
       }
     }
 
-    return bestMove;
+    function startNext() {
+      if (!ready || active || queue.length === 0) {
+        return;
+      }
+
+      active = queue.shift();
+      send("ucinewgame");
+      send("isready");
+    }
+
+    function failActive(message) {
+      if (active) {
+        active.reject(new Error(message));
+        active = null;
+      }
+
+      while (queue.length > 0) {
+        queue.shift().reject(new Error(message));
+      }
+    }
+
+    function load() {
+      if (worker || loading || typeof Worker === "undefined") {
+        return;
+      }
+
+      loading = true;
+      worker = new Worker("vendor/stockfish/stockfish-18-lite-single.js");
+
+      worker.onmessage = function (event) {
+        var line = String(event.data || "");
+
+        if (line === "uciok") {
+          send("setoption name Skill Level value 8");
+          send("setoption name UCI_LimitStrength value true");
+          send("setoption name UCI_Elo value 1600");
+          send("isready");
+          return;
+        }
+
+        if (line === "readyok") {
+          ready = true;
+
+          if (active && !active.started) {
+            active.started = true;
+            send("position fen " + active.fen);
+            send("go movetime " + active.moveTime);
+          } else {
+            startNext();
+          }
+
+          return;
+        }
+
+        if (line.indexOf("bestmove ") === 0 && active) {
+          var uci = line.split(/\s+/)[1];
+          var current = active;
+          active = null;
+          current.resolve(uci);
+          startNext();
+        }
+      };
+
+      worker.onerror = function () {
+        failActive("Stockfish failed to load");
+        ready = false;
+        loading = false;
+        worker = null;
+      };
+
+      send("uci");
+    }
+
+    return {
+      getMove: function (fen, moveTime) {
+        load();
+
+        return new Promise(function (resolve, reject) {
+          if (!worker) {
+            reject(new Error("Stockfish worker unavailable"));
+            return;
+          }
+
+          queue.push({
+            fen: fen,
+            moveTime: moveTime,
+            resolve: resolve,
+            reject: reject,
+            started: false
+          });
+
+          startNext();
+        });
+      },
+      reset: function () {
+        queue = [];
+        active = null;
+
+        if (worker) {
+          send("stop");
+          send("ucinewgame");
+        }
+      },
+      terminate: function () {
+        if (worker) {
+          send("quit");
+          worker.terminate();
+        }
+
+        worker = null;
+        ready = false;
+        loading = false;
+        queue = [];
+        active = null;
+      }
+    };
+  }
+
+  function getStockfish() {
+    if (!stockfish) {
+      stockfish = createStockfishEngine();
+    }
+
+    return stockfish;
+  }
+
+  function updateDepthUi() {
+    depthValueEl.textContent = searchDepth + " ply";
+    depthWarningEl.hidden = searchDepth < 4;
+  }
+
+  function updateStockfishTimeUi() {
+    stockfishTimeValueEl.textContent = stockfishMoveTime + " ms";
   }
 
   function renderMoveHistory() {
@@ -523,9 +213,8 @@
     }
   }
 
-  function updateDepthUi() {
-    depthValueEl.textContent = searchDepth + " ply";
-    depthWarningEl.hidden = searchDepth < 4;
+  function botName(kind) {
+    return kind === "stockfish" ? "Stockfish.js" : "Custom minimax";
   }
 
   function updateStatus() {
@@ -535,12 +224,14 @@
       status = game.turn() === "w" ? "Checkmate. Black wins." : "Checkmate. White wins.";
     } else if (game.in_draw()) {
       status = "Draw.";
+    } else if (botBattle) {
+      status = (game.turn() === "w" ? "White" : "Black") + " bot to move.";
     } else {
-      status = game.turn() === "w" ? "Your move as White." : "Engine thinking as Black.";
+      status = game.turn() === "w" ? "Your move as White." : botName(engines.b) + " thinking as Black.";
+    }
 
-      if (game.in_check()) {
-        status += " Check.";
-      }
+    if (!game.game_over() && game.in_check()) {
+      status += " Check.";
     }
 
     statusEl.textContent = status;
@@ -552,96 +243,160 @@
     updateStatus();
   }
 
-  function createEngineWorker() {
-    if (typeof Worker === "undefined") {
-      return null;
+  function shouldBotMove() {
+    if (game.game_over() || engineThinking) {
+      return false;
     }
 
-    try {
-      var worker = new Worker("chess-engine-worker.js");
-
-      worker.onmessage = function (event) {
-        var data = event.data;
-
-        if (!data || data.requestId !== engineRequestId) {
-          return;
-        }
-
-        engineThinking = false;
-
-        if (data.error) {
-          engineStateEl.textContent = "Worker failed; using fallback";
-          window.setTimeout(runSynchronousEngineMove, 20);
-          return;
-        }
-
-        applyEngineResult(data);
-      };
-
-      worker.onerror = function () {
-        engineThinking = false;
-        engineWorker = null;
-        engineStateEl.textContent = "Worker unavailable; using fallback";
-        window.setTimeout(runSynchronousEngineMove, 20);
-      };
-
-      return worker;
-    } catch (error) {
-      return null;
-    }
+    return botBattle || game.turn() === "b";
   }
 
-  function applyEngineResult(result) {
-    if (game.game_over() || game.turn() !== "b") {
-      return;
-    }
+  function scheduleBotMove(delay) {
+    window.clearTimeout(botMoveTimer);
 
-    if (result.move) {
-      game.move(result.move);
-      syncBoard();
-    }
-
-    if (game.game_over()) {
-      engineStateEl.textContent = "Game over";
-    } else if (result.book) {
-      engineStateEl.textContent = "Book move";
-    } else {
-      engineStateEl.textContent = "Searched " + Number(result.nodes || 0).toLocaleString() + " positions";
-    }
-  }
-
-  function runSynchronousEngineMove() {
-    if (game.game_over() || game.turn() !== "b") {
+    if (!shouldBotMove()) {
       engineStateEl.textContent = game.game_over() ? "Game over" : "Waiting";
       return;
     }
 
-    var bestMove = getBestMove(searchDepth);
-    applyEngineResult({
-      move: bestMove,
-      nodes: nodesSearched,
-      book: nodesSearched === 0
+    botMoveTimer = window.setTimeout(makeBotMove, delay || 180);
+  }
+
+  function moveFromUci(uci) {
+    if (!uci || uci === "(none)") {
+      return null;
+    }
+
+    return {
+      from: uci.slice(0, 2),
+      to: uci.slice(2, 4),
+      promotion: uci.slice(4, 5) || "q"
+    };
+  }
+
+  function requestCustomMove(requestId, fen, history) {
+    return new Promise(function (resolve, reject) {
+      if (!customWorker) {
+        customWorker = createCustomWorker();
+      }
+
+      if (!customWorker) {
+        reject(new Error("Custom worker unavailable"));
+        return;
+      }
+
+      customWorker.onmessage = function (event) {
+        var data = event.data || {};
+
+        if (data.requestId !== requestId) {
+          return;
+        }
+
+        if (data.error) {
+          reject(new Error(data.error));
+          return;
+        }
+
+        resolve({
+          move: data.move,
+          label: data.book ? "Custom book move" : "Custom searched " + Number(data.nodes || 0).toLocaleString() + " positions"
+        });
+      };
+
+      customWorker.onerror = function () {
+        reject(new Error("Custom worker failed"));
+      };
+
+      customWorker.postMessage({
+        requestId: requestId,
+        fen: fen,
+        history: history,
+        depth: searchDepth
+      });
     });
   }
 
+  function requestStockfishMove(fen) {
+    return getStockfish().getMove(fen, stockfishMoveTime).then(function (uciMove) {
+      return {
+        move: moveFromUci(uciMove),
+        label: "Stockfish.js chose " + uciMove
+      };
+    });
+  }
+
+  function getBotMove(kind, requestId, fen, history) {
+    if (kind === "stockfish") {
+      return requestStockfishMove(fen);
+    }
+
+    return requestCustomMove(requestId, fen, history);
+  }
+
+  function makeBotMove() {
+    if (!shouldBotMove()) {
+      return;
+    }
+
+    var color = game.turn();
+    var kind = engines[color];
+    var requestId = activeRequestId + 1;
+    var fen = game.fen();
+    var history = game.history();
+
+    activeRequestId = requestId;
+    engineThinking = true;
+    engineStateEl.textContent = botName(kind) + " thinking for " + (color === "w" ? "White" : "Black");
+
+    getBotMove(kind, requestId, fen, history)
+      .then(function (result) {
+        if (requestId !== activeRequestId || game.game_over()) {
+          return;
+        }
+
+        if (!result.move) {
+          engineStateEl.textContent = botName(kind) + " found no legal move";
+          return;
+        }
+
+        var move = game.move(result.move);
+
+        if (!move) {
+          engineStateEl.textContent = botName(kind) + " returned an illegal move";
+          return;
+        }
+
+        engineStateEl.textContent = result.label;
+        syncBoard();
+      })
+      .catch(function (error) {
+        if (requestId === activeRequestId) {
+          engineStateEl.textContent = error.message || "Engine failed";
+        }
+      })
+      .finally(function () {
+        if (requestId !== activeRequestId) {
+          return;
+        }
+
+        engineThinking = false;
+
+        if (game.game_over()) {
+          engineStateEl.textContent = "Game over";
+          updateStatus();
+          return;
+        }
+
+        scheduleBotMove(botBattle ? 350 : 0);
+      });
+  }
+
   function onDragStart(source, piece) {
-    if (engineThinking) {
+    if (engineThinking || game.game_over() || botBattle || game.turn() !== "w") {
       return false;
     }
 
-    if (game.game_over()) {
-      return false;
-    }
-
-    if (game.turn() !== "w") {
-      return false;
-    }
-
-    if (piece.search(/^b/) !== -1) {
-      return false;
-    }
-
-    return true;
+    return piece.search(/^b/) === -1;
   }
 
   function onDrop(source, target) {
@@ -656,7 +411,7 @@
     }
 
     syncBoard();
-    window.setTimeout(makeEngineMove, 150);
+    scheduleBotMove(150);
     return undefined;
   }
 
@@ -664,54 +419,36 @@
     board.position(game.fen());
   }
 
-  function makeEngineMove() {
-    if (game.game_over()) {
-      engineStateEl.textContent = "Game over";
-      updateStatus();
-      return;
+  function cancelThinking() {
+    activeRequestId += 1;
+    engineThinking = false;
+    window.clearTimeout(botMoveTimer);
+
+    if (customWorker) {
+      customWorker.terminate();
+      customWorker = null;
     }
 
-    if (game.turn() !== "b") {
-      engineStateEl.textContent = "Waiting";
-      return;
+    if (stockfish) {
+      stockfish.reset();
     }
-
-    engineThinking = true;
-    engineStateEl.textContent = "Thinking at depth " + searchDepth;
-
-    if (!engineWorker) {
-      engineWorker = createEngineWorker();
-    }
-
-    if (!engineWorker) {
-      window.setTimeout(function () {
-        engineThinking = false;
-        runSynchronousEngineMove();
-      }, 20);
-      return;
-    }
-
-    engineRequestId += 1;
-    engineWorker.postMessage({
-      requestId: engineRequestId,
-      fen: game.fen(),
-      history: game.history(),
-      depth: searchDepth
-    });
   }
 
   function resetGame() {
-    engineRequestId += 1;
-    engineThinking = false;
-
-    if (engineWorker) {
-      engineWorker.terminate();
-      engineWorker = createEngineWorker();
-    }
-
+    cancelThinking();
     game.reset();
     engineStateEl.textContent = "Waiting";
     syncBoard();
+    scheduleBotMove(250);
+  }
+
+  function syncEngineSettings() {
+    engines.b = blackEngineEl.value;
+    engines.w = whiteEngineEl.value;
+    botBattle = botBattleEl.checked;
+    whiteEngineEl.disabled = !botBattle;
+    engineStateEl.textContent = "Settings updated";
+    scheduleBotMove(200);
   }
 
   board = Chessboard("board", {
@@ -723,8 +460,6 @@
     onSnapEnd: onSnapEnd
   });
 
-  engineWorker = createEngineWorker();
-
   window.addEventListener("resize", function () {
     board.resize();
   });
@@ -734,6 +469,14 @@
     updateDepthUi();
   });
 
+  stockfishTimeEl.addEventListener("input", function (event) {
+    stockfishMoveTime = parseInt(event.target.value, 10);
+    updateStockfishTimeUi();
+  });
+
+  blackEngineEl.addEventListener("change", syncEngineSettings);
+  whiteEngineEl.addEventListener("change", syncEngineSettings);
+  botBattleEl.addEventListener("change", syncEngineSettings);
   newGameEl.addEventListener("click", resetGame);
 
   flipBoardEl.addEventListener("click", function () {
@@ -741,6 +484,8 @@
   });
 
   updateDepthUi();
+  updateStockfishTimeUi();
+  syncEngineSettings();
   renderMoveHistory();
   updateStatus();
 })();

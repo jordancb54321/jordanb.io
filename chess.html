@@ -46,9 +46,9 @@
           <h1>Chess engine demo with a browser-first UI.</h1>
           <p class="lead">
             This page uses <code>chess.js</code> for legal move generation and a
-            custom minimax engine written in plain JavaScript. The board UI is
-            rendered with <code>chessboard.js</code> so the page stays static and
-            easy to host.
+            choice of a custom minimax bot or a local Stockfish.js engine based
+            on the open-source Stockfish project. The board UI is rendered with
+            <code>chessboard.js</code> so the page stays static and easy to host.
           </p>
 
           <div class="hero-actions">
@@ -68,7 +68,8 @@
             <li>Quiescence search for tactical capture sequences</li>
             <li>Material, piece-square, pawn-structure, and development scoring</li>
             <li>Web Worker search so deeper analysis does not block the board</li>
-            <li>Adjustable search depth and live game status</li>
+            <li>Optional Stockfish.js bot using the local lite WASM build</li>
+            <li>Bot-vs-bot mode for custom engine and Stockfish matchups</li>
           </ul>
         </aside>
       </div>
@@ -100,8 +101,41 @@
             </div>
           </div>
 
+          <div class="engine-controls" aria-label="Chess engine options">
+            <label class="select-control" for="black-engine">
+              Black bot
+              <select id="black-engine">
+                <option value="custom">Custom minimax</option>
+                <option value="stockfish">Stockfish.js lite</option>
+              </select>
+            </label>
+
+            <label class="toggle-control">
+              <input id="bot-battle" type="checkbox">
+              <span>Make the bots play each other</span>
+            </label>
+
+            <label class="select-control" for="white-engine">
+              White bot
+              <select id="white-engine">
+                <option value="custom">Custom minimax</option>
+                <option value="stockfish">Stockfish.js lite</option>
+              </select>
+            </label>
+
+            <label class="depth-control" for="stockfish-time">
+              Stockfish move time
+              <input id="stockfish-time" type="range" min="100" max="1500" step="100" value="500">
+              <span id="stockfish-time-value">500 ms</span>
+            </label>
+          </div>
+
           <p class="performance-warning" id="depth-warning" hidden>
             Higher depth means a stronger search, but it can slow the engine noticeably on some devices.
+          </p>
+
+          <p class="performance-warning" id="stockfish-warning">
+            Stockfish loads a local WASM engine. It is much stronger, but first use can take longer and bot-vs-bot mode may use more CPU.
           </p>
 
           <div class="move-history-wrap">
@@ -112,8 +146,9 @@
           <div class="notes">
             <p class="panel-label">How it works</p>
             <p class="status-copy">
-              You play White. After your move, the engine evaluates legal replies
-              and chooses one in a background worker tuned for a static site.
+              In normal mode you play White and the selected Black bot replies.
+              In bot-vs-bot mode both sides move automatically using the selected
+              engines.
             </p>
           </div>
         </div>
