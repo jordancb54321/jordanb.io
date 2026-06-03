@@ -464,6 +464,10 @@
     board.resize();
   });
 
+  window.setTimeout(function () {
+    board.resize();
+  }, 0);
+
   depthInputEl.addEventListener("input", function (event) {
     searchDepth = parseInt(event.target.value, 10);
     updateDepthUi();

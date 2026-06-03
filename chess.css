@@ -19,12 +19,13 @@
 }
 
 .chess-layout {
-  grid-template-columns: minmax(320px, 720px) minmax(280px, 360px);
+  grid-template-columns: minmax(0, 720px) minmax(280px, 360px);
   align-items: start;
 }
 
 .chess-board-card,
 .chess-sidebar {
+  min-width: 0;
   padding: 1.5rem;
 }
 
@@ -37,6 +38,13 @@
   width: 100%;
   max-width: 680px;
   margin: 0 auto;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+.chess-board .chessboard-63f37,
+.chess-board .board-b72b1 {
+  max-width: 100%;
 }
 
 .chess-summary {
@@ -139,11 +147,81 @@
   .status-grid {
     grid-template-columns: 1fr;
   }
+
+  .chess-layout {
+    gap: 1rem;
+  }
+
+  .chess-sidebar {
+    order: -1;
+  }
 }
 
 @media (max-width: 640px) {
+  .chess-hero {
+    padding-bottom: 1.5rem;
+  }
+
+  .chess-section {
+    padding-top: 0;
+  }
+
+  .chess-hero-grid,
+  .chess-layout,
+  .status-grid {
+    gap: 1rem;
+  }
+
   .chess-board-card,
   .chess-sidebar {
-    padding: 1rem;
+    padding: 0.75rem;
+  }
+
+  .chess-board-card {
+    margin-inline: -0.15rem;
+  }
+
+  .chess-board {
+    max-width: calc(100vw - 1.75rem);
+  }
+
+  .chess-summary,
+  .engine-controls {
+    border-radius: 16px;
+  }
+
+  .engine-controls {
+    gap: 0.75rem;
+    padding: 0.8rem;
+  }
+
+  .status-group,
+  .status-grid,
+  .engine-controls,
+  .move-history-wrap,
+  .performance-warning {
+    margin-bottom: 1rem;
+  }
+
+  .move-history {
+    min-height: 5rem;
+    max-height: 12rem;
+    overflow: auto;
+  }
+
+  .select-control select,
+  .button {
+    min-height: 2.85rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .chess-board-card,
+  .chess-sidebar {
+    padding: 0.55rem;
+  }
+
+  .chess-board {
+    max-width: calc(100vw - 1.35rem);
   }
 }

@@ -439,18 +439,64 @@ h3 {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --wrap: min(100% - 1rem, 1120px);
+    --radius: 18px;
+  }
+
   .hero,
   .section,
   .site-footer {
-    padding: 3.5rem 0;
+    padding: 2.75rem 0;
   }
 
   .site-header .wrap {
     gap: 1rem;
+    padding: 0.85rem 0;
+  }
+
+  .brand {
+    gap: 0.7rem;
+  }
+
+  .brand-mark {
+    width: 2.35rem;
+    height: 2.35rem;
+    font-size: 0.82rem;
+  }
+
+  .site-nav {
+    gap: 0.45rem;
+  }
+
+  .site-nav a {
+    padding: 0.42rem 0.58rem;
+    border: 1px solid rgba(78, 139, 91, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.56);
+    font-size: 0.92rem;
   }
 
   h1 {
-    max-width: 12ch;
+    max-width: 100%;
+    font-size: 2.55rem;
+    line-height: 1;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    display: grid;
+  }
+
+  .button {
+    width: 100%;
   }
 }
 
