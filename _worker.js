@@ -21,6 +21,10 @@ export default {
     headers.set("X-Content-Type-Options", "nosniff");
     headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 
+    if (url.pathname === "/fractal/app.js") {
+      headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+    }
+
     return new Response(response.body, {
       status: response.status,
       statusText: response.statusText,
