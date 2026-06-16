@@ -8,3 +8,6 @@
 
 /vendor/stockfish/*
   Cache-Control: public, max-age=31536000, immutable
+
+/fractal/app.js
+  Cache-Control: public, max-age=0, must-revalidate

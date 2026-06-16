@@ -489,7 +489,8 @@ function startAutoZoom() {
   state.autoZoomStep = 0;
   setAutoZoomButtonLabel();
   updateStatus("Auto zoom searching...");
-  queueAutoZoomStep();
+  window.clearTimeout(state.autoZoomTimer);
+  state.autoZoomTimer = window.setTimeout(runAutoZoomStep, 20);
 }
 
 function stopAutoZoom(message = "Auto zoom paused") {
