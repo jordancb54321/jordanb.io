@@ -72,6 +72,7 @@ const elements = {
   juliaReal: document.getElementById("juliaReal"),
   juliaImag: document.getElementById("juliaImag"),
   renderButton: document.getElementById("renderButton"),
+  autoZoomButton: document.getElementById("autoZoomButton"),
   resetViewButton: document.getElementById("resetViewButton"),
   downloadButton: document.getElementById("downloadButton"),
   fitViewButton: document.getElementById("fitViewButton"),
@@ -99,7 +100,20 @@ const state = {
   dragStartY: 0,
   dragCenterX: 0,
   dragCenterY: 0,
-  renderToken: 0
+  renderToken: 0,
+  autoZooming: false,
+  autoZoomTimer: null,
+  autoZoomStep: 0
+};
+
+const AUTO_ZOOM = {
+  samplesAcross: 9,
+  samplesDown: 7,
+  localRadius: 0.075,
+  zoomFactor: 0.68,
+  delay: 260,
+  maxSteps: 90,
+  minimumScale: 1e-12
 };
 
 function updatePresetOptions() {
@@ -173,6 +187,11 @@ function updateStatus(message = "Ready") {
   elements.zoomValue.textContent = `${(3.2 / state.scale).toFixed(2)}x`;
   elements.renderStatus.textContent = message;
   elements.canvasInfo.textContent = `${canvas.width} x ${canvas.height}`;
+}
+
+function setAutoZoomButtonLabel() {
+  elements.autoZoomButton.textContent = state.autoZooming ? "Pause auto zoom" : "Auto zoom";
+  elements.autoZoomButton.setAttribute("aria-pressed", String(state.autoZooming));
 }
 
 function resizeCanvas() {
@@ -338,9 +357,14 @@ async function renderFractal() {
   elements.renderButton.disabled = false;
   elements.downloadButton.disabled = false;
   updateStatus("Complete");
+
+  if (state.autoZooming && token === state.renderToken) {
+    queueAutoZoomStep();
+  }
 }
 
 function zoomAt(canvasX, canvasY, zoomFactor) {
+  stopAutoZoom();
   const before = mapPixelToComplex(canvasX, canvasY);
   state.scale *= zoomFactor;
   const after = mapPixelToComplex(canvasX, canvasY);
@@ -348,6 +372,136 @@ function zoomAt(canvasX, canvasY, zoomFactor) {
   state.centerY += before.y - after.y;
   syncControlsFromState();
   renderFractal();
+}
+
+function getComplexAtNormalized(normalizedX, normalizedY) {
+  const aspect = canvas.width / canvas.height;
+  return {
+    x: state.centerX + (normalizedX - 0.5) * state.scale * aspect,
+    y: state.centerY + (normalizedY - 0.5) * state.scale
+  };
+}
+
+function scoreCandidate(point) {
+  const aspect = canvas.width / canvas.height;
+  const radiusX = state.scale * aspect * AUTO_ZOOM.localRadius;
+  const radiusY = state.scale * AUTO_ZOOM.localRadius;
+  const offsets = [
+    [0, 0],
+    [-radiusX, 0],
+    [radiusX, 0],
+    [0, -radiusY],
+    [0, radiusY],
+    [-radiusX * 0.62, -radiusY * 0.62],
+    [radiusX * 0.62, -radiusY * 0.62],
+    [-radiusX * 0.62, radiusY * 0.62],
+    [radiusX * 0.62, radiusY * 0.62]
+  ];
+
+  const values = offsets.map(([dx, dy]) => iteratePoint(point.x + dx, point.y + dy));
+  const normalized = values.map((value) => Math.min(1, value / state.iterations));
+  const escapedCount = values.filter((value) => value < state.iterations).length;
+  const interiorCount = values.length - escapedCount;
+
+  if (escapedCount === 0 || interiorCount === 0) {
+    return -Infinity;
+  }
+
+  const average = normalized.reduce((sum, value) => sum + value, 0) / normalized.length;
+  const variance = normalized.reduce((sum, value) => sum + (value - average) ** 2, 0) / normalized.length;
+  const range = Math.max(...normalized) - Math.min(...normalized);
+  const boundaryMix = Math.min(escapedCount, interiorCount) / values.length;
+  const sweetSpot = 1 - Math.abs(average - 0.55);
+
+  return variance * 8 + range * 2.6 + boundaryMix * 3.2 + sweetSpot;
+}
+
+function findInterestingTarget() {
+  const candidates = [];
+
+  for (let row = 0; row < AUTO_ZOOM.samplesDown; row += 1) {
+    const normalizedY = 0.18 + (row / (AUTO_ZOOM.samplesDown - 1)) * 0.64;
+
+    for (let col = 0; col < AUTO_ZOOM.samplesAcross; col += 1) {
+      const normalizedX = 0.16 + (col / (AUTO_ZOOM.samplesAcross - 1)) * 0.68;
+      const point = getComplexAtNormalized(normalizedX, normalizedY);
+      const centerBias = 1 - Math.hypot(normalizedX - 0.5, normalizedY - 0.5);
+      const score = scoreCandidate(point) + centerBias * 0.18;
+
+      if (Number.isFinite(score)) {
+        candidates.push({ point, score });
+      }
+    }
+  }
+
+  candidates.sort((a, b) => b.score - a.score);
+
+  if (candidates.length === 0) {
+    return null;
+  }
+
+  const topChoices = candidates.slice(0, Math.min(5, candidates.length));
+  return topChoices[Math.floor(Math.random() * topChoices.length)].point;
+}
+
+function queueAutoZoomStep() {
+  window.clearTimeout(state.autoZoomTimer);
+
+  if (!state.autoZooming) {
+    return;
+  }
+
+  state.autoZoomTimer = window.setTimeout(runAutoZoomStep, AUTO_ZOOM.delay);
+}
+
+function runAutoZoomStep() {
+  if (!state.autoZooming) {
+    return;
+  }
+
+  if (state.scale <= AUTO_ZOOM.minimumScale || state.autoZoomStep >= AUTO_ZOOM.maxSteps) {
+    stopAutoZoom("Auto zoom paused at deep zoom");
+    return;
+  }
+
+  const target = findInterestingTarget();
+
+  if (!target) {
+    stopAutoZoom("Auto zoom paused: no detailed edge found");
+    return;
+  }
+
+  state.centerX = target.x;
+  state.centerY = target.y;
+  state.scale *= AUTO_ZOOM.zoomFactor;
+  state.iterations = Math.min(2500, Math.max(state.iterations, Math.round(state.iterations * 1.035)));
+  state.autoZoomStep += 1;
+  syncControlsFromState();
+  renderFractal();
+}
+
+function startAutoZoom() {
+  if (state.autoZooming) {
+    return;
+  }
+
+  state.autoZooming = true;
+  state.autoZoomStep = 0;
+  setAutoZoomButtonLabel();
+  updateStatus("Auto zoom searching...");
+  queueAutoZoomStep();
+}
+
+function stopAutoZoom(message = "Auto zoom paused") {
+  if (!state.autoZooming && !state.autoZoomTimer) {
+    return;
+  }
+
+  state.autoZooming = false;
+  window.clearTimeout(state.autoZoomTimer);
+  state.autoZoomTimer = null;
+  setAutoZoomButtonLabel();
+  updateStatus(message);
 }
 
 function setDefaultView(type = state.fractalType) {
@@ -369,6 +523,8 @@ function setDefaultView(type = state.fractalType) {
 }
 
 elements.controls.addEventListener("input", (event) => {
+  stopAutoZoom();
+
   if (event.target === elements.fractalType) {
     setDefaultView(elements.fractalType.value);
     renderFractal();
@@ -379,6 +535,8 @@ elements.controls.addEventListener("input", (event) => {
 });
 
 elements.controls.addEventListener("change", (event) => {
+  stopAutoZoom();
+
   if (event.target === elements.presetSelect) {
     applyPreset(Number(elements.presetSelect.value));
     return;
@@ -388,15 +546,27 @@ elements.controls.addEventListener("change", (event) => {
 });
 
 elements.renderButton.addEventListener("click", () => {
+  stopAutoZoom();
   renderFractal();
 });
 
+elements.autoZoomButton.addEventListener("click", () => {
+  if (state.autoZooming) {
+    stopAutoZoom();
+    return;
+  }
+
+  startAutoZoom();
+});
+
 elements.resetViewButton.addEventListener("click", () => {
+  stopAutoZoom();
   setDefaultView();
   renderFractal();
 });
 
 elements.fitViewButton.addEventListener("click", () => {
+  stopAutoZoom();
   if (resizeCanvas()) {
     renderFractal();
   }
@@ -419,6 +589,7 @@ canvas.addEventListener("wheel", (event) => {
 }, { passive: false });
 
 canvas.addEventListener("pointerdown", (event) => {
+  stopAutoZoom();
   state.dragging = true;
   state.dragStartX = event.clientX;
   state.dragStartY = event.clientY;
@@ -469,10 +640,12 @@ canvas.addEventListener("dblclick", (event) => {
 });
 
 window.addEventListener("resize", () => {
+  stopAutoZoom();
   resizeCanvas();
   renderFractal();
 });
 
 setDefaultView("mandelbrot");
 resizeCanvas();
+setAutoZoomButtonLabel();
 renderFractal();
