@@ -214,7 +214,7 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .button {
@@ -249,6 +249,14 @@ h3 {
 .panel-list {
   padding: 0;
   list-style: none;
+}
+
+.personal-note {
+  max-width: 52ch;
+  margin: 0 0 2rem;
+  padding-left: 1rem;
+  border-left: 3px solid rgba(78, 139, 91, 0.42);
+  color: var(--muted);
 }
 
 .hero-stats {
@@ -339,6 +347,15 @@ h3 {
 .feature-card,
 .contact-card {
   padding: 1.5rem;
+}
+
+.project-card:nth-child(2),
+.feature-card:nth-child(2) {
+  transform: translateY(0.65rem);
+}
+
+.project-card:nth-child(4) {
+  transform: translateY(-0.35rem);
 }
 
 .card-index {
@@ -435,6 +452,12 @@ h3 {
 
   .hero-stats {
     grid-template-columns: 1fr;
+  }
+
+  .project-card:nth-child(2),
+  .project-card:nth-child(4),
+  .feature-card:nth-child(2) {
+    transform: none;
   }
 }
 

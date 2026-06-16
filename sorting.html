@@ -6,7 +6,7 @@
   <title>Jordan Betts | Sorting Visualizer</title>
   <meta
     name="description"
-    content="A browser-based sorting visualizer by Jordan Betts showing different sorting algorithms running in real time."
+    content="A sorting visualizer by Jordan Betts for comparing classic algorithms in the browser."
   >
   <meta name="theme-color" content="#f4f7f1">
   <link rel="stylesheet" href="styles.css">
@@ -41,12 +41,12 @@
     <section class="section sorting-hero">
       <div class="wrap sorting-hero-grid">
         <div>
-          <p class="eyebrow">Algorithm visualizer</p>
-          <h1>Watch classic sorting algorithms work through the same data.</h1>
+          <p class="eyebrow">Sorting playground</p>
+          <h1>Same numbers, different ways of putting them in order.</h1>
           <p class="lead">
-            This page generates a random array and animates how different
-            algorithms compare, swap, and place values over time. It stays fully
-            static, with all rendering and logic handled in plain JavaScript.
+            This is a visual way to compare algorithms I had mostly seen in
+            code or diagrams. Pick a few sorts, change the bar count, and watch
+            where the simple approaches start to struggle.
           </p>
 
           <div class="hero-actions">
@@ -60,7 +60,7 @@
         </div>
 
         <aside class="hero-panel" aria-label="Visualizer summary">
-          <p class="panel-label">Included algorithms</p>
+          <p class="panel-label">Currently included</p>
           <ul class="panel-list">
             <li>Bubble sort</li>
             <li>Selection sort</li>
@@ -132,8 +132,8 @@
             </label>
           </div>
         </div>
-        <p class="performance-warning" id="performance-warning" hidden>
-          High bar counts and very fast animation can look great, but they may lag on some devices.
+          <p class="performance-warning" id="performance-warning" hidden>
+          High bar counts and very fast animation can look good, but they may lag on some devices.
         </p>
       </div>
     </section>
@@ -345,7 +345,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-row">
-      <p>Static visualizer page with animated algorithm demos.</p>
+      <p>Sorting demos in plain JavaScript, with the rough edges kept visible.</p>
       <a href="./">Back to portfolio</a>
     </div>
   </footer>

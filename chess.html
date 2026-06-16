@@ -6,7 +6,7 @@
   <title>Jordan Betts | Chess Engine Demo</title>
   <meta
     name="description"
-    content="A browser-based chess demo by Jordan Betts featuring a custom JavaScript engine and interactive board."
+    content="A chess page by Jordan Betts with a custom JavaScript bot, Stockfish.js, and a bot-vs-bot mode."
   >
   <meta name="theme-color" content="#f4f7f1">
   <link rel="stylesheet" href="styles.css">
@@ -42,13 +42,12 @@
     <section class="section chess-hero">
       <div class="wrap chess-hero-grid">
         <div>
-          <p class="eyebrow">Custom JavaScript build</p>
-          <h1>Chess engine demo with a browser-first UI.</h1>
+          <p class="eyebrow">Chess experiment</p>
+          <h1>A small chess page that got more serious than planned.</h1>
           <p class="lead">
-            This page uses <code>chess.js</code> for legal move generation and a
-            choice of a custom minimax bot or a local Stockfish.js engine based
-            on the open-source Stockfish project. The board UI is rendered with
-            <code>chessboard.js</code> so the page stays static and easy to host.
+            I started this as a way to understand minimax properly. It now has
+            my own worker-based bot, a local Stockfish.js option, and a bot-vs-bot
+            mode so I can compare how badly my engine gets punished.
           </p>
 
           <div class="hero-actions">
@@ -62,14 +61,13 @@
         </div>
 
         <aside class="hero-panel chess-summary" aria-label="Engine summary">
-          <p class="panel-label">Engine profile</p>
+          <p class="panel-label">What is running here</p>
           <ul class="panel-list">
-            <li>Minimax search with alpha-beta pruning and move ordering</li>
-            <li>Quiescence search for tactical capture sequences</li>
-            <li>Material, piece-square, pawn-structure, and development scoring</li>
-            <li>Web Worker search so deeper analysis does not block the board</li>
-            <li>Optional Stockfish.js bot using the local lite WASM build</li>
-            <li>Bot-vs-bot mode for custom engine and Stockfish matchups</li>
+            <li>My bot uses minimax, alpha-beta pruning, and simple move ordering</li>
+            <li>It has a small evaluation function for material, squares, pawns, and development</li>
+            <li>The search runs in a Web Worker so dragging pieces still feels normal</li>
+            <li>Stockfish.js is included locally for a much stronger comparison</li>
+            <li>Bot-vs-bot mode is mostly there because watching engines argue is useful</li>
           </ul>
         </aside>
       </div>
@@ -135,7 +133,8 @@
           </p>
 
           <p class="performance-warning" id="stockfish-warning">
-            Stockfish loads a local WASM engine. It is much stronger, but first use can take longer and bot-vs-bot mode may use more CPU.
+            Stockfish loads a local WASM engine. It is much stronger than my bot,
+            but first load can take a moment and bot-vs-bot mode can use more CPU.
           </p>
 
           <div class="move-history-wrap">
@@ -146,9 +145,9 @@
           <div class="notes">
             <p class="panel-label">How it works</p>
             <p class="status-copy">
-              In normal mode you play White and the selected Black bot replies.
-              In bot-vs-bot mode both sides move automatically using the selected
-              engines.
+              Normal mode lets you play White. Bot-vs-bot mode hands both sides
+              to the selected engines. It is not meant to be a polished chess
+              product, just a working browser experiment.
             </p>
           </div>
         </div>
@@ -158,7 +157,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-row">
-      <p>Static page, custom engine logic, no build step required.</p>
+      <p>Built as a learning project, then left visible because it shows the work.</p>
       <a href="./">Back to portfolio</a>
     </div>
   </footer>
