@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML &amp; CSS Study Deck | Jordan Betts</title>
+  <meta
+    name="description"
+    content="Learn HTML and CSS with an Anki-style flashcard system, spaced repetition, progress tracking, and editable study decks."
+  >
+  <meta name="theme-color" content="#f4f7f1">
+  <meta property="og:title" content="HTML &amp; CSS Study Deck | Jordan Betts">
+  <meta property="og:description" content="A local-first HTML and CSS flashcard system with spaced repetition and progress tracking.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jordanb.io/learn">
+  <link rel="canonical" href="https://jordanb.io/learn">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="learn.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">JB</span>
+        <div>
+          <p class="eyebrow">Learning project</p>
+          <a class="brand-name" href="./">Jordan Betts</a>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="./#work">Work</a>
+        <a href="./#about">About</a>
+        <a href="./#stack">Stack</a>
+        <a href="learn" aria-current="page">Learn</a>
+        <a href="chess">Chess</a>
+        <a href="sorting">Sorting</a>
+        <a href="fractal/">Fractal</a>
+        <a href="./#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="learn-main">
+    <section class="learn-hero">
+      <div class="wrap learn-hero-grid">
+        <div>
+          <p class="eyebrow">HTML and CSS study lab</p>
+          <h1>Learn the browser fundamentals by remembering them.</h1>
+          <p class="lead">
+            A complete, local-first flashcard system for HTML and CSS. Review what
+            is due, rate how well you remembered it, and let spaced repetition
+            decide when each card should return.
+          </p>
+          <div class="hero-actions">
+            <button class="button button-primary" id="hero-study-button" type="button">Study now</button>
+            <button class="button button-secondary" id="hero-add-button" type="button">Create a card</button>
+          </div>
+        </div>
+
+        <aside class="hero-panel learn-hero-panel" aria-label="Learning system summary">
+          <p class="panel-label">Included from the start</p>
+          <ul class="panel-list">
+            <li>60 practical HTML and CSS cards</li>
+            <li>Anki-style Again, Hard, Good, and Easy scheduling</li>
+            <li>Six focused decks with examples and explanations</li>
+            <li>Private progress stored only in this browser</li>
+            <li>Card editing, search, filtering, import, and export</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="learn-workspace" aria-label="Study workspace">
+      <div class="wrap">
+        <nav class="learn-tabs" aria-label="Learning views" role="tablist">
+          <button class="learn-tab is-active" id="tab-dashboard" data-view="dashboard" type="button" role="tab" tabindex="0" aria-selected="true" aria-controls="view-dashboard">Overview</button>
+          <button class="learn-tab" id="tab-review" data-view="review" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="view-review">Review</button>
+          <button class="learn-tab" id="tab-browse" data-view="browse" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="view-browse">Cards</button>
+          <button class="learn-tab" id="tab-stats" data-view="stats" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="view-stats">Stats</button>
+          <button class="learn-tab" id="tab-settings" data-view="settings" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="view-settings">Settings</button>
+        </nav>
+
+        <p class="sr-announcement" id="learn-announcement" aria-live="polite"></p>
+
+        <section class="learn-view" id="view-dashboard" data-view-panel="dashboard" role="tabpanel" aria-labelledby="tab-dashboard">
+          <div class="view-heading">
+            <div>
+              <p class="eyebrow">Today</p>
+              <h2>Keep the queue small and the streak alive.</h2>
+            </div>
+            <button class="button button-primary" id="dashboard-study-button" type="button">Start today’s review</button>
+          </div>
+
+          <div class="study-metrics" role="group" aria-label="Study summary">
+            <article class="metric-card metric-due">
+              <span>Due now</span>
+              <strong id="metric-due">0</strong>
+              <small>reviews waiting</small>
+            </article>
+            <article class="metric-card metric-new">
+              <span>New</span>
+              <strong id="metric-new">0</strong>
+              <small>available cards</small>
+            </article>
+            <article class="metric-card metric-mastered">
+              <span>Mastered</span>
+              <strong id="metric-mastered">0</strong>
+              <small>21+ day interval</small>
+            </article>
+            <article class="metric-card metric-streak">
+              <span>Streak</span>
+              <strong id="metric-streak">0</strong>
+              <small>consecutive days</small>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="learn-card deck-overview" aria-labelledby="deck-overview-title">
+              <div class="card-heading-row">
+                <div>
+                  <p class="panel-label">Choose a focus</p>
+                  <h3 id="deck-overview-title">Decks</h3>
+                </div>
+                <span class="saved-locally">Saved locally</span>
+              </div>
+              <div class="deck-list" id="dashboard-decks"></div>
+            </section>
+
+            <section class="learn-card daily-progress" aria-labelledby="daily-progress-title">
+              <p class="panel-label">Daily progress</p>
+              <h3 id="daily-progress-title">Reviews completed</h3>
+              <div class="ring-progress" id="daily-ring" aria-hidden="true">
+                <div>
+                  <strong id="daily-reviewed">0</strong>
+                  <span id="daily-goal-label">of 20</span>
+                </div>
+              </div>
+              <progress class="visually-hidden" id="daily-progress" max="20" value="0">0 of 20 reviews</progress>
+              <p class="muted-copy" id="daily-message">Your first review is ready when you are.</p>
+            </section>
+          </div>
+
+          <section class="learn-card recent-activity" aria-labelledby="recent-activity-title">
+            <div class="card-heading-row">
+              <div>
+                <p class="panel-label">Study log</p>
+                <h3 id="recent-activity-title">Recent activity</h3>
+              </div>
+              <button class="text-button" id="view-all-stats" type="button">Open full stats</button>
+            </div>
+            <div id="recent-activity-list" class="activity-list"></div>
+          </section>
+        </section>
+
+        <section class="learn-view" id="view-review" data-view-panel="review" role="tabpanel" aria-labelledby="tab-review" hidden>
+          <div class="review-setup" id="review-setup">
+            <div class="view-heading">
+              <div>
+                <p class="eyebrow">Review session</p>
+                <h2>Pick a deck or review everything due.</h2>
+              </div>
+            </div>
+
+            <div class="review-setup-grid">
+              <section class="learn-card session-options" aria-labelledby="session-options-title">
+                <h3 id="session-options-title">Session setup</h3>
+                <label for="review-deck">Deck</label>
+                <select id="review-deck">
+                  <option value="all">All decks</option>
+                </select>
+                <div class="session-counts" aria-live="polite">
+                  <div><strong id="session-due-count">0</strong><span>due</span></div>
+                  <div><strong id="session-new-count">0</strong><span>new</span></div>
+                  <div><strong id="session-total-count">0</strong><span>in session</span></div>
+                </div>
+                <button class="button button-primary" id="start-session-button" type="button">Start session</button>
+              </section>
+
+              <aside class="learn-card shortcut-card" aria-labelledby="shortcut-title">
+                <p class="panel-label">Keyboard friendly</p>
+                <h3 id="shortcut-title">Review shortcuts</h3>
+                <dl class="shortcut-list">
+                  <div><dt><kbd>Space</kbd></dt><dd>Show the answer</dd></div>
+                  <div><dt><kbd>1</kbd></dt><dd>Again</dd></div>
+                  <div><dt><kbd>2</kbd></dt><dd>Hard</dd></div>
+                  <div><dt><kbd>3</kbd></dt><dd>Good</dd></div>
+                  <div><dt><kbd>4</kbd></dt><dd>Easy</dd></div>
+                </dl>
+              </aside>
+            </div>
+          </div>
+
+          <div class="review-session" id="review-session" hidden>
+            <div class="review-session-header">
+              <button class="text-button" id="end-session-button" type="button">End session</button>
+              <div class="review-progress-wrap">
+                <div class="review-progress-label">
+                  <span id="review-progress-text">Card 1 of 1</span>
+                  <span id="review-queue-text">0 remaining</span>
+                </div>
+                <div class="review-progress" aria-hidden="true"><span id="review-progress-bar"></span></div>
+              </div>
+              <button class="text-button" id="edit-review-card" type="button">Edit card</button>
+            </div>
+
+            <article class="flashcard" id="flashcard" aria-live="polite">
+              <div class="flashcard-meta">
+                <span id="review-deck-name">Deck</span>
+                <span id="review-topic-name">Topic</span>
+              </div>
+              <div class="flashcard-front">
+                <p class="card-side-label">Question</p>
+                <h2 id="review-front">Question</h2>
+                <p class="flashcard-hint" id="review-hint" hidden></p>
+              </div>
+              <div class="flashcard-answer" id="review-answer" hidden>
+                <div class="answer-divider"></div>
+                <p class="card-side-label">Answer</p>
+                <p id="review-back"></p>
+                <pre id="review-example-wrap" hidden><code id="review-example"></code></pre>
+                <p class="answer-note" id="review-note" hidden></p>
+              </div>
+            </article>
+
+            <div class="reveal-row" id="reveal-row">
+              <button class="button button-primary reveal-button" id="reveal-answer-button" type="button">Show answer <kbd>Space</kbd></button>
+            </div>
+
+            <div class="rating-grid" id="rating-grid" role="group" aria-label="Rate your answer" hidden>
+              <button class="rating-button rating-again" data-rating="again" type="button"><strong>Again</strong><span id="interval-again">1 min</span><kbd>1</kbd></button>
+              <button class="rating-button rating-hard" data-rating="hard" type="button"><strong>Hard</strong><span id="interval-hard">10 min</span><kbd>2</kbd></button>
+              <button class="rating-button rating-good" data-rating="good" type="button"><strong>Good</strong><span id="interval-good">1 day</span><kbd>3</kbd></button>
+              <button class="rating-button rating-easy" data-rating="easy" type="button"><strong>Easy</strong><span id="interval-easy">4 days</span><kbd>4</kbd></button>
+            </div>
+          </div>
+
+          <div class="session-complete learn-card" id="session-complete" hidden>
+            <span class="complete-mark" aria-hidden="true">✓</span>
+            <p class="eyebrow">Session complete</p>
+            <h2>You cleared the queue.</h2>
+            <p id="session-complete-summary">Nice work.</p>
+            <div class="hero-actions">
+              <button class="button button-primary" id="return-dashboard-button" type="button">Back to overview</button>
+              <button class="button button-secondary" id="review-more-button" type="button">Review another deck</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="learn-view" id="view-browse" data-view-panel="browse" role="tabpanel" aria-labelledby="tab-browse" hidden>
+          <div class="view-heading">
+            <div>
+              <p class="eyebrow">Card library</p>
+              <h2>Search, edit, suspend, or add your own.</h2>
+            </div>
+            <button class="button button-primary" id="add-card-button" type="button">Add card</button>
+          </div>
+
+          <div class="card-toolbar learn-card">
+            <label class="search-field">
+              <span>Search cards</span>
+              <input id="card-search" type="search" placeholder="Try ‘flexbox’ or ‘landmark’">
+            </label>
+            <label>Deck
+              <select id="browse-deck-filter"><option value="all">All decks</option></select>
+            </label>
+            <label>State
+              <select id="browse-state-filter">
+                <option value="all">All states</option>
+                <option value="new">New</option>
+                <option value="learning">Learning</option>
+                <option value="review">Review</option>
+                <option value="mastered">Mastered</option>
+                <option value="suspended">Suspended</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="browse-summary">
+            <p id="browse-result-count">0 cards</p>
+            <button class="text-button" id="clear-card-filters" type="button">Clear filters</button>
+          </div>
+          <div class="card-library" id="card-library"></div>
+          <div class="empty-state learn-card" id="browse-empty" hidden>
+            <h3>No cards match those filters.</h3>
+            <p>Try a broader search or create the card you expected to find.</p>
+          </div>
+        </section>
+
+        <section class="learn-view" id="view-stats" data-view-panel="stats" role="tabpanel" aria-labelledby="tab-stats" hidden>
+          <div class="view-heading">
+            <div>
+              <p class="eyebrow">Progress</p>
+              <h2>See what is sticking and what needs work.</h2>
+            </div>
+          </div>
+
+          <div class="study-metrics stats-metrics">
+            <article class="metric-card"><span>Total reviews</span><strong id="stats-reviews">0</strong><small>all time</small></article>
+            <article class="metric-card"><span>Recall</span><strong id="stats-accuracy">—</strong><small>non-Again ratings</small></article>
+            <article class="metric-card"><span>Studied</span><strong id="stats-studied">0</strong><small>unique cards</small></article>
+            <article class="metric-card"><span>Longest streak</span><strong id="stats-longest-streak">0</strong><small>days</small></article>
+          </div>
+
+          <div class="stats-grid">
+            <section class="learn-card" aria-labelledby="mastery-title">
+              <p class="panel-label">Deck mastery</p>
+              <h3 id="mastery-title">Knowledge by deck</h3>
+              <div class="mastery-list" id="mastery-list"></div>
+            </section>
+
+            <section class="learn-card" aria-labelledby="forecast-title">
+              <p class="panel-label">Next seven days</p>
+              <h3 id="forecast-title">Review forecast</h3>
+              <div class="forecast-chart" id="forecast-chart"></div>
+            </section>
+          </div>
+
+          <section class="learn-card heatmap-card" aria-labelledby="heatmap-title">
+            <div class="card-heading-row">
+              <div>
+                <p class="panel-label">Last 28 days</p>
+                <h3 id="heatmap-title">Study activity</h3>
+              </div>
+              <span class="heatmap-legend"><i></i> More reviews</span>
+            </div>
+            <div class="study-heatmap" id="study-heatmap" role="group" aria-label="Review activity over the last 28 days"></div>
+          </section>
+        </section>
+
+        <section class="learn-view" id="view-settings" data-view-panel="settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
+          <div class="view-heading">
+            <div>
+              <p class="eyebrow">Preferences</p>
+              <h2>Make the review rhythm fit your day.</h2>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <form class="learn-card settings-form" id="settings-form">
+              <h3>Study settings</h3>
+              <label>New cards per day
+                <input id="new-card-limit" type="number" min="1" max="100" required>
+              </label>
+              <label>Maximum reviews per day
+                <input id="review-card-limit" type="number" min="1" max="500" required>
+              </label>
+              <label>Daily review goal
+                <input id="daily-review-goal" type="number" min="1" max="500" required>
+              </label>
+              <label>New card order
+                <select id="new-card-order">
+                  <option value="deck">Deck order</option>
+                  <option value="random">Random</option>
+                </select>
+              </label>
+              <button class="button button-primary" type="submit">Save settings</button>
+            </form>
+
+            <section class="learn-card data-tools" aria-labelledby="data-tools-title">
+              <h3 id="data-tools-title">Your data</h3>
+              <p>Everything is stored in this browser. Export a backup before clearing browser data or moving devices.</p>
+              <div class="data-actions">
+                <button class="button button-secondary" id="export-data-button" type="button">Export backup</button>
+                <button class="button button-secondary" id="import-data-button" type="button">Import backup</button>
+                <input id="import-data-file" type="file" accept="application/json" hidden>
+                <button class="text-button danger-text" id="reset-progress-button" type="button">Reset learning progress</button>
+                <button class="text-button" id="restore-cards-button" type="button">Restore missing starter cards</button>
+              </div>
+              <p class="data-status" id="data-status" aria-live="polite">No account or server is involved.</p>
+            </section>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="card-modal" hidden>
+    <section class="card-editor" role="dialog" aria-modal="true" aria-labelledby="card-editor-title">
+      <div class="card-heading-row">
+        <div>
+          <p class="panel-label">Card editor</p>
+          <h2 id="card-editor-title">Add a card</h2>
+        </div>
+        <button class="icon-close" id="close-card-editor" type="button" aria-label="Close card editor">×</button>
+      </div>
+      <form id="card-form">
+        <input id="card-id" type="hidden">
+        <div class="editor-grid">
+          <label>Deck
+            <input id="card-deck" type="text" list="deck-options" required maxlength="60">
+            <datalist id="deck-options"></datalist>
+          </label>
+          <label>Topic
+            <input id="card-topic" type="text" required maxlength="60" placeholder="e.g. Flexbox">
+          </label>
+        </div>
+        <label>Question
+          <textarea id="card-front" rows="3" required maxlength="600"></textarea>
+        </label>
+        <label>Answer
+          <textarea id="card-back" rows="5" required maxlength="1800"></textarea>
+        </label>
+        <label>Code example <span>(optional)</span>
+          <textarea id="card-example" rows="5" maxlength="1800" spellcheck="false"></textarea>
+        </label>
+        <div class="editor-grid">
+          <label>Hint <span>(optional)</span>
+            <input id="card-hint" type="text" maxlength="200">
+          </label>
+          <label>Tags <span>(comma separated)</span>
+            <input id="card-tags" type="text" maxlength="200" placeholder="semantic, accessibility">
+          </label>
+        </div>
+        <div class="editor-actions">
+          <button class="button button-secondary" id="cancel-card-editor" type="button">Cancel</button>
+          <button class="button button-primary" type="submit">Save card</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>Spaced repetition in plain JavaScript. Your study history stays on your device.</p>
+      <a href="./">Back to portfolio</a>
+    </div>
+  </footer>
+
+  <script src="learn-cards.js"></script>
+  <script src="learn.js"></script>
+</body>
+</html>
