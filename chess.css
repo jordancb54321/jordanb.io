@@ -31,7 +31,7 @@
 
 .chess-board-card {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(220, 232, 221, 0.82));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(233, 248, 207, 0.82));
 }
 
 .chess-board {
@@ -84,7 +84,7 @@
   padding: 1rem;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: rgba(244, 247, 241, 0.68);
+  background: rgba(248, 249, 250, 0.68);
 }
 
 .select-control,

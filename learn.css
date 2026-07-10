@@ -18,7 +18,7 @@
 }
 
 .learn-hero-panel {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(220, 232, 221, 0.66));
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(233, 248, 207, 0.66));
 }
 
 .learn-workspace {
@@ -36,7 +36,7 @@
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(244, 247, 241, 0.94);
+  background: rgba(248, 249, 250, 0.94);
   box-shadow: 0 14px 40px rgba(17, 24, 39, 0.08);
   backdrop-filter: blur(16px);
 }
@@ -57,12 +57,12 @@
 .learn-tab:hover,
 .learn-tab:focus-visible {
   color: var(--accent-deep);
-  outline: 2px solid rgba(78, 139, 91, 0.3);
+  outline: 2px solid rgba(162, 228, 54, 0.3);
   outline-offset: 1px;
 }
 
 .learn-tab.is-active {
-  color: #f7fcf8;
+  color: #000000;
   background: var(--forest);
 }
 
@@ -154,7 +154,7 @@
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background: rgba(78, 139, 91, 0.09);
+  background: rgba(162, 228, 54, 0.09);
 }
 
 .metric-card span,
@@ -249,14 +249,14 @@
 .deck-study-button {
   padding: 0.45rem 0.7rem;
   border-radius: 999px;
-  color: #f7fcf8;
+  color: #000000;
   background: var(--forest);
   text-decoration: none;
 }
 
 .deck-study-button:focus-visible,
 .text-button:focus-visible {
-  outline: 3px solid rgba(78, 139, 91, 0.26);
+  outline: 3px solid rgba(162, 228, 54, 0.26);
   outline-offset: 3px;
 }
 
@@ -377,7 +377,7 @@
 .card-editor input:focus,
 .card-editor textarea:focus {
   border-color: var(--fern);
-  outline: 3px solid rgba(78, 139, 91, 0.16);
+  outline: 3px solid rgba(162, 228, 54, 0.16);
 }
 
 .session-counts {
@@ -481,7 +481,7 @@ kbd {
   border: 1px solid rgba(17, 24, 39, 0.12);
   border-radius: 28px;
   background:
-    radial-gradient(circle at top right, rgba(159, 190, 166, 0.18), transparent 20rem),
+    radial-gradient(circle at top right, rgba(162, 228, 54, 0.18), transparent 20rem),
     rgba(255, 255, 255, 0.86);
   box-shadow: 0 28px 70px rgba(17, 24, 39, 0.12);
 }
@@ -600,7 +600,7 @@ kbd {
 .rating-button:hover,
 .rating-button:focus-visible {
   transform: translateY(-2px);
-  outline: 3px solid rgba(78, 139, 91, 0.16);
+  outline: 3px solid rgba(162, 228, 54, 0.16);
 }
 
 .rating-again { border-top: 4px solid #b75d4c; }
@@ -697,7 +697,7 @@ kbd {
   border: 1px solid var(--line);
   border-radius: 9px;
   color: var(--forest);
-  background: rgba(244, 247, 241, 0.9);
+  background: rgba(248, 249, 250, 0.9);
   font: inherit;
   font-size: 0.78rem;
   font-weight: 700;
@@ -707,7 +707,7 @@ kbd {
 .small-action:hover,
 .small-action:focus-visible {
   border-color: var(--fern);
-  outline: 2px solid rgba(78, 139, 91, 0.16);
+  outline: 2px solid rgba(162, 228, 54, 0.16);
 }
 
 .small-action.danger-action,
@@ -902,7 +902,7 @@ kbd {
 }
 
 .icon-close:focus-visible {
-  outline: 3px solid rgba(78, 139, 91, 0.25);
+  outline: 3px solid rgba(162, 228, 54, 0.25);
 }
 
 body.modal-open {

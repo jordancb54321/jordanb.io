@@ -8,7 +8,8 @@
     name="description"
     content="A sorting visualizer by Jordan Betts for comparing classic algorithms in the browser."
   >
-  <meta name="theme-color" content="#f4f7f1">
+  <meta name="theme-color" content="#a2e436">
+  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css" rel="stylesheet" integrity="sha384-Ofi7E7ZOYTr4CxupdpiGUzzXde5ISlET4zbL25ujM4xQDsQmnLHb5H5d+Helx0qk" crossorigin="anonymous">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="sorting.css">
 </head>
@@ -51,10 +52,10 @@
           </p>
 
           <div class="hero-actions">
-            <button class="button button-primary" id="shuffle" type="button">
+            <button class="btn btn-primary button button-primary" id="shuffle" type="button">
               Shuffle array
             </button>
-            <button class="button button-secondary" id="run-selected" type="button">
+            <button class="btn btn-outline-dark button button-secondary" id="run-selected" type="button">
               Run selected
             </button>
           </div>
@@ -98,28 +99,28 @@
           <div>
             <p class="panel-label">Algorithms to run</p>
             <div class="algorithm-actions">
-              <button class="button button-secondary algorithm-button is-selected" data-algorithm="bubble" aria-pressed="true" type="button">
+              <button class="btn btn-outline-dark button button-secondary algorithm-button is-selected" data-algorithm="bubble" aria-pressed="true" type="button">
                 Bubble
               </button>
-              <button class="button button-secondary algorithm-button is-selected" data-algorithm="selection" aria-pressed="true" type="button">
+              <button class="btn btn-outline-dark button button-secondary algorithm-button is-selected" data-algorithm="selection" aria-pressed="true" type="button">
                 Selection
               </button>
-              <button class="button button-secondary algorithm-button is-selected" data-algorithm="insertion" aria-pressed="true" type="button">
+              <button class="btn btn-outline-dark button button-secondary algorithm-button is-selected" data-algorithm="insertion" aria-pressed="true" type="button">
                 Insertion
               </button>
-              <button class="button button-secondary algorithm-button is-selected" data-algorithm="merge" aria-pressed="true" type="button">
+              <button class="btn btn-outline-dark button button-secondary algorithm-button is-selected" data-algorithm="merge" aria-pressed="true" type="button">
                 Merge
               </button>
-              <button class="button button-secondary algorithm-button" data-algorithm="quick" aria-pressed="false" type="button">
+              <button class="btn btn-outline-dark button button-secondary algorithm-button" data-algorithm="quick" aria-pressed="false" type="button">
                 Quick
               </button>
-              <button class="button button-secondary algorithm-button" data-algorithm="heap" aria-pressed="false" type="button">
+              <button class="btn btn-outline-dark button button-secondary algorithm-button" data-algorithm="heap" aria-pressed="false" type="button">
                 Heap
               </button>
-              <button class="button button-secondary algorithm-button" data-algorithm="shell" aria-pressed="false" type="button">
+              <button class="btn btn-outline-dark button button-secondary algorithm-button" data-algorithm="shell" aria-pressed="false" type="button">
                 Shell
               </button>
-              <button class="button button-secondary algorithm-button" data-algorithm="radix" aria-pressed="false" type="button">
+              <button class="btn btn-outline-dark button button-secondary algorithm-button" data-algorithm="radix" aria-pressed="false" type="button">
                 Radix
               </button>
             </div>
@@ -157,7 +158,7 @@
             Bubble sort repeatedly compares neighboring values and swaps them when
             they are out of order, slowly pushing larger values to the end.
           </p>
-          <button class="button button-secondary code-toggle" data-code-toggle="bubble" type="button" aria-expanded="false">
+          <button class="btn btn-outline-dark button button-secondary code-toggle" data-code-toggle="bubble" type="button" aria-expanded="false">
             Show code
           </button>
           <div class="code-panel" id="code-panel-bubble" hidden>
@@ -182,7 +183,7 @@
             Selection sort scans the remaining unsorted values to find the
             smallest item, then places it into the next sorted position.
           </p>
-          <button class="button button-secondary code-toggle" data-code-toggle="selection" type="button" aria-expanded="false">
+          <button class="btn btn-outline-dark button button-secondary code-toggle" data-code-toggle="selection" type="button" aria-expanded="false">
             Show code
           </button>
           <div class="code-panel" id="code-panel-selection" hidden>
@@ -207,7 +208,7 @@
             Insertion sort builds a sorted section from left to right, inserting
             each new value into the correct place among the items before it.
           </p>
-          <button class="button button-secondary code-toggle" data-code-toggle="insertion" type="button" aria-expanded="false">
+          <button class="btn btn-outline-dark button button-secondary code-toggle" data-code-toggle="insertion" type="button" aria-expanded="false">
             Show code
           </button>
           <div class="code-panel" id="code-panel-insertion" hidden>
@@ -232,7 +233,7 @@
             Merge sort splits the array into smaller pieces, sorts those pieces,
             and then merges them back together in order.
           </p>
-          <button class="button button-secondary code-toggle" data-code-toggle="merge" type="button" aria-expanded="false">
+          <button class="btn btn-outline-dark button button-secondary code-toggle" data-code-toggle="merge" type="button" aria-expanded="false">
             Show code
           </button>
           <div class="code-panel" id="code-panel-merge" hidden>
@@ -257,7 +258,7 @@
             Quick sort chooses a pivot, partitions smaller and larger values
             around it, and then recursively sorts each side.
           </p>
-          <button class="button button-secondary code-toggle" data-code-toggle="quick" type="button" aria-expanded="false">
+          <button class="btn btn-outline-dark button button-secondary code-toggle" data-code-toggle="quick" type="button" aria-expanded="false">
             Show code
           </button>
           <div class="code-panel" id="code-panel-quick" hidden>
@@ -282,7 +283,7 @@
             Heap sort organizes values into a max heap, repeatedly removes the
             largest value, and places it at the end of the array.
           </p>
-          <button class="button button-secondary code-toggle" data-code-toggle="heap" type="button" aria-expanded="false">
+          <button class="btn btn-outline-dark button button-secondary code-toggle" data-code-toggle="heap" type="button" aria-expanded="false">
             Show code
           </button>
           <div class="code-panel" id="code-panel-heap" hidden>
@@ -307,7 +308,7 @@
             Shell sort improves insertion sort by first comparing values across
             larger gaps, then reducing the gap until the array is fully sorted.
           </p>
-          <button class="button button-secondary code-toggle" data-code-toggle="shell" type="button" aria-expanded="false">
+          <button class="btn btn-outline-dark button button-secondary code-toggle" data-code-toggle="shell" type="button" aria-expanded="false">
             Show code
           </button>
           <div class="code-panel" id="code-panel-shell" hidden>
@@ -332,7 +333,7 @@
             Radix sort groups numbers by individual digits from least
             significant to most significant instead of comparing values directly.
           </p>
-          <button class="button button-secondary code-toggle" data-code-toggle="radix" type="button" aria-expanded="false">
+          <button class="btn btn-outline-dark button button-secondary code-toggle" data-code-toggle="radix" type="button" aria-expanded="false">
             Show code
           </button>
           <div class="code-panel" id="code-panel-radix" hidden>

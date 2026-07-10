@@ -48,14 +48,14 @@
 .algorithm-button.is-selected {
   background: var(--accent);
   border-color: var(--accent);
-  color: #f7fcf8;
+  color: #000000;
 }
 
 .algorithm-button.is-selected:hover,
 .algorithm-button.is-selected:focus-visible {
   background: var(--accent-deep);
   border-color: var(--accent-deep);
-  color: #f7fcf8;
+  color: #000000;
 }
 
 .sorting-grid {
@@ -152,7 +152,7 @@
 }
 
 .code-list li.is-highlighted {
-  background: rgba(78, 139, 91, 0.16);
+  background: rgba(162, 228, 54, 0.16);
   color: var(--forest);
 }
 
@@ -182,7 +182,7 @@
 }
 
 .bar.is-sorted {
-  background: linear-gradient(180deg, #dce8dd, var(--forest));
+  background: linear-gradient(180deg, #e9f8cf, var(--forest));
 }
 
 @media (max-width: 960px) {
