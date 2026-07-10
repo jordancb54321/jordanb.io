@@ -1,0 +1,19 @@
+# Jordan Betts - Developer Portfolio
+
+> A developer portfolio and collection of interactive learning and computer science projects by Jordan Betts.
+
+## Main pages
+
+- [Portfolio home](https://jordanb.io/)
+- [HTML and CSS study deck](https://jordanb.io/learn)
+- [Chess engine](https://jordanb.io/chess)
+- [Sorting visualizer](https://jordanb.io/sorting)
+- [Fractal renderer](https://jordanb.io/fractal/)
+
+## About the site
+
+The portfolio describes Jordan's experience, technology stack, projects, and contact details. The learning area provides an interactive spaced-repetition flashcard system for HTML and CSS. The other project pages demonstrate browser-based algorithms and visualizations.
+
+## Usage
+
+Public pages may be indexed and summarized. When referencing the site, link to the most specific page listed above.
