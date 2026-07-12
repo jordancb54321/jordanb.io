@@ -31,7 +31,7 @@
 }
 
 .learn-hero-panel {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(233, 248, 207, 0.66));
+  background: linear-gradient(145deg, var(--white), var(--gray-100));
 }
 
 .learn-workspace {
@@ -70,7 +70,7 @@
 .learn-tab:hover,
 .learn-tab:focus-visible {
   color: var(--accent-deep);
-  outline: 2px solid rgba(162, 228, 54, 0.3);
+  outline: 2px solid rgba(215, 25, 32, 0.3);
   outline-offset: 1px;
 }
 
@@ -167,7 +167,7 @@
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background: rgba(162, 228, 54, 0.09);
+  background: rgba(215, 25, 32, 0.09);
 }
 
 .metric-card span,
@@ -187,7 +187,7 @@
 
 .metric-due { border-top: 4px solid #b75d4c; }
 .metric-new { border-top: 4px solid #4d78a7; }
-.metric-mastered { border-top: 4px solid var(--fern); }
+.metric-mastered { border-top: 4px solid var(--signal); }
 .metric-streak { border-top: 4px solid #c89036; }
 
 .dashboard-grid,
@@ -203,8 +203,8 @@
 .saved-locally {
   padding: 0.35rem 0.65rem;
   border-radius: 999px;
-  color: var(--forest);
-  background: var(--mist);
+  color: var(--ink);
+  background: var(--gray-100);
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -277,7 +277,7 @@
 
 .deck-study-button:focus-visible,
 .text-button:focus-visible {
-  outline: 3px solid rgba(162, 228, 54, 0.26);
+  outline: 3px solid rgba(215, 25, 32, 0.26);
   outline-offset: 3px;
 }
 
@@ -289,7 +289,7 @@
   margin: 1.2rem auto;
   place-items: center;
   border-radius: 50%;
-  background: conic-gradient(var(--fern) var(--progress), var(--mist) 0);
+  background: conic-gradient(var(--signal) var(--progress), var(--gray-100) 0);
 }
 
 .ring-progress::before {
@@ -345,7 +345,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--fern);
+  background: var(--signal);
 }
 
 .activity-item p,
@@ -397,8 +397,8 @@
 .settings-form select:focus,
 .card-editor input:focus,
 .card-editor textarea:focus {
-  border-color: var(--fern);
-  outline: 3px solid rgba(162, 228, 54, 0.16);
+  border-color: var(--signal);
+  outline: 3px solid rgba(215, 25, 32, 0.16);
 }
 
 .session-counts {
@@ -484,7 +484,7 @@ kbd {
   height: 8px;
   overflow: hidden;
   border-radius: 999px;
-  background: var(--mist);
+  background: var(--gray-100);
 }
 
 .review-progress span {
@@ -492,7 +492,7 @@ kbd {
   width: 0;
   height: 100%;
   border-radius: inherit;
-  background: var(--fern);
+  background: var(--signal);
   transition: width 180ms ease;
 }
 
@@ -502,7 +502,7 @@ kbd {
   border: 1px solid rgba(17, 24, 39, 0.12);
   border-radius: 28px;
   background:
-    radial-gradient(circle at top right, rgba(162, 228, 54, 0.18), transparent 20rem),
+    radial-gradient(circle at top right, rgba(215, 25, 32, 0.18), transparent 20rem),
     rgba(255, 255, 255, 0.86);
   box-shadow: 0 28px 70px rgba(17, 24, 39, 0.12);
 }
@@ -516,8 +516,8 @@ kbd {
 .flashcard-meta span {
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
-  color: var(--forest);
-  background: var(--mist);
+  color: var(--ink);
+  background: var(--gray-100);
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -621,12 +621,12 @@ kbd {
 .rating-button:hover,
 .rating-button:focus-visible {
   transform: translateY(-2px);
-  outline: 3px solid rgba(162, 228, 54, 0.16);
+  outline: 3px solid rgba(215, 25, 32, 0.16);
 }
 
 .rating-again { border-top: 4px solid #b75d4c; }
 .rating-hard { border-top: 4px solid #c89036; }
-.rating-good { border-top: 4px solid var(--fern); }
+.rating-good { border-top: 4px solid var(--signal); }
 .rating-easy { border-top: 4px solid #4d78a7; }
 
 .session-complete {
@@ -648,7 +648,7 @@ kbd {
   place-items: center;
   border-radius: 50%;
   color: white;
-  background: var(--fern);
+  background: var(--signal);
   font-size: 2rem;
   font-weight: 800;
 }
@@ -717,7 +717,7 @@ kbd {
   padding: 0.4rem 0.6rem;
   border: 1px solid var(--line);
   border-radius: 9px;
-  color: var(--forest);
+  color: var(--ink);
   background: rgba(248, 249, 250, 0.9);
   font: inherit;
   font-size: 0.78rem;
@@ -727,8 +727,8 @@ kbd {
 
 .small-action:hover,
 .small-action:focus-visible {
-  border-color: var(--fern);
-  outline: 2px solid rgba(162, 228, 54, 0.16);
+  border-color: var(--signal);
+  outline: 2px solid rgba(215, 25, 32, 0.16);
 }
 
 .small-action.danger-action,
@@ -762,14 +762,14 @@ kbd {
   height: 12px;
   overflow: hidden;
   border-radius: 999px;
-  background: var(--mist);
+  background: var(--gray-100);
 }
 
 .mastery-track span {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--fern), var(--forest));
+  background: linear-gradient(90deg, var(--signal), var(--ink));
 }
 
 .forecast-chart {
@@ -800,7 +800,7 @@ kbd {
   width: min(32px, 80%);
   min-height: 4px;
   border-radius: 8px 8px 3px 3px;
-  background: var(--fern);
+  background: var(--signal);
 }
 
 .forecast-day small {
@@ -820,10 +820,10 @@ kbd {
   background: #e4ebe2;
 }
 
-.heatmap-cell.level-1 { background: #c9ddcc; }
-.heatmap-cell.level-2 { background: #8eba97; }
-.heatmap-cell.level-3 { background: #5b9566; }
-.heatmap-cell.level-4 { background: var(--forest); }
+.heatmap-cell.level-1 { background: var(--gray-100); }
+.heatmap-cell.level-2 { background: var(--gray-300); }
+.heatmap-cell.level-3 { background: var(--gray-600); }
+.heatmap-cell.level-4 { background: var(--ink); }
 
 .heatmap-legend {
   color: var(--muted);
@@ -836,7 +836,7 @@ kbd {
   height: 10px;
   margin-right: 0.25rem;
   border-radius: 3px;
-  background: var(--forest);
+  background: var(--ink);
 }
 
 .settings-form,
@@ -923,7 +923,7 @@ kbd {
 }
 
 .icon-close:focus-visible {
-  outline: 3px solid rgba(162, 228, 54, 0.25);
+  outline: 3px solid rgba(215, 25, 32, 0.25);
 }
 
 body.modal-open {

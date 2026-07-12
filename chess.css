@@ -30,8 +30,7 @@
 }
 
 .chess-board-card {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(233, 248, 207, 0.82));
+  background: linear-gradient(180deg, var(--white), var(--gray-100));
 }
 
 .chess-board {

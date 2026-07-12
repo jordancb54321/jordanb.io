@@ -168,8 +168,8 @@
 }
 
 .code-list li.is-highlighted {
-  background: rgba(162, 228, 54, 0.16);
-  color: var(--forest);
+  color: var(--ink);
+  background: rgba(215, 25, 32, 0.12);
 }
 
 .bars {
@@ -185,20 +185,20 @@
   flex: 1 1 0;
   min-width: 0;
   border-radius: 999px 999px 0 0;
-  background: linear-gradient(180deg, var(--sage), var(--accent));
+  background: linear-gradient(180deg, var(--gray-300), var(--gray-600));
   transition: height 80ms linear, background-color 80ms linear, opacity 80ms linear;
 }
 
 .bar.is-active {
-  background: linear-gradient(180deg, #8fd6a0, var(--forest));
+  background: linear-gradient(180deg, #ef4b51, var(--signal));
 }
 
 .bar.is-compare {
-  background: linear-gradient(180deg, #a9d4b0, #5f9e6d);
+  background: linear-gradient(180deg, var(--white), var(--ink));
 }
 
 .bar.is-sorted {
-  background: linear-gradient(180deg, #e9f8cf, var(--forest));
+  background: var(--ink);
 }
 
 @media (max-width: 960px) {
