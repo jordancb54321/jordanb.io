@@ -17,6 +17,19 @@
   max-width: 780px;
 }
 
+.learn-main .button-primary {
+  color: var(--white);
+  border-color: var(--signal);
+  background: var(--signal);
+}
+
+.learn-main .button-primary:hover,
+.learn-main .button-primary:focus-visible {
+  color: var(--white);
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
 .learn-hero-panel {
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(233, 248, 207, 0.66));
 }
@@ -62,8 +75,8 @@
 }
 
 .learn-tab.is-active {
-  color: #000000;
-  background: var(--forest);
+  color: var(--white);
+  background: var(--ink);
 }
 
 .sr-announcement {
@@ -236,7 +249,7 @@
 .deck-study-button,
 .text-button {
   border: 0;
-  color: var(--accent-deep);
+  color: var(--signal);
   background: transparent;
   font: inherit;
   font-weight: 700;
@@ -248,10 +261,18 @@
 
 .deck-study-button {
   padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-  color: #000000;
-  background: var(--forest);
+  border: 1px solid var(--signal);
+  border-radius: 0;
+  color: var(--white);
+  background: var(--signal);
   text-decoration: none;
+}
+
+.deck-study-button:hover,
+.deck-study-button:focus-visible {
+  color: var(--white);
+  border-color: var(--ink);
+  background: var(--ink);
 }
 
 .deck-study-button:focus-visible,
