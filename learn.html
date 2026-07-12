@@ -8,13 +8,13 @@
     name="description"
     content="Learn HTML and CSS with an Anki-style flashcard system, spaced repetition, progress tracking, and editable study decks."
   >
-  <meta name="theme-color" content="#a2e436">
+  <meta name="theme-color" content="#0a0a0a">
   <meta property="og:title" content="HTML &amp; CSS Study Deck | Jordan Betts">
   <meta property="og:description" content="A local-first HTML and CSS flashcard system with spaced repetition and progress tracking.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jordanb.io/learn">
   <link rel="canonical" href="https://jordanb.io/learn">
-  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css" rel="stylesheet" integrity="sha384-Ofi7E7ZOYTr4CxupdpiGUzzXde5ISlET4zbL25ujM4xQDsQmnLHb5H5d+Helx0qk" crossorigin="anonymous">
+
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="learn.css">
 </head>
@@ -56,8 +56,8 @@
             decide when each card should return.
           </p>
           <div class="hero-actions">
-            <button class="btn btn-primary button button-primary" id="hero-study-button" type="button">Study now</button>
-            <button class="btn btn-outline-dark button button-secondary" id="hero-add-button" type="button">Create a card</button>
+            <button class="button button-primary" id="hero-study-button" type="button">Study now</button>
+            <button class="button button-secondary" id="hero-add-button" type="button">Create a card</button>
           </div>
         </div>
 
@@ -92,7 +92,7 @@
               <p class="eyebrow">Today</p>
               <h2>Keep the queue small and the streak alive.</h2>
             </div>
-            <button class="btn btn-primary button button-primary" id="dashboard-study-button" type="button">Start today’s review</button>
+            <button class="button button-primary" id="dashboard-study-button" type="button">Start today’s review</button>
           </div>
 
           <div class="study-metrics" role="group" aria-label="Study summary">
@@ -177,7 +177,7 @@
                   <div><strong id="session-new-count">0</strong><span>new</span></div>
                   <div><strong id="session-total-count">0</strong><span>in session</span></div>
                 </div>
-                <button class="btn btn-primary button button-primary" id="start-session-button" type="button">Start session</button>
+                <button class="button button-primary" id="start-session-button" type="button">Start session</button>
               </section>
 
               <aside class="learn-card shortcut-card" aria-labelledby="shortcut-title">
@@ -227,7 +227,7 @@
             </article>
 
             <div class="reveal-row" id="reveal-row">
-              <button class="btn btn-primary button button-primary reveal-button" id="reveal-answer-button" type="button">Show answer <kbd>Space</kbd></button>
+              <button class="button button-primary reveal-button" id="reveal-answer-button" type="button">Show answer <kbd>Space</kbd></button>
             </div>
 
             <div class="rating-grid" id="rating-grid" role="group" aria-label="Rate your answer" hidden>
@@ -244,8 +244,8 @@
             <h2>You cleared the queue.</h2>
             <p id="session-complete-summary">Nice work.</p>
             <div class="hero-actions">
-              <button class="btn btn-primary button button-primary" id="return-dashboard-button" type="button">Back to overview</button>
-              <button class="btn btn-outline-dark button button-secondary" id="review-more-button" type="button">Review another deck</button>
+              <button class="button button-primary" id="return-dashboard-button" type="button">Back to overview</button>
+              <button class="button button-secondary" id="review-more-button" type="button">Review another deck</button>
             </div>
           </div>
         </section>
@@ -256,7 +256,7 @@
               <p class="eyebrow">Card library</p>
               <h2>Search, edit, suspend, or add your own.</h2>
             </div>
-            <button class="btn btn-primary button button-primary" id="add-card-button" type="button">Add card</button>
+            <button class="button button-primary" id="add-card-button" type="button">Add card</button>
           </div>
 
           <div class="card-toolbar learn-card">
@@ -357,15 +357,15 @@
                   <option value="random">Random</option>
                 </select>
               </label>
-              <button class="btn btn-primary button button-primary" type="submit">Save settings</button>
+              <button class="button button-primary" type="submit">Save settings</button>
             </form>
 
             <section class="learn-card data-tools" aria-labelledby="data-tools-title">
               <h3 id="data-tools-title">Your data</h3>
               <p>Everything is stored in this browser. Export a backup before clearing browser data or moving devices.</p>
               <div class="data-actions">
-                <button class="btn btn-outline-dark button button-secondary" id="export-data-button" type="button">Export backup</button>
-                <button class="btn btn-outline-dark button button-secondary" id="import-data-button" type="button">Import backup</button>
+                <button class="button button-secondary" id="export-data-button" type="button">Export backup</button>
+                <button class="button button-secondary" id="import-data-button" type="button">Import backup</button>
                 <input id="import-data-file" type="file" accept="application/json" hidden>
                 <button class="text-button danger-text" id="reset-progress-button" type="button">Reset learning progress</button>
                 <button class="text-button" id="restore-cards-button" type="button">Restore missing starter cards</button>
@@ -416,8 +416,8 @@
           </label>
         </div>
         <div class="editor-actions">
-          <button class="btn btn-outline-dark button button-secondary" id="cancel-card-editor" type="button">Cancel</button>
-          <button class="btn btn-primary button button-primary" type="submit">Save card</button>
+          <button class="button button-secondary" id="cancel-card-editor" type="button">Cancel</button>
+          <button class="button button-primary" type="submit">Save card</button>
         </div>
       </form>
     </section>
