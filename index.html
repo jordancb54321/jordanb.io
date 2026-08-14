@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jordan Betts — developer portfolio</title>
+  <title>Jordan Betts — Web designer &amp; developer</title>
   <meta
     name="description"
-    content="Jordan Betts is a Computer Science graduate in Hertfordshire interested in backend development, troubleshooting, and practical web work."
+    content="Jordan Betts designs and builds practical websites, and enjoys the problem-solving behind them."
   >
-  <meta name="theme-color" content="#f6f0e6">
-  <meta property="og:title" content="Jordan Betts — developer portfolio">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta property="og:title" content="Jordan Betts — Web designer &amp; developer">
   <meta
     property="og:description"
-    content="A small hand-built portfolio with client work, browser experiments, and a few things Jordan is learning."
+    content="Web work, browser experiments, and practical problem-solving by Jordan Betts."
   >
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="styles.css">
@@ -21,157 +21,158 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" id="top">
-    <div class="wrap header-inner">
-      <a class="site-name" href="#top">Jordan Betts<span>.</span></a>
+    <div class="wrap nav-row">
+      <a class="brand" href="#top" aria-label="Jordan Betts, home">
+        <span>JB</span>
+        <small>web design<br>&amp; development</small>
+      </a>
       <nav aria-label="Primary">
         <a href="#work">Work</a>
-        <a href="#about">About</a>
+        <a href="#playground">Experiments</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="intro wrap">
-      <p class="kicker">Hello — I’m Jordan.</p>
-      <div class="intro-grid">
-        <h1>I make websites and enjoy figuring out why things break.</h1>
-        <div class="intro-note">
-          <p>
-            I’m a Computer Science graduate in Hertfordshire looking for a junior
-            backend or software role. I like clear systems, awkward bugs, and
-            code that still makes sense a month later.
-          </p>
-          <a class="text-link" href="#work">Have a look at my work <span aria-hidden="true">↓</span></a>
-        </div>
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">Hertfordshire, UK · Available for junior opportunities</p>
+        <h1>Design in the browser.<br><em>Build it properly.</em></h1>
+        <p class="hero-intro">
+          I’m Jordan — a Computer Science graduate who enjoys making practical
+          websites feel clear, useful, and a little more memorable than they need to be.
+        </p>
+        <a class="button" href="#work">See my work <span aria-hidden="true">↓</span></a>
       </div>
-      <p class="margin-note">Currently learning by building small things and fixing real ones.</p>
+
+      <div class="hero-art" aria-label="Web design, build, and debug">
+        <p class="art-label">A simple approach</p>
+        <div class="art-window art-window-main">
+          <span class="window-dots" aria-hidden="true">● ● ●</span>
+          <strong>DESIGN</strong>
+          <p>Start with the person using it.</p>
+        </div>
+        <div class="art-window art-window-small">
+          <strong>BUILD</strong>
+          <p>Keep the code easy to follow.</p>
+        </div>
+        <div class="art-sticker">debug<br>the weird bits</div>
+        <p class="art-caption">Visual thinking + practical problem-solving</p>
+      </div>
     </section>
 
     <section class="work-section" id="work">
       <div class="wrap">
-        <div class="section-title">
-          <p class="kicker">A few things I’ve worked on</p>
-          <p>Not a massive case-study wall. Just the useful bits.</p>
+        <div class="section-heading">
+          <p class="eyebrow">Selected web work</p>
+          <h2>Websites with a job to do.</h2>
+          <p>
+            I care about the small decisions that make a site easier to use:
+            hierarchy, readable copy, a clear next step, and a layout that works on a phone.
+          </p>
         </div>
 
-        <div class="project-list">
-          <article class="project">
-            <p class="project-number">01</p>
-            <div>
-              <h2>Prestige Carpet Cleaning</h2>
-              <p>
-                A real client site. I worked on the layout, service pages, mobile
-                fixes, and the smaller updates that come after a site goes live.
-              </p>
+        <div class="featured-work">
+          <article class="work-piece work-piece-orange">
+            <div class="project-preview preview-carpet" aria-hidden="true">
+              <span>PRESTIGE</span>
+              <strong>Carpet<br>Cleaning</strong>
+              <i>Local service site</i>
             </div>
-            <p class="project-type">Client web work<br>HTML · CSS</p>
+            <div class="work-copy">
+              <p class="project-label">01 · Client website</p>
+              <h3>Prestige Carpet Cleaning</h3>
+              <p>
+                A real client site where I handled layout, service pages, mobile
+                fixes, and the small content updates that followed launch.
+              </p>
+              <ul>
+                <li>Clearer service information</li>
+                <li>Responsive layout work</li>
+                <li>Live-site maintenance</li>
+              </ul>
+            </div>
           </article>
 
-          <article class="project">
-            <p class="project-number">02</p>
-            <div>
-              <h2>Prestige Commercial</h2>
-              <p>
-                More client work for a commercial cleaning service. It taught me
-                how to make careful changes without causing problems on a live site.
-              </p>
+          <article class="work-piece work-piece-blue">
+            <div class="project-preview preview-commercial" aria-hidden="true">
+              <span>PRESTIGE</span>
+              <strong>Commercial<br>Cleaning</strong>
+              <i>Business service site</i>
             </div>
-            <p class="project-type">Client web work<br>Updates · deployment</p>
-          </article>
-
-          <article class="project">
-            <p class="project-number">03</p>
-            <div>
-              <h2>Production support</h2>
+            <div class="work-copy">
+              <p class="project-label">02 · Client website</p>
+              <h3>Prestige Commercial</h3>
               <p>
-                Support work made me patient with messy problems: check the logs,
-                narrow down the cause, write down the fix, and don’t guess.
+                Commercial cleaning work with the same real-world lesson: make
+                changes carefully, check them properly, and don’t break a live site.
               </p>
+              <ul>
+                <li>Content and page changes</li>
+                <li>Mobile improvements</li>
+                <li>Deployment awareness</li>
+              </ul>
             </div>
-            <p class="project-type">Troubleshooting<br>Documentation</p>
-          </article>
-
-          <article class="project">
-            <p class="project-number">04</p>
-            <div>
-              <h2>Fractal renderer</h2>
-              <p>
-                A browser canvas experiment. Change a value, render again, and see
-                straight away what it did — a good way to learn and debug visually.
-              </p>
-              <a class="text-link" href="fractal/">Try the renderer <span aria-hidden="true">↗</span></a>
-            </div>
-            <p class="project-type">Canvas<br>JavaScript</p>
-          </article>
-
-          <article class="project">
-            <p class="project-number">05</p>
-            <div>
-              <h2>HTML &amp; CSS study deck</h2>
-              <p>
-                A local-first flashcard app with spaced repetition, editable cards,
-                study statistics, and practical starter questions.
-              </p>
-              <a class="text-link" href="learn">Open the study deck <span aria-hidden="true">↗</span></a>
-            </div>
-            <p class="project-type">LocalStorage<br>Accessible UI</p>
           </article>
         </div>
+
+        <article class="support-note">
+          <p class="project-label">Also useful at</p>
+          <h3>Finding the actual problem before trying to fix it.</h3>
+          <p>
+            Production support taught me to check logs, isolate causes, document
+            what changed, and avoid treating a guess as an answer.
+          </p>
+        </article>
       </div>
     </section>
 
-    <section class="about-section" id="about">
+    <section class="about-section">
       <div class="wrap about-grid">
+        <p class="eyebrow">How I work</p>
         <div>
-          <p class="kicker">A bit about me</p>
-          <h2>I prefer useful over flashy.</h2>
-        </div>
-        <div class="about-copy">
-          <p>
-            My background is a mixture of development, support, and fixing things
-            that are already being used. It has made me practical: before I reach
-            for a clever solution, I want to know what is failing and who it affects.
-          </p>
-          <p>
-            Backend development suits me because the work is concrete. The code
-            either handles the case, keeps the data safe, responds quickly enough,
-            and gives the next person a fair chance of maintaining it.
-          </p>
+          <h2>Good design is not decoration. It is making the next step obvious.</h2>
+          <div class="principles">
+            <p><b>01</b> Start with what the visitor needs to find.</p>
+            <p><b>02</b> Use contrast and spacing before adding more components.</p>
+            <p><b>03</b> Keep the implementation simple enough to maintain.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="tools-section wrap" aria-labelledby="tools-heading">
-      <div class="section-title">
-        <p class="kicker" id="tools-heading">Things I can work with</p>
+    <section class="skills-section wrap" aria-labelledby="skills-heading">
+      <div class="section-heading compact-heading">
+        <p class="eyebrow" id="skills-heading">My toolkit</p>
+        <h2>Comfortable across the page and behind it.</h2>
       </div>
-      <ul class="tool-list">
-        <li><strong>Programming</strong><span>C#, Java, Python</span></li>
-        <li><strong>Web</strong><span>HTML, CSS, JavaScript, React, ASP.NET MVC, WordPress</span></li>
-        <li><strong>Systems</strong><span>MySQL, MongoDB, Git, Linux, Windows troubleshooting</span></li>
-      </ul>
+      <dl class="skills-list">
+        <div><dt>Web</dt><dd>HTML, CSS, JavaScript, React, ASP.NET MVC, WordPress</dd></div>
+        <div><dt>Programming</dt><dd>C#, Java, Python</dd></div>
+        <div><dt>Systems</dt><dd>MySQL, MongoDB, Git, Linux, Windows troubleshooting</dd></div>
+      </dl>
     </section>
 
-    <section class="playground-section">
+    <section class="playground-section" id="playground">
       <div class="wrap playground-grid">
         <div>
-          <p class="kicker">When I’m experimenting</p>
-          <h2>There are a few small browser projects here too.</h2>
+          <p class="eyebrow">Browser experiments</p>
+          <h2>I learn best by making small things that move.</h2>
         </div>
-        <ul class="experiment-links">
-          <li><a href="learn">Study deck <span aria-hidden="true">↗</span></a></li>
-          <li><a href="chess">Chess board <span aria-hidden="true">↗</span></a></li>
-          <li><a href="sorting">Sorting visualiser <span aria-hidden="true">↗</span></a></li>
-          <li><a href="fractal/">Fractal renderer <span aria-hidden="true">↗</span></a></li>
-        </ul>
+        <div class="experiment-list">
+          <a href="learn"><span>01</span><b>Study deck</b><em>Flashcards with spaced repetition</em><i aria-hidden="true">↗</i></a>
+          <a href="chess"><span>02</span><b>Chess board</b><em>A playable browser board</em><i aria-hidden="true">↗</i></a>
+          <a href="sorting"><span>03</span><b>Sorting visualiser</b><em>Algorithms you can watch</em><i aria-hidden="true">↗</i></a>
+          <a href="fractal/"><span>04</span><b>Fractal renderer</b><em>Canvas-based exploration</em><i aria-hidden="true">↗</i></a>
+        </div>
       </div>
     </section>
 
     <section class="contact-section wrap" id="contact">
-      <p class="kicker">Get in touch</p>
+      <p class="eyebrow">Say hello</p>
       <div class="contact-grid">
-        <h2>Open to junior developer opportunities.</h2>
+        <h2>Looking for a junior developer who cares about the work?</h2>
         <address>
           <a href="mailto:jordanb03@protonmail.com">jordanb03@protonmail.com</a>
           <a href="tel:07387454468">07387 454 468</a>
@@ -182,8 +183,8 @@
   </main>
 
   <footer>
-    <div class="wrap footer-inner">
-      <p>Built with plain HTML and CSS. No template, no tracking, no build step.</p>
+    <div class="wrap footer-row">
+      <p>Hand-coded from scratch — HTML, CSS, and no tracking.</p>
       <a href="#top">Back to top ↑</a>
     </div>
   </footer>
