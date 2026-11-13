@@ -6,7 +6,7 @@
     <title>Jordan Betts | Web designer &amp; developer</title>
     <meta
       name="description"
-      content="I'm Jordan, a web designer and developer in Hertfordshire. Websites, useful tools, and browser experiments you can try for yourself."
+      content="Jordan Betts. Web designer and developer in Hertfordshire, UK. Websites, browser tools and interactive experiments."
     />
     <meta name="theme-color" content="#141414" />
     <meta
@@ -15,7 +15,7 @@
     />
     <meta
       property="og:description"
-      content="Websites, useful tools, and the experiments I build to figure things out."
+      content="Websites, browser tools and interactive experiments."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://jordanb.io/" />
@@ -24,7 +24,7 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link
       rel="preload"
-      href="assets/fonts/big-shoulders.ttf"
+      href="assets/fonts/doto.ttf"
       as="font"
       type="font/ttf"
       crossorigin
@@ -47,7 +47,7 @@
           >jordanb.io</a
         >
         <nav aria-label="Primary">
-          <a href="#work">Work</a>
+          <a href="#work">Projects</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -55,320 +55,170 @@
     </header>
     <main id="main">
       <section class="hero" aria-labelledby="name">
-        <div class="wrap hero-layout">
-          <h1 id="name">
-            <span class="name-line"><span>Jordan </span></span
-            ><span class="name-line"><span>Betts</span></span>
-          </h1>
-          <div class="hero-copy">
-            <p class="role">
-              Web designer<br />
-              &amp; developer.
-            </p>
-            <p>
-              I build websites and small tools, usually because I want to
-              understand how something works.
-            </p>
-            <a class="button hero-button" href="#work"
-              >See my work <span aria-hidden="true">↘</span></a
-            >
-            <p class="location">Based in Hertfordshire, UK.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="work wrap" id="work" aria-labelledby="work-title">
-        <div class="section-top">
-          <h2 id="work-title" data-enter>Things I've made</h2>
-          <p data-enter>
-            The best way to explain these<br /> is to let you try them.
-          </p>
-        </div>
-        <div class="project-index">
-          <div class="project-list">
-            <article class="project is-selected" data-project="0">
-              <a
-                class="mobile-picture"
-                href="fractal/"
-                tabindex="-1"
-                aria-hidden="true"
-                ><img
-                  src="assets/fractal.webp"
-                  alt=""
-                  width="1200"
-                  height="750"
-                  loading="lazy"
-              /></a>
-              <h3 data-enter>
-                <button
-                  type="button"
-                  data-project-select="0"
-                  aria-pressed="true"
-                  aria-controls="project-preview"
-                >
-                  Fractal renderer
-                </button>
-              </h3>
-              <p data-enter>
-                Start with a familiar shape. Keep zooming until it isn't.
-                Explore Mandelbrot, Julia and Burning Ship fractals.
-              </p>
-              <a class="text-link" href="fractal/" data-enter
-                >Explore the fractals</a
-              >
-            </article>
-            <article class="project" data-project="1">
-              <a
-                class="mobile-picture"
-                href="learn"
-                tabindex="-1"
-                aria-hidden="true"
-                ><img
-                  src="assets/study.webp"
-                  alt=""
-                  width="1200"
-                  height="750"
-                  loading="lazy"
-              /></a>
-              <h3 data-enter>
-                <button
-                  type="button"
-                  data-project-select="1"
-                  aria-pressed="false"
-                  aria-controls="project-preview"
-                >
-                  Study deck
-                </button>
-              </h3>
-              <p data-enter>
-                A place to practise HTML and CSS without losing track of what
-                you've forgotten. Your progress stays in your browser.
-              </p>
-              <a class="text-link" href="learn" data-enter
-                >Try the study deck</a
-              >
-            </article>
-            <article class="project" data-project="2">
-              <a
-                class="mobile-picture"
-                href="chess"
-                tabindex="-1"
-                aria-hidden="true"
-                ><img
-                  src="assets/chess.webp"
-                  alt=""
-                  width="1200"
-                  height="750"
-                  loading="lazy"
-              /></a>
-              <h3 data-enter>
-                <button
-                  type="button"
-                  data-project-select="2"
-                  aria-pressed="false"
-                  aria-controls="project-preview"
-                >
-                  Chess
-                </button>
-              </h3>
-              <p data-enter>
-                My attempt to understand minimax turned into a chess bot. Play
-                against it, try Stockfish, or let the engines play each other.
-              </p>
-              <a class="text-link" href="chess" data-enter>Play a game</a>
-            </article>
-            <article class="project" data-project="3">
-              <a
-                class="mobile-picture"
-                href="sorting"
-                tabindex="-1"
-                aria-hidden="true"
-                ><img
-                  src="assets/sorting.webp"
-                  alt=""
-                  width="1200"
-                  height="750"
-                  loading="lazy"
-              /></a>
-              <h3 data-enter>
-                <button
-                  type="button"
-                  data-project-select="3"
-                  aria-pressed="false"
-                  aria-controls="project-preview"
-                >
-                  Sorting visualiser
-                </button>
-              </h3>
-              <p data-enter>
-                The same numbers, eight different approaches. Change the array
-                and watch the algorithms work through it.
-              </p>
-              <a class="text-link" href="sorting" data-enter>Watch the sorts</a>
-            </article>
-          </div>
-          <div class="preview-column" id="project-preview">
-            <div class="preview-stage" data-enter>
-              <figure
-                class="project-picture is-active"
-                data-project-picture="0"
-              >
-                <img
-                  src="assets/fractal.webp"
-                  alt="The fractal renderer drawing a detailed Mandelbrot boundary."
-                  width="1200"
-                  height="750"
-                  loading="lazy"
-                />
-                <figcaption>
-                  Fractal renderer. A closer look at the boundary.
-                </figcaption>
-              </figure>
-              <figure class="project-picture" data-project-picture="1">
-                <img
-                  src="assets/study.webp"
-                  alt="The study deck with an HTML flashcard and review controls."
-                  width="1200"
-                  height="750"
-                  loading="lazy"
-                />
-                <figcaption>
-                  Study deck. A little practice, remembered later.
-                </figcaption>
-              </figure>
-              <figure class="project-picture" data-project-picture="2">
-                <img
-                  src="assets/chess.webp"
-                  alt="The chess board with white and black pieces ready to play."
-                  width="1200"
-                  height="750"
-                  loading="lazy"
-                />
-                <figcaption>Chess. My bot has a lot to learn.</figcaption>
-              </figure>
-              <figure class="project-picture" data-project-picture="3">
-                <img
-                  src="assets/sorting.webp"
-                  alt="Sorting algorithms comparing bars in a shuffled array."
-                  width="1200"
-                  height="750"
-                  loading="lazy"
-                />
-                <figcaption>
-                  Sorting visualiser. Different routes to the same result.
-                </figcaption>
-              </figure>
+        <div class="wrap">
+          <h1 id="name"><span>Jordan</span> <span>Betts</span></h1>
+          <div class="hero-bottom">
+            <div class="hero-description">
+              <p class="role">Web designer &amp; developer.</p>
+              <p>Hertfordshire, UK.</p>
             </div>
-            <p class="preview-note">Real projects. Open one and have a go.</p>
+            <a class="button" href="#work"
+              >View projects <span aria-hidden="true">↘</span></a
+            >
           </div>
         </div>
       </section>
 
-      <section class="fractal-feature" aria-labelledby="fractal-title">
-        <div class="wrap feature-heading">
-          <h2 id="fractal-title" data-enter>There's more up close</h2>
-          <a href="fractal/" class="text-link" data-enter>Open the renderer</a>
-        </div>
-        <div class="film-wrap">
-          <video
-            id="fractal-film"
-            muted
-            loop
-            playsinline
-            preload="none"
-            poster="assets/fractal-wide.webp"
-            width="1440"
-            height="810"
-            aria-label="A screen recording of zooming into the fractal renderer"
-          >
-            <source src="assets/fractal-zoom.mp4" type="video/mp4" />
-          </video>
-          <button
-            id="film-toggle"
-            class="film-toggle"
-            type="button"
-            aria-pressed="false"
-            hidden
-          >
-            Play motion
-          </button>
+      <section class="work" id="work" aria-labelledby="work-title">
+        <div class="wrap">
+          <div class="section-top">
+            <h2 id="work-title" data-enter>Projects</h2>
+            <a
+              class="text-link"
+              href="https://github.com/jordancb54321"
+              data-enter
+              >Source on GitHub</a
+            >
+          </div>
+          <div class="project-wall">
+            <article class="project project-fractal">
+              <div class="project-media film-wrap" data-enter>
+                <a href="fractal/" aria-label="Open the fractal renderer">
+                  <video
+                    id="fractal-film"
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                    poster="assets/fractal.webp"
+                    width="1200"
+                    height="750"
+                    aria-label="Screen recording of the fractal renderer zooming into the Mandelbrot set"
+                  >
+                    <source src="assets/fractal-zoom.mp4" type="video/mp4" />
+                  </video>
+                </a>
+                <button
+                  id="film-toggle"
+                  class="film-toggle"
+                  type="button"
+                  aria-pressed="false"
+                  hidden
+                >
+                  Play motion
+                </button>
+              </div>
+              <div class="project-copy" data-enter>
+                <h3><a href="fractal/">Fractal renderer</a></h3>
+                <p>Explore Mandelbrot, Julia and Burning Ship fractals.</p>
+              </div>
+            </article>
+            <article class="project project-study">
+              <a class="project-media" href="learn" data-enter>
+                <img
+                  src="assets/study.webp"
+                  alt="An HTML flashcard in the study deck, with review controls."
+                  width="1200"
+                  height="750"
+                  loading="lazy"
+                />
+              </a>
+              <div class="project-copy" data-enter>
+                <h3><a href="learn">Study deck</a></h3>
+                <p>HTML and CSS flashcards. Progress saved in your browser.</p>
+              </div>
+            </article>
+            <article class="project project-chess">
+              <a class="project-media" href="chess" data-enter>
+                <img
+                  src="assets/chess.webp"
+                  alt="The chess project with a full board ready for a game."
+                  width="1200"
+                  height="750"
+                  loading="lazy"
+                />
+              </a>
+              <div class="project-copy" data-enter>
+                <h3><a href="chess">Chess</a></h3>
+                <p>Play my minimax bot or Stockfish. Or watch them play.</p>
+              </div>
+            </article>
+            <article class="project project-sorting">
+              <a class="project-media" href="sorting" data-enter>
+                <img
+                  src="assets/sorting.webp"
+                  alt="Eight sorting algorithms visualised as arrays of vertical bars."
+                  width="1200"
+                  height="750"
+                  loading="lazy"
+                />
+              </a>
+              <div class="project-copy" data-enter>
+                <h3><a href="sorting">Sorting visualiser</a></h3>
+                <p>Compare eight algorithms on the same array.</p>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
       <section class="about" id="about" aria-labelledby="about-title">
         <div class="wrap about-layout">
-          <div class="about-facts">
-            <h2 id="about-title" data-enter>About me</h2>
-            <p data-enter>Computer Science graduate.<br /> Hertfordshire, UK.</p>
-            <a
-              class="text-link"
-              href="https://github.com/jordancb54321"
-              data-enter
-              >Find me on GitHub</a
-            >
+          <div class="about-heading">
+            <h2 id="about-title" data-enter>About</h2>
+            <p data-enter>Computer Science graduate.<br />Hertfordshire, UK.</p>
           </div>
           <div class="about-copy">
             <p class="statement" data-enter>
-              I like turning a rough idea into something that works in a
-              browser. Finding the mistake is usually half the job.
+              I design and build websites, with experience in client work and
+              production support.
             </p>
             <p data-enter>
-              I've worked on Prestige Carpet Cleaning and Prestige Commercial:
-              page layouts, service information, mobile fixes and updates after
-              launch. Production support taught me to check the logs before
-              deciding what broke.
+              I've worked on Prestige Carpet Cleaning and Prestige Commercial,
+              from page layouts and mobile fixes to updates after launch.
             </p>
-            <div id="stack" class="toolkit" data-enter>
-              <h3>What I work with</h3>
+            <div class="toolkit" id="stack" data-enter>
+              <h3>Tools</h3>
               <p>
-                HTML, CSS, JavaScript, React and WordPress. Behind the page,
-                I've used C#, ASP.NET MVC, Java, Python, MySQL and MongoDB. Git
-                and Linux are part of the routine.
+                HTML, CSS, JavaScript, React, WordPress.
+                C#, ASP.NET MVC, Java, Python, MySQL, MongoDB.
+                Git and Linux.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section
-        class="contact wrap"
-        id="contact"
-        aria-labelledby="contact-title"
-      >
-        <div class="contact-heading">
-          <h2 id="contact-title" data-enter>Let's talk</h2>
-          <p data-enter>
-            If you're hiring a junior developer, or have a website that needs
-            some work, send me a message. Tell me what you're working on.
-          </p>
-        </div>
-        <!--email_off-->
-        <address class="contact-rows">
-          <a class="email-row" href="mailto:jordanb03@protonmail.com" data-enter
-            >jordanb03@protonmail.com</a
-          >
-          <div class="contact-bottom" data-enter>
-            <a href="tel:07387454468">07387 454 468</a
-            ><a href="https://github.com/jordancb54321">GitHub</a
-            ><a class="button" href="mailto:jordanb03@protonmail.com"
-              >Email me</a
-            >
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="wrap">
+          <div class="contact-top">
+            <h2 id="contact-title" data-enter>Contact</h2>
           </div>
-        </address>
-        <!--/email_off-->
+          <!--email_off-->
+          <address>
+            <a
+              class="email-link"
+              href="mailto:jordanb03@protonmail.com"
+              data-enter
+              >jordanb03@<wbr />protonmail.com</a
+            >
+            <div class="contact-bottom" data-enter>
+              <a href="tel:07387454468">07387 454 468</a>
+              <a href="https://github.com/jordancb54321">GitHub</a>
+              <a class="button" href="mailto:jordanb03@protonmail.com"
+                >Email me</a
+              >
+            </div>
+          </address>
+          <!--/email_off-->
+        </div>
       </section>
     </main>
     <footer class="site-footer">
-      <div class="wrap">
-        <div class="footer-top">
-          <p>Websites, tools and things<br /> I wanted to figure out.</p>
-          <a href="#top">Back to top</a>
-        </div>
-        <p class="footer-name" aria-hidden="true">Jordan Betts</p>
-        <div class="footer-bottom">
-          <p>Built in the browser. No tracking.</p>
-          <p>Project images and recording: my own browser experiments.</p>
-        </div>
+      <div class="wrap footer-row">
+        <a class="brand" href="./">jordanb.io</a>
+        <p>Project images &amp; recording by Jordan Betts.</p>
+        <a href="#top">Back to top</a>
       </div>
     </footer>
   </body>

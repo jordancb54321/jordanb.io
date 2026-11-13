@@ -1,38 +1,5 @@
 (() => {
-  const choices = [...document.querySelectorAll("[data-project-select]")];
-  const pictures = [...document.querySelectorAll("[data-project-picture]")];
-  const projects = [...document.querySelectorAll("[data-project]")];
-  const choose = (index) => {
-    for (const choice of choices) {
-      choice.setAttribute(
-        "aria-pressed",
-        String(choice.dataset.projectSelect === index),
-      );
-    }
-    for (const picture of pictures) {
-      const active = picture.dataset.projectPicture === index;
-      picture.classList.toggle("is-active", active);
-      picture.setAttribute("aria-hidden", String(!active));
-    }
-    for (const project of projects) {
-      project.classList.toggle(
-        "is-selected",
-        project.dataset.project === index,
-      );
-    }
-  };
-  for (const choice of choices) {
-    choice.addEventListener("click", () =>
-      choose(choice.dataset.projectSelect),
-    );
-    choice.addEventListener("focus", () =>
-      choose(choice.dataset.projectSelect),
-    );
-    choice.addEventListener("pointerenter", (event) => {
-      if (event.pointerType === "mouse") choose(choice.dataset.projectSelect);
-    });
-  }
-  choose("0");
+  // The project wall uses normal links, including without JavaScript.
 
   const calm = matchMedia("(prefers-reduced-motion: reduce)");
   if ("IntersectionObserver" in window) {

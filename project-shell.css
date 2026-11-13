@@ -1,6 +1,7 @@
 /* Shared shell for the working experiments. Their controls and engines stay separate. */
 .project-page {
-  --bg: #e5e5e5;
+  --display: Doto, Arial, sans-serif;
+  --bg: #efefec;
   --ink: #141414;
   --muted: #484848;
   --text: #141414;
@@ -23,6 +24,10 @@
   color: var(--ink);
   background: var(--bg);
 }
+.project-page .site-header {
+  background: var(--bg);
+  color: var(--ink);
+}
 .project-page .site-header > .wrap {
   display: flex;
   align-items: center;
@@ -39,7 +44,10 @@
   display: none;
 }
 .project-page .brand-name {
-  color: #e5e5e5;
+  color: #141414;
+  font-family: Doto, Arial, sans-serif;
+  font-weight: 800;
+  font-variation-settings: "ROND" 100;
   text-decoration: none;
   font-size: 20px;
 }
@@ -53,13 +61,14 @@
   font-size: 14px;
 }
 .project-page .site-nav a[aria-current="page"] {
-  color: #ff6268;
+  color: #b60d15;
 }
 .project-page .eyebrow {
   display: none;
 }
 .project-page h1 {
-  font-size: clamp(52px, 6vw, 88px);
+  font-variation-settings: "ROND" 100;
+  font-size: clamp(44px, 5vw, 72px);
   max-width: 13ch;
   line-height: 0.96;
   margin-bottom: 28px;
@@ -113,9 +122,9 @@
   padding: 12px 20px;
 }
 .project-page .button-primary {
-  color: #141414;
-  background: #f23b42;
-  border-color: #f23b42;
+  color: #f7f7f4;
+  background: #d71921;
+  border-color: #d71921;
 }
 .project-page .button-secondary {
   color: #141414;

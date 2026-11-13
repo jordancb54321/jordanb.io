@@ -29,7 +29,7 @@ def save_picture(page, selector, name):
     source = ROOT / '.taste-skill' / f'{name}-source.png'
     page.locator(selector).screenshot(path=str(source))
     with Image.open(source) as image:
-        picture = ImageOps.fit(image.convert('RGB'), (1200, 750))
+        picture = ImageOps.pad(image.convert('RGB'), (1200, 750), color='#efefec')
         picture.save(OUTPUT / f'{name}.webp', quality=88)
     print(f'Captured {name}: {selector}')
 
@@ -134,7 +134,7 @@ def main():
         if not args.fractal_only:
             page.goto('http://127.0.0.1:8788/chess.html')
             page.locator('#board img').first.wait_for()
-            save_picture(page, '.chess-layout', 'chess')
+            save_picture(page, '#board', 'chess')
             page.goto('http://127.0.0.1:8788/learn.html')
             page.locator('#hero-study-button').click()
             page.locator('#start-session-button').click()
@@ -142,7 +142,8 @@ def main():
             save_picture(page, '#review-session', 'study')
             page.goto('http://127.0.0.1:8788/sorting.html')
             page.locator('#bars-bubble > *').first.wait_for()
-            save_picture(page, '#sorting-grid', 'sorting')
+            assert page.locator('#bars-bubble > *').first.evaluate("element => getComputedStyle(element).backgroundImage") != 'none', 'Sorting bars must be painted before capture'
+            save_picture(page, '[data-panel="bubble"]', 'sorting')
         capture_fractal(page)
         browser.close()
     verify_fractal_assets()
