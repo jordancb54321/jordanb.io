@@ -9,49 +9,24 @@
     name="description"
     content="A sorting visualizer by Jordan Betts for comparing classic algorithms in the browser."
   >
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#f5f5f2">
 
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="sorting.css?v=mono-2">
   <link rel="stylesheet" href="project-shell.css">
+  <link rel="stylesheet" href="sorting.css?v=redesign-3">
 </head>
 <body class="project-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="wrap">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">JB</span>
-        <div>
-          <p class="eyebrow">Interactive project</p>
-          <a class="brand-name" href="./">Jordan Betts</a>
-        </div>
-      </div>
-
-      <nav class="site-nav" aria-label="Primary">
-        <a href="./#work">Work</a>
-        <a href="./#about">About</a>
-        <a href="./#stack">Stack</a>
-        <a href="learn">Learn</a>
-        <a href="chess">Chess</a>
-        <a href="sorting" aria-current="page">Sorting</a>
-        <a href="fractal/">Fractal</a>
-        <a href="./#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <header class="site-header"><div class="wrap header-row"><a class="wordmark" href="/" aria-label="Jordan Betts, home">JORDAN B<span class="brand-dot" aria-hidden="true"></span></a><nav class="site-nav" aria-label="Primary"><a href="/">Portfolio</a><a href="/fractal/">Fractal</a><a href="/sorting" aria-current="page">Sorting</a><a href="/chess">Chess</a><a href="/learn">Study</a></nav></div></header>
 
   <main id="main">
     <section class="section sorting-hero">
       <div class="wrap sorting-hero-grid">
         <div>
-          <p class="eyebrow">Sorting playground</p>
-          <h1>Watch the sorts</h1>
-          <p class="lead">
-            This is a visual way to compare algorithms I had mostly seen in
-            code or diagrams. Pick a few sorts, change the bar count, and watch
-            where the simple approaches start to struggle.
-          </p>
+          <p class="meta">Algorithms</p>
+          <h1>Sorting visualiser<span class="red-dot" aria-hidden="true">.</span></h1>
+          <p class="lead">Choose algorithms and compare them on the same array. Open the code to follow each step.</p>
 
           <div class="hero-actions">
             <button class="button button-primary" id="shuffle" type="button">
@@ -62,20 +37,6 @@
             </button>
           </div>
         </div>
-
-        <aside class="hero-panel" aria-label="Visualizer summary">
-          <p class="panel-label">Currently included</p>
-          <ul class="panel-list">
-            <li>Bubble sort</li>
-            <li>Selection sort</li>
-            <li>Insertion sort</li>
-            <li>Merge sort</li>
-            <li>Quick sort</li>
-            <li>Heap sort</li>
-            <li>Shell sort</li>
-            <li>Radix sort</li>
-          </ul>
-        </aside>
       </div>
     </section>
 
@@ -147,7 +108,7 @@
         <article class="card algorithm-card" data-panel="bubble">
           <div class="algorithm-header">
             <div>
-              <p class="panel-label">Bubble sort</p>
+
               <h2>Bubble</h2>
             </div>
             <p class="algorithm-status" id="status-bubble">Ready</p>
@@ -172,7 +133,7 @@
         <article class="card algorithm-card" data-panel="selection">
           <div class="algorithm-header">
             <div>
-              <p class="panel-label">Selection sort</p>
+
               <h2>Selection</h2>
             </div>
             <p class="algorithm-status" id="status-selection">Ready</p>
@@ -197,7 +158,7 @@
         <article class="card algorithm-card" data-panel="insertion">
           <div class="algorithm-header">
             <div>
-              <p class="panel-label">Insertion sort</p>
+
               <h2>Insertion</h2>
             </div>
             <p class="algorithm-status" id="status-insertion">Ready</p>
@@ -222,7 +183,7 @@
         <article class="card algorithm-card" data-panel="merge">
           <div class="algorithm-header">
             <div>
-              <p class="panel-label">Merge sort</p>
+
               <h2>Merge</h2>
             </div>
             <p class="algorithm-status" id="status-merge">Ready</p>
@@ -247,7 +208,7 @@
         <article class="card algorithm-card" data-panel="quick">
           <div class="algorithm-header">
             <div>
-              <p class="panel-label">Quick sort</p>
+
               <h2>Quick</h2>
             </div>
             <p class="algorithm-status" id="status-quick">Ready</p>
@@ -272,7 +233,7 @@
         <article class="card algorithm-card" data-panel="heap">
           <div class="algorithm-header">
             <div>
-              <p class="panel-label">Heap sort</p>
+
               <h2>Heap</h2>
             </div>
             <p class="algorithm-status" id="status-heap">Ready</p>
@@ -297,7 +258,7 @@
         <article class="card algorithm-card" data-panel="shell">
           <div class="algorithm-header">
             <div>
-              <p class="panel-label">Shell sort</p>
+
               <h2>Shell</h2>
             </div>
             <p class="algorithm-status" id="status-shell">Ready</p>
@@ -322,7 +283,7 @@
         <article class="card algorithm-card" data-panel="radix">
           <div class="algorithm-header">
             <div>
-              <p class="panel-label">Radix sort</p>
+
               <h2>Radix</h2>
             </div>
             <p class="algorithm-status" id="status-radix">Ready</p>
@@ -347,12 +308,7 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="wrap footer-row">
-      <p>Sorting demos in plain JavaScript, with the rough edges kept visible.</p>
-      <a href="./">Back to portfolio</a>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="wrap footer-row"><a class="wordmark" href="/">JORDAN B<span class="brand-dot" aria-hidden="true"></span></a><a class="meta" href="/#work">All projects ↗</a></div></footer>
 
   <script src="sorting.js"></script>
 </body>

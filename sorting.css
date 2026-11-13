@@ -1,221 +1,195 @@
-.sorting-hero {
-  padding-bottom: 2.5rem;
-}
-
-.sorting-hero-grid,
-.sorting-grid {
+.project-page .sorting-controls {
   display: grid;
-  gap: 1.5rem;
-}
-
-.sorting-hero-grid {
-  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
-  align-items: start;
-}
-
-.sorting-hero .button-primary,
-.sorting-controls .button-primary {
-  color: var(--white);
-  border-color: var(--signal);
-  background: var(--signal);
-}
-
-.sorting-hero .button-primary:hover,
-.sorting-hero .button-primary:focus-visible,
-.sorting-controls .button-primary:hover,
-.sorting-controls .button-primary:focus-visible {
-  color: var(--white);
-  border-color: var(--ink);
-  background: var(--ink);
-}
-
-.sorting-section {
-  padding-top: 1rem;
-}
-
-.sorting-section-tight {
-  padding-top: 0;
-}
-
-.sorting-controls {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.5rem;
-  padding: 1.5rem;
+  grid-template-columns: 1fr 1fr 2fr 1fr;
+  gap: 28px;
+  padding: 24px;
+  background: var(--bg-strong);
+  border: 0;
+  border-radius: 8px
 }
 
 .control-label {
   display: grid;
-  gap: 0.6rem;
-  color: var(--muted);
-}
-
-.control-label input {
-  width: 100%;
-  accent-color: var(--accent);
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted)
 }
 
 .algorithm-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 6px;
+  flex-wrap: wrap
 }
 
-.algorithm-button.is-selected {
-  color: var(--white);
-  border-color: var(--signal);
-  background: var(--signal);
+.algorithm-actions .button {
+  padding: 6px 12px;
+  min-height: 32px;
+  font-size: 11px;
+  gap: 0;
+  border-color: #bdbdb5
 }
 
-.algorithm-button.is-selected:hover,
-.algorithm-button.is-selected:focus-visible {
-  color: var(--white);
-  border-color: var(--ink);
+.algorithm-actions .is-selected {
   background: var(--ink);
+  border-color: var(--ink);
+  color: #fff
+}
+
+.algorithm-actions .is-selected:hover {
+  background: var(--accent);
+  border-color: var(--accent)
 }
 
 .sorting-grid {
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.performance-warning {
-  margin: 1rem 0 0;
-  color: var(--accent-deep);
-  font-weight: 700;
-}
-
-.algorithm-card {
-  padding: 1.5rem;
-}
-
-.algorithm-card[hidden] {
-  display: none;
-}
-
-.toggle-control {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-  color: var(--muted);
-}
-
-.toggle-control input {
-  accent-color: var(--accent);
+  gap: 24px
 }
 
 .algorithm-header {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  align-items: start;
-  margin-bottom: 1rem;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px
 }
 
 .algorithm-header h2 {
-  font-size: 1.7rem;
+  font-size: 24px
 }
 
 .algorithm-status {
-  margin: 0;
-  color: var(--muted);
-  font-weight: 700;
+  font: 11px 'Courier New', monospace;
+  text-transform: uppercase;
+  color: var(--muted)
 }
 
 .algorithm-metrics {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.algorithm-metrics p {
-  margin: 0;
+  gap: 18px;
+  font: 11px 'Courier New', monospace;
   color: var(--muted);
-  font-size: 0.95rem;
+  margin-bottom: 18px
 }
 
 .algorithm-explanation {
-  margin: 0 0 1rem;
+  font-size: 13px;
   color: var(--muted);
+  min-height: 44px;
+  margin-bottom: 20px
 }
 
-.code-toggle {
-  margin-bottom: 1rem;
+.project-page .code-toggle {
+  min-height: 32px;
+  font-size: 11px;
+  padding: 6px 14px
 }
 
 .code-panel {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.66);
-  overflow-x: auto;
+  margin-top: 16px;
+  background: var(--bg-strong);
+  border-radius: 4px;
+  padding: 14px 10px;
+  overflow-x: auto
 }
 
 .code-list {
+  padding-left: 32px;
   margin: 0;
-  padding-left: 2.75rem;
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--muted);
+  font: 12px/1.8 'Courier New', monospace;
+  white-space: pre
 }
 
 .code-list li {
-  padding: 0.1rem 0.5rem;
-  border-radius: 10px;
-  white-space: pre;
+  padding-inline: 8px
 }
 
-.code-list li.is-highlighted {
-  color: var(--ink);
-  background: rgba(215, 25, 32, 0.12);
+.code-list .is-highlighted {
+  background: #e6c7c2
 }
 
 .bars {
-  height: 18rem;
+  height: 240px;
   display: flex;
   align-items: end;
-  gap: 0.2rem;
-  padding: 1rem 0 0;
-  border-top: 1px solid var(--line);
+  gap: 3px;
+  border-bottom: 1px solid var(--line);
+  padding-top: 28px;
+  margin-top: 20px
 }
 
 .bar {
-  flex: 1 1 0;
+  flex: 1;
   min-width: 0;
-  border-radius: 999px 999px 0 0;
-  background: linear-gradient(180deg, var(--gray-300), var(--gray-600));
-  transition: height 80ms linear, background-color 80ms linear, opacity 80ms linear;
+  background: #77776f;
+  transition: height 80ms linear, background-color 80ms linear
 }
 
 .bar.is-active {
-  background: linear-gradient(180deg, #ef4b51, var(--signal));
+  background: var(--accent)
 }
 
 .bar.is-compare {
-  background: linear-gradient(180deg, var(--white), var(--ink));
+  background: #b1b1a5
 }
 
 .bar.is-sorted {
-  background: var(--ink);
+  background: var(--ink)
 }
 
-@media (max-width: 960px) {
-  .sorting-hero-grid,
-  .sorting-grid,
-  .sorting-controls {
-    grid-template-columns: 1fr;
-  }
+.sorting-section-tight {
+  padding-top: 0 !important
 }
 
-@media (max-width: 640px) {
-  .algorithm-card,
-  .sorting-controls {
-    padding: 1rem;
+.toggle-control {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px
+}
+
+.sorting-controls-wrap>.performance-warning {
+  margin-top: 12px
+}
+
+.sorting-section {
+  padding-top: 0 !important
+}
+
+@media(max-width:1000px) {
+  .project-page .sorting-controls {
+    grid-template-columns: 1fr 1fr
   }
 
   .bars {
-    height: 14rem;
+    height: 210px
+  }
+}
+
+@media(max-width:650px) {
+  .sorting-grid {
+    grid-template-columns: 1fr;
+    gap: 18px
+  }
+
+  .project-page .sorting-controls {
+    gap: 24px 20px;
+    padding: 20px
+  }
+
+  .sorting-controls>div:nth-child(3) {
+    grid-column: 1/-1
+  }
+
+  .sorting-controls>div:last-child {
+    grid-column: 1/-1
+  }
+
+  .bars {
+    height: 200px
+  }
+
+  .algorithm-explanation {
+    min-height: 0
   }
 }

@@ -46,9 +46,9 @@ for (const id of ['work', 'about', 'contact']) {
     assert.match(homepage, new RegExp(`\\bid=["']${id}["']`), `Missing #${id} target`);
   });
 }
-test('homepage uses the dark theme color', () => {
+test('homepage declares its light theme color', () => {
   const meta = tags(homepage, 'meta').find((tag) => attribute(tag, 'name') === 'theme-color');
-  assert.equal(attribute(meta ?? '', 'content')?.toLowerCase(), '#141414');
+  assert.equal(attribute(meta ?? '', 'content')?.toLowerCase(), '#f5f5f2');
 });
 test('homepage loads site.js externally without inline JavaScript', async () => {
   const scripts = [...homepage.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];

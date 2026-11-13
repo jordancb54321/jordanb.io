@@ -410,7 +410,7 @@
     elements.dailyReviewed.textContent = reviewed;
     elements.dailyGoalLabel.textContent = "of " + goal;
     if (reviewed === 0) {
-      elements.dailyMessage.textContent = "Your first review is ready when you are.";
+      elements.dailyMessage.textContent = "Complete a review to track your progress.";
     } else if (reviewed >= goal) {
       elements.dailyMessage.textContent = "Daily goal complete. Extra reviews are optional.";
     } else {

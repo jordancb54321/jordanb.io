@@ -9,7 +9,7 @@
     name="description"
     content="Learn HTML and CSS with an Anki-style flashcard system, spaced repetition, progress tracking, and editable study decks."
   >
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#f5f5f2">
   <meta property="og:title" content="HTML &amp; CSS Study Deck | Jordan Betts">
   <meta property="og:description" content="A local-first HTML and CSS flashcard system with spaced repetition and progress tracking.">
   <meta property="og:type" content="website">
@@ -17,62 +17,26 @@
   <link rel="canonical" href="https://jordanb.io/learn">
 
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="learn.css?v=mono-2">
   <link rel="stylesheet" href="project-shell.css">
+  <link rel="stylesheet" href="learn.css?v=redesign-3">
 </head>
 <body class="project-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="wrap">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">JB</span>
-        <div>
-          <p class="eyebrow">Learning project</p>
-          <a class="brand-name" href="./">Jordan Betts</a>
-        </div>
-      </div>
-
-      <nav class="site-nav" aria-label="Primary">
-        <a href="./#work">Work</a>
-        <a href="./#about">About</a>
-        <a href="./#stack">Stack</a>
-        <a href="learn" aria-current="page">Learn</a>
-        <a href="chess">Chess</a>
-        <a href="sorting">Sorting</a>
-        <a href="fractal/">Fractal</a>
-        <a href="./#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <header class="site-header"><div class="wrap header-row"><a class="wordmark" href="/" aria-label="Jordan Betts, home">JORDAN B<span class="brand-dot" aria-hidden="true"></span></a><nav class="site-nav" aria-label="Primary"><a href="/">Portfolio</a><a href="/fractal/">Fractal</a><a href="/sorting">Sorting</a><a href="/chess">Chess</a><a href="/learn" aria-current="page">Study</a></nav></div></header>
 
   <main id="main" class="learn-main">
     <section class="learn-hero">
       <div class="wrap learn-hero-grid">
         <div>
-          <p class="eyebrow">HTML and CSS study lab</p>
-          <h1>A little practice</h1>
-          <p class="lead">
-            A complete, local-first flashcard system for HTML and CSS. Review what
-            is due, rate how well you remembered it, and let spaced repetition
-            decide when each card should return.
-          </p>
+          <p class="meta">HTML &amp; CSS / Spaced repetition</p>
+          <h1>Study deck<span class="red-dot" aria-hidden="true">.</span></h1>
+          <p class="lead">Review HTML and CSS at your own pace. Cards and progress stay in this browser.</p>
           <div class="hero-actions">
             <button class="button button-primary" id="hero-study-button" type="button">Study now</button>
             <button class="button button-secondary" id="hero-add-button" type="button">Create a card</button>
           </div>
         </div>
-
-        <aside class="hero-panel learn-hero-panel" aria-label="Learning system summary">
-          <p class="panel-label">Included from the start</p>
-          <ul class="panel-list">
-            <li>60 practical HTML and CSS cards</li>
-            <li>Anki-style Again, Hard, Good, and Easy scheduling</li>
-            <li>Six focused decks with examples and explanations</li>
-            <li>Private progress stored only in this browser</li>
-            <li>Card editing, search, filtering, import, and export</li>
-          </ul>
-        </aside>
       </div>
     </section>
 
@@ -92,7 +56,7 @@
           <div class="view-heading">
             <div>
               <p class="eyebrow">Today</p>
-              <h2>Ready when you are</h2>
+              <h2>Your overview</h2>
             </div>
             <button class="button button-primary" id="dashboard-study-button" type="button">Start today’s review</button>
           </div>
@@ -142,7 +106,7 @@
                 </div>
               </div>
               <progress class="visually-hidden" id="daily-progress" max="20" value="0">0 of 20 reviews</progress>
-              <p class="muted-copy" id="daily-message">Your first review is ready when you are.</p>
+              <p class="muted-copy" id="daily-message">Complete a review to track your progress.</p>
             </section>
           </div>
 
@@ -425,12 +389,7 @@
     </section>
   </div>
 
-  <footer class="site-footer">
-    <div class="wrap footer-row">
-      <p>Spaced repetition in plain JavaScript. Your study history stays on your device.</p>
-      <a href="./">Back to portfolio</a>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="wrap footer-row"><a class="wordmark" href="/">JORDAN B<span class="brand-dot" aria-hidden="true"></span></a><a class="meta" href="/#work">All projects ↗</a></div></footer>
 
   <script src="learn-cards.js"></script>
   <script src="learn.js"></script>

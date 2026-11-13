@@ -95,7 +95,7 @@ class BrowserChecks(unittest.TestCase):
         # Plain spans may have no whitespace between them; compare visible words,
         # not an obsolete heading markup structure or a particular typeface.
         expect(page.locator("h1")).to_be_visible()
-        self.assertEqual(re.sub(r"\s+", "", page.locator("h1").text_content()), "JordanBetts")
+        self.assertEqual(re.sub(r"\s+", "", page.locator("h1").text_content()).rstrip("."), "JordanBetts")
         for anchor in ("work", "about", "contact"):
             link = page.locator(f'a[href="#{anchor}"]').first
             expect(link).to_be_visible()
@@ -184,43 +184,31 @@ class BrowserChecks(unittest.TestCase):
         page = self.page(390, reduced_motion="reduce")
         self.visit(page)
         self.assertTrue(page.evaluate("matchMedia('(prefers-reduced-motion: reduce)').matches"))
-        film = page.locator("#fractal-film")
-        film.scroll_into_view_if_needed()
-        # Real frames let the intersection observer run before checking autoplay.
-        page.evaluate("() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))")
-        expect(film).to_have_js_property("paused", True)
-        expect(page.locator("#film-toggle")).to_have_attribute("aria-pressed", "false")
-        page.wait_for_function("() => document.getAnimations().every(a => a.playState !== 'running')")
+        expect(page.locator('#project-preview')).to_be_visible()
+        self.assertTrue(page.evaluate("document.getAnimations().every(a => a.playState !== 'running')"))
         self.assert_layout(page, "reduced-motion homepage")
 
-    def test_film_play_pause(self):
-        page = self.page(reduced_motion="no-preference")
+    def test_project_preview_switches_with_keyboard(self):
+        page = self.page()
         self.visit(page)
-        film = page.locator("#fractal-film")
-        toggle = page.locator("#film-toggle")
-        film.scroll_into_view_if_needed()
-        expect(toggle).to_be_visible()
-        page.wait_for_function("() => document.querySelector('#fractal-film').readyState >= 2", timeout=15000)
-        if not film.evaluate("video => video.paused"):
-            toggle.click()
-        expect(film).to_have_js_property("paused", True)
-        expect(toggle).to_have_attribute("aria-pressed", "false")
-        start = film.evaluate("video => video.currentTime")
-        toggle.click()
-        expect(film).to_have_js_property("paused", False)
-        expect(toggle).to_have_attribute("aria-pressed", "true")
-        page.wait_for_function("start => document.querySelector('#fractal-film').currentTime !== start", arg=start)
-        toggle.click()
-        expect(film).to_have_js_property("paused", True)
-        expect(toggle).to_have_attribute("aria-pressed", "false")
-        paused_at = film.evaluate("video => video.currentTime")
-        # This bounded sample tests a stopped media clock, not load synchronization.
-        page.wait_for_timeout(250)
-        self.assertAlmostEqual(film.evaluate("video => video.currentTime"), paused_at, places=2)
-        page.locator("h1").scroll_into_view_if_needed()
-        film.scroll_into_view_if_needed()
-        page.evaluate("() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))")
-        expect(film).to_have_js_property("paused", True)
+        canvas = page.locator('#project-preview')
+        snapshots = set()
+        for key, route, title in [('fractal', 'fractal/', 'Fractal renderer'),
+                                  ('sorting', 'sorting', 'Sorting visualiser'),
+                                  ('chess', 'chess', 'Chess'),
+                                  ('study', 'learn', 'Study deck')]:
+            button = page.locator(f'[data-preview="{key}"]')
+            button.focus()
+            page.keyboard.press('Enter')
+            expect(button).to_have_attribute('aria-pressed', 'true')
+            expect(page.locator('.preview-switcher [aria-pressed="true"]')).to_have_count(1)
+            expect(page.locator('#preview-link')).to_have_attribute('href', route)
+            expect(page.locator('#preview-title')).to_have_text(title)
+            self.assertTrue(canvas.get_attribute('aria-label').strip())
+            snapshots.add(canvas.evaluate('canvas => canvas.toDataURL()'))
+        self.assertEqual(len(snapshots), 4, 'Each project must draw a distinct preview')
+        page.locator('#preview-link').click()
+        expect(page.locator('#hero-study-button')).to_be_visible()
 
     def test_experiment_responsive_routes(self):
         page = self.page()
