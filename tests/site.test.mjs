@@ -187,6 +187,26 @@ test('worker forces fractal application revalidation without changing other cach
   const vendor = await worker.fetch(request('/vendor/stockfish/stockfish-18-lite-single.js'), asset.env);
   assert.equal(vendor.headers.get('Cache-Control'), 'public, max-age=31536000, immutable');
 });
+test('HTML responses give Cloudflare an unpredictable CSP nonce without allowing unsafe inline scripts', async () => {
+  const asset = boundary(() => new Response('<!doctype html><h1>Test</h1>', {
+    headers: { 'Content-Type': 'text/html; charset=utf-8' },
+  }));
+  const first = await worker.fetch(request('/'), asset.env);
+  const second = await worker.fetch(request('/'), asset.env);
+  const nonceFrom = (response) => response.headers.get('Content-Security-Policy').match(/'nonce-([^']+)'/)?.[1];
+  const firstNonce = nonceFrom(first);
+  const secondNonce = nonceFrom(second);
+  assert.ok(firstNonce, 'HTML CSP must provide a nonce for Cloudflare JavaScript detections');
+  assert.ok(secondNonce);
+  assert.equal(Buffer.from(firstNonce, 'base64').length, 16);
+  assert.notEqual(firstNonce, secondNonce, 'Never reuse a response nonce');
+  const scriptPolicy = first.headers.get('Content-Security-Policy').split(';').find((part) => part.trim().startsWith('script-src '));
+  assert.ok(scriptPolicy.includes("'self'"));
+  assert.ok(scriptPolicy.includes("'wasm-unsafe-eval'"));
+  assert.ok(!scriptPolicy.includes("'unsafe-inline'"));
+  assert.equal(await first.text(), '<!doctype html><h1>Test</h1>');
+});
+
 test('chess worker, engine binary and piece assets remain present', async () => {
   const files = ['chess-engine-worker.js', 'vendor/stockfish/stockfish-18-lite-single.js', 'vendor/stockfish/stockfish-18-lite-single.wasm'];
   for (const color of ['w', 'b']) for (const piece of ['K', 'Q', 'R', 'B', 'N', 'P']) files.push(`vendor/img/chesspieces/wikipedia/${color}${piece}.png`);

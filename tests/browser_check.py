@@ -13,7 +13,7 @@ import shutil
 import sys
 import unittest
 from urllib.error import URLError
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 from playwright.sync_api import expect, sync_playwright
 
@@ -333,7 +333,10 @@ if __name__ == "__main__":
     if sys.flags.optimize:
         raise SystemExit("Run browser QA without -O so Playwright assertions remain enabled.")
     try:
-        with urlopen(BASE + "/", timeout=3) as response:
+        # The live site's WAF rejects Python's default User-Agent. This is
+        # only a reachability probe; all behavior is checked in a real browser.
+        probe = Request(BASE + "/", headers={"User-Agent": "Mozilla/5.0"})
+        with urlopen(probe, timeout=3) as response:
             if response.status != 200:
                 raise SystemExit(f"Site returned HTTP {response.status}: {BASE}")
     except (URLError, TimeoutError) as error:

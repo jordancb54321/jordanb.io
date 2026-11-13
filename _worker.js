@@ -26,9 +26,16 @@ export default {
     const headers = new Headers(response.headers);
 
     headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+    // Cloudflare reads the response CSP and applies its nonce to injected
+    // JavaScript detections. Keep arbitrary inline scripts blocked.
+    const isHtml = /^text\/html\b/i.test(headers.get("Content-Type") || "");
+    const nonce = isHtml
+      ? btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))))
+      : null;
+    const noncePolicy = nonce ? ` 'nonce-${nonce}'` : "";
     headers.set(
       "Content-Security-Policy",
-      "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; worker-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+      `default-src 'self'; script-src 'self' 'wasm-unsafe-eval'${noncePolicy}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; worker-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests`,
     );
     headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=(), serial=()");
     headers.set("X-Frame-Options", "DENY");
