@@ -1,98 +1,256 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jordan Betts — Web designer &amp; developer</title>
-  <meta name="description" content="Jordan Betts. Web designer and developer in Hertfordshire, UK. Explore my websites, browser tools and interactive experiments.">
-  <meta name="theme-color" content="#f5f5f2">
-  <meta property="og:title" content="Jordan Betts — Web designer &amp; developer">
-  <meta property="og:description" content="Websites, browser tools and interactive experiments. Hertfordshire, UK.">
+  <title>Jordan Betts | Junior Developer Portfolio</title>
+  <meta
+    name="description"
+    content="Jordan Betts is a Computer Science graduate in Hertfordshire focused on backend development, problem-solving, and efficient web applications."
+  >
+  <meta name="theme-color" content="#f4f7f1">
+  <meta property="og:title" content="Jordan Betts | Junior Developer Portfolio">
+  <meta
+    property="og:description"
+    content="Jordan Betts' portfolio: client sites, small JavaScript demos, and notes on the kind of backend work he is aiming for."
+  >
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jordanb.io/">
-  <meta property="og:image" content="https://jordanb.io/assets/social.jpg">
-  <link rel="canonical" href="https://jordanb.io/">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="/assets/fonts/public-sans.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="/assets/fonts/doto.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="/styles.css">
-  <script src="/site.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="home">
+<body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header" id="top">
-    <div class="wrap header-row">
-      <a class="wordmark" href="/" aria-label="Jordan Betts, home">JORDAN B<span class="brand-dot" aria-hidden="true"></span></a>
-      <nav class="site-nav" aria-label="Primary"><a href="#work">Projects</a><a href="#about">About</a><a href="#contact">Contact <span aria-hidden="true">↗</span></a></nav>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">JB</span>
+        <div>
+          <p class="eyebrow">Junior developer portfolio</p>
+          <a class="brand-name" href="#top">Jordan Betts</a>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#stack">Stack</a>
+        <a href="chess">Chess</a>
+        <a href="sorting">Sorting</a>
+        <a href="fractal/">Fractal</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
   </header>
+
   <main id="main">
-    <section class="intro wrap" aria-labelledby="name">
-      <div class="intro-copy">
-        <p class="meta location">Hertfordshire, UK</p>
-        <h1 id="name">Jordan<br> Betts<span class="red-dot" aria-hidden="true">.</span></h1>
-        <p class="intro-role">Web designer &amp; developer.</p>
-        <p class="intro-description">I make websites and interactive tools for the browser.</p>
-        <a class="button button-primary" href="#work">Explore my work <span aria-hidden="true">↘</span></a>
-        <a class="intro-github meta" href="https://github.com/jordancb54321">GitHub <span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="feature">
-        <div class="feature-art">
-          <div class="feature-topline"><span class="meta" id="preview-category">Interactive / Fractals</span><span class="dot-symbol" aria-hidden="true">⠿</span></div>
-          <canvas id="project-preview" width="900" height="700" aria-label="A dot-matrix rendering of the Mandelbrot set"></canvas>
-          <noscript><p class="preview-fallback">Explore the fractal renderer, sorting visualiser, chess and study deck below.</p></noscript>
-          <a class="feature-link" id="preview-link" href="fractal/"><span id="preview-title">Fractal renderer</span><span class="round-arrow" aria-hidden="true">↗</span></a>
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Built by hand, kept lightweight</p>
+          <h1>Backend-focused developer building practical, reliable software.</h1>
+          <p class="lead">
+            I'm Jordan, a Computer Science graduate based in Hertfordshire. I
+            like working close to the logic of a system: debugging awkward
+            problems, keeping websites fast, and writing code that is easy to
+            come back to later.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#work">See projects</a>
+            <a class="button button-secondary" href="#contact">Get in touch</a>
+          </div>
+
+          <p class="personal-note">
+            Current priority: get into a junior role, become useful quickly, and
+            keep improving by working around better developers.
+          </p>
+
+          <ul class="hero-stats" aria-label="Site highlights">
+            <li>
+              <strong>0</strong>
+              <span>frameworks needed for this site</span>
+            </li>
+            <li>
+              <strong>2024</strong>
+              <span>finished my Computer Science degree</span>
+            </li>
+            <li>
+              <strong>2025</strong>
+              <span>moved to the UK and started client web work</span>
+            </li>
+          </ul>
         </div>
-        <div class="preview-switcher" role="group" aria-label="Preview a project" hidden>
-          <button type="button" data-preview="fractal" aria-pressed="true">Fractal</button>
-          <button type="button" data-preview="sorting" aria-pressed="false">Sorting</button>
-          <button type="button" data-preview="chess" aria-pressed="false">Chess</button>
-          <button type="button" data-preview="study" aria-pressed="false">Study</button>
+
+        <aside class="hero-panel" aria-label="Profile summary">
+          <p class="panel-label">What I am looking for</p>
+          <ul class="panel-list">
+            <li>Junior backend or software developer work</li>
+            <li>A team where I can learn from real code reviews</li>
+            <li>Work that rewards careful debugging and clear thinking</li>
+          </ul>
+
+          <div class="panel-divider"></div>
+
+          <p class="panel-label">Location</p>
+          <p class="panel-copy">
+            Hertfordshire, United Kingdom. Relocated from South Africa in April
+            2025, so I am currently building up UK experience and looking for a
+            team where I can contribute properly.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">Selected work</p>
+          <h2>A few things I have actually built or worked on.</h2>
         </div>
-        <p class="visually-hidden" id="preview-announcement" aria-live="polite"></p>
+
+        <div class="project-grid">
+          <article class="card project-card">
+            <p class="card-index">01</p>
+            <h3>Prestige Carpet Cleaning</h3>
+            <p>
+              A real client website, not a mockup. I handled layout, service
+              pages, mobile fixes, and small content updates after launch.
+            </p>
+            <ul class="tag-list" aria-label="Technologies used">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>Responsive design</li>
+            </ul>
+          </article>
+
+          <article class="card project-card">
+            <p class="card-index">02</p>
+            <h3>Prestige Commercial</h3>
+            <p>
+              Similar client work for a commercial cleaning service. The useful
+              part here was learning to make changes without breaking a live site.
+            </p>
+            <ul class="tag-list" aria-label="Technologies used">
+              <li>Client work</li>
+              <li>Live updates</li>
+              <li>Deployment</li>
+            </ul>
+          </article>
+
+          <article class="card project-card">
+            <p class="card-index">03</p>
+            <h3>Production support and troubleshooting</h3>
+            <p>
+              Support work taught me to be patient with messy problems: checking
+              logs, isolating causes, documenting fixes, and not guessing.
+            </p>
+            <ul class="tag-list" aria-label="Technologies used">
+              <li>Troubleshooting</li>
+              <li>Documentation</li>
+              <li>Systems support</li>
+            </ul>
+          </article>
+
+          <article class="card project-card">
+            <p class="card-index">04</p>
+            <h3>Fractal renderer</h3>
+            <p>
+              A browser canvas project I added because I like visual debugging:
+              tweak a value, render again, see immediately what changed.
+            </p>
+            <ul class="tag-list" aria-label="Technologies used">
+              <li>Canvas</li>
+              <li>JavaScript</li>
+              <li>Interactive rendering</li>
+            </ul>
+          </article>
+        </div>
       </div>
     </section>
-    <section class="work wrap" id="work" aria-labelledby="work-title">
-      <div class="section-heading"><h2 id="work-title">Selected projects<span class="project-count">(04)</span></h2></div>
-      <div class="project-index">
-        <a class="project-row" href="fractal/">
-          <span class="project-number meta" aria-hidden="true">01</span>
-          <div class="project-thumb"><img src="assets/fractal.webp" alt="Mandelbrot fractal in the browser renderer" width="1200" height="750" loading="lazy"></div>
-          <div class="project-info"><h3>Fractal renderer</h3><p>Explore Mandelbrot, Julia and five more fractals.</p></div>
-          <span class="project-type meta">Canvas / Maths</span><span class="project-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="project-row" href="sorting">
-          <span class="project-number meta" aria-hidden="true">02</span>
-          <div class="project-thumb"><img src="assets/sorting.webp" alt="Sorting algorithms represented as vertical bars" width="1200" height="750" loading="lazy"></div>
-          <div class="project-info"><h3>Sorting visualiser</h3><p>Compare eight algorithms, step by step.</p></div>
-          <span class="project-type meta">Algorithms</span><span class="project-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="project-row" href="chess">
-          <span class="project-number meta" aria-hidden="true">03</span>
-          <div class="project-thumb"><img src="assets/chess.webp" alt="Chess board ready to play" width="1200" height="750" loading="lazy"></div>
-          <div class="project-info"><h3>Chess</h3><p>Play my minimax engine or take on Stockfish.</p></div>
-          <span class="project-type meta">Game / AI</span><span class="project-arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="project-row" href="learn">
-          <span class="project-number meta" aria-hidden="true">04</span>
-          <div class="project-thumb"><img src="assets/study.webp" alt="HTML and CSS flashcards in the study deck" width="1200" height="750" loading="lazy"></div>
-          <div class="project-info"><h3>Study deck</h3><p>HTML and CSS flashcards with spaced repetition.</p></div>
-          <span class="project-type meta">Learning tool</span><span class="project-arrow" aria-hidden="true">↗</span>
-        </a>
-      </div>
-      <a class="source-link meta" href="https://github.com/jordancb54321/jordanb.io">View source on GitHub <span aria-hidden="true">↗</span></a>
-    </section>
-    <section class="about-section" id="about" aria-labelledby="about-title">
-      <div class="wrap about-grid">
-        <h2 id="about-title">A little<br> about me.</h2>
-        <div class="about-content"><p class="about-lead">I’m a Computer Science graduate based in Hertfordshire, designing and building for the web.</p><p>My experience includes client websites and production support, with work on Prestige Carpet Cleaning and Prestige Commercial.</p><div class="tool-list" id="stack"><h3 class="meta">Tools I work with</h3><p>HTML &amp; CSS / JavaScript / React / WordPress<br>C# &amp; ASP.NET / Python / SQL / Git &amp; Linux</p></div></div>
+
+    <section class="section section-accent" id="about">
+      <div class="wrap info-grid">
+        <div>
+          <p class="eyebrow">About</p>
+          <h2>I would rather make the boring part solid than hide it behind polish.</h2>
+        </div>
+
+        <div class="flow">
+          <p>
+            My background is a mix of development, support, and fixing things
+            that are already in use. That has made me fairly practical: before I
+            reach for a clever solution, I want to understand what is actually
+            failing and who it affects.
+          </p>
+          <p>
+            Backend development appeals to me because the work is measurable.
+            The code either handles the case correctly, stores the data safely,
+            responds quickly enough, and gives the next person enough context to
+            maintain it.
+          </p>
+        </div>
       </div>
     </section>
-    <section class="contact-section wrap" id="contact" aria-labelledby="contact-title">
-      <div><p class="meta">Contact</p><h2 id="contact-title">Get in touch<span class="red-dot" aria-hidden="true">.</span></h2></div>
-      <!--email_off--><address><a class="contact-email" href="mailto:jordanb03@protonmail.com">jordanb03@<wbr>protonmail.com <span aria-hidden="true">↗</span></a><div class="contact-links"><a href="tel:+447387454468">07387 454 468</a><a href="https://github.com/jordancb54321">GitHub ↗</a></div></address><!--/email_off-->
+
+    <section class="section" id="stack">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">Stack</p>
+          <h2>Tools I have used enough to be useful with.</h2>
+        </div>
+
+        <div class="feature-grid">
+          <article class="card feature-card">
+            <h3>Programming</h3>
+            <p>
+              C#, Java, and Python. I am most comfortable when I can break a
+              problem into smaller pieces and test the behaviour as I go.
+            </p>
+          </article>
+
+          <article class="card feature-card">
+            <h3>Web development</h3>
+            <p>
+              HTML, CSS, JavaScript, React, ASP.NET MVC, and WordPress. This
+              site is deliberately plain static HTML because it does not need more.
+            </p>
+          </article>
+
+          <article class="card feature-card">
+            <h3>Systems and databases</h3>
+            <p>
+              MySQL, MongoDB, Git, Linux, and Windows troubleshooting. I have
+              also spent time around production support, where small details matter.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-contact" id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Open to junior developer opportunities.</h2>
+        </div>
+
+        <div class="card contact-card">
+          <p>Email</p>
+          <a href="mailto:jordanb03@protonmail.com">jordanb03@protonmail.com</a>
+          <p>Phone</p>
+          <a href="tel:07387454468">07387 454 468</a>
+          <p>Based in</p>
+          <span>Hertfordshire, UK</span>
+        </div>
+      </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wrap footer-row"><a class="wordmark" href="/">JORDAN B<span class="brand-dot" aria-hidden="true"></span></a><span class="meta">Hertfordshire, UK</span><a class="meta" href="#top">Back to top ↑</a></div></footer>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>Hand-built static site. No template, no tracking scripts, no build step.</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
 </body>
 </html>

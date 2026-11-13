@@ -4,34 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jordan Betts | Fractal Renderer</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="../project-shell.css">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="project-page">
+<body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header"><div class="wrap header-row"><a class="wordmark" href="/" aria-label="Jordan Betts, home">JORDAN B<span class="brand-dot" aria-hidden="true"></span></a><nav class="site-nav" aria-label="Primary"><a href="/">Portfolio</a><a href="/fractal/" aria-current="page">Fractal</a><a href="/sorting">Sorting</a><a href="/chess">Chess</a><a href="/learn">Study</a></nav></div></header>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">JB</span>
+        <div>
+          <p class="eyebrow">Interactive project</p>
+          <a class="brand-name" href="../">Jordan Betts</a>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="../#work">Work</a>
+        <a href="../#about">About</a>
+        <a href="../#stack">Stack</a>
+        <a href="../chess">Chess</a>
+        <a href="../sorting">Sorting</a>
+        <a href="./" aria-current="page">Fractal</a>
+        <a href="../#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
   <main id="main" class="app-shell">
-<div class="fractal-heading"><div>
-        <p class="meta">Canvas / Maths</p>
-        <h1>Fractal renderer<span class="red-dot" aria-hidden="true">.</span></h1>
-        <p class="fractal-intro">Scroll to zoom. Drag to pan. Choose a preset to explore.</p>
-      </div></div>
-    <section class="viewer" aria-label="Fractal preview">
-      <div class="viewer-toolbar">
-        <button type="button" id="fitViewButton" class="secondary">Fit canvas</button>
-        <span id="canvasInfo">0 x 0</span>
+    <aside class="control-panel">
+      <div>
+        <p class="eyebrow">Canvas experiment</p>
+        <h1>Fractal Renderer</h1>
+        <p class="intro">
+          A browser renderer for playing with Mandelbrot, Julia, Burning Ship,
+          and a few other fractals. Change the values, zoom in, break it, reset it.
+        </p>
       </div>
-      <div class="canvas-frame">
-        <canvas id="fractalCanvas" aria-label="Fractal renderer canvas"></canvas>
-      </div>
-    </section>
-    <aside class="control-panel" aria-label="Renderer settings">
-
 
       <form id="controls" class="controls">
         <label>
@@ -119,7 +128,10 @@
         </div>
       </form>
 
-
+      <section class="tips">
+        <h2>Navigation</h2>
+        <p>Scroll to zoom, drag to pan, double-click to zoom in, and shift + double-click to zoom out. Auto zoom samples the image and follows detailed edges instead of empty regions.</p>
+      </section>
 
       <section class="status-panel">
         <h2>Status</h2>
@@ -140,7 +152,15 @@
       </section>
     </aside>
 
-
+    <section class="viewer" aria-label="Fractal preview">
+      <div class="viewer-toolbar">
+        <button type="button" id="fitViewButton" class="secondary">Fit canvas</button>
+        <span id="canvasInfo">0 x 0</span>
+      </div>
+      <div class="canvas-frame">
+        <canvas id="fractalCanvas" aria-label="Fractal renderer canvas"></canvas>
+      </div>
+    </section>
   </main>
 
   <script src="app.js?v=guided-auto-zoom-2"></script>

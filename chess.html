@@ -4,30 +4,51 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Jordan Betts | Chess Engine Demo</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta
     name="description"
     content="A chess page by Jordan Betts with a custom JavaScript bot, Stockfish.js, and a bot-vs-bot mode."
   >
-  <meta name="theme-color" content="#f5f5f2">
-
+  <meta name="theme-color" content="#f4f7f1">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="project-shell.css">
   <link rel="stylesheet" href="vendor/chessboard-1.0.0.min.css">
-  <link rel="stylesheet" href="chess.css?v=redesign-3">
+  <link rel="stylesheet" href="chess.css">
 </head>
-<body class="project-page">
+<body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header"><div class="wrap header-row"><a class="wordmark" href="/" aria-label="Jordan Betts, home">JORDAN B<span class="brand-dot" aria-hidden="true"></span></a><nav class="site-nav" aria-label="Primary"><a href="/">Portfolio</a><a href="/fractal/">Fractal</a><a href="/sorting">Sorting</a><a href="/chess" aria-current="page">Chess</a><a href="/learn">Study</a></nav></div></header>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">JB</span>
+        <div>
+          <p class="eyebrow">Interactive project</p>
+          <a class="brand-name" href="./">Jordan Betts</a>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="./#work">Work</a>
+        <a href="./#about">About</a>
+        <a href="./#stack">Stack</a>
+        <a href="chess" aria-current="page">Chess</a>
+        <a href="sorting">Sorting</a>
+        <a href="fractal/">Fractal</a>
+        <a href="./#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
   <main id="main">
     <section class="section chess-hero">
       <div class="wrap chess-hero-grid">
         <div>
-          <p class="meta">Game / AI</p>
-          <h1>Chess<span class="red-dot" aria-hidden="true">.</span></h1>
-          <p class="lead">Play White against my minimax engine or Stockfish. Switch on bot battle to watch the engines play.</p>
+          <p class="eyebrow">Chess experiment</p>
+          <h1>A small chess page that got more serious than planned.</h1>
+          <p class="lead">
+            I started this as a way to understand minimax properly. It now has
+            my own worker-based bot, a local Stockfish.js option, and a bot-vs-bot
+            mode so I can compare how badly my engine gets punished.
+          </p>
 
           <div class="hero-actions">
             <button class="button button-primary" id="new-game" type="button">
@@ -38,6 +59,17 @@
             </button>
           </div>
         </div>
+
+        <aside class="hero-panel chess-summary" aria-label="Engine summary">
+          <p class="panel-label">What is running here</p>
+          <ul class="panel-list">
+            <li>My bot uses minimax, alpha-beta pruning, and simple move ordering</li>
+            <li>It has a small evaluation function for material, squares, pawns, and development</li>
+            <li>The search runs in a Web Worker so dragging pieces still feels normal</li>
+            <li>Stockfish.js is included locally for a much stronger comparison</li>
+            <li>Bot-vs-bot mode is mostly there because watching engines argue is useful</li>
+          </ul>
+        </aside>
       </div>
     </section>
 
@@ -69,7 +101,7 @@
 
           <div class="engine-controls" aria-label="Chess engine options">
             <label class="select-control" for="black-engine">
-              Black engine
+              Black bot
               <select id="black-engine">
                 <option value="custom">Custom minimax</option>
                 <option value="stockfish">Stockfish.js lite</option>
@@ -78,11 +110,11 @@
 
             <label class="toggle-control">
               <input id="bot-battle" type="checkbox">
-              <span>Bot battle</span>
+              <span>Make the bots play each other</span>
             </label>
 
             <label class="select-control" for="white-engine">
-              White engine
+              White bot
               <select id="white-engine">
                 <option value="custom">Custom minimax</option>
                 <option value="stockfish">Stockfish.js lite</option>
@@ -100,20 +132,35 @@
             Higher depth means a stronger search, but it can slow the engine noticeably on some devices.
           </p>
 
-          <p class="performance-warning" id="stockfish-warning">Stockfish loads on first use.</p>
+          <p class="performance-warning" id="stockfish-warning">
+            Stockfish loads a local WASM engine. It is much stronger than my bot,
+            but first load can take a moment and bot-vs-bot mode can use more CPU.
+          </p>
 
           <div class="move-history-wrap">
             <p class="panel-label">Move history</p>
             <ol id="move-history" class="move-history" aria-live="polite"></ol>
           </div>
 
-
+          <div class="notes">
+            <p class="panel-label">How it works</p>
+            <p class="status-copy">
+              Normal mode lets you play White. Bot-vs-bot mode hands both sides
+              to the selected engines. It is not meant to be a polished chess
+              product, just a working browser experiment.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="wrap footer-row"><a class="wordmark" href="/">JORDAN B<span class="brand-dot" aria-hidden="true"></span></a><a class="meta" href="/#work">All projects ↗</a></div></footer>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>Built as a learning project, then left visible because it shows the work.</p>
+      <a href="./">Back to portfolio</a>
+    </div>
+  </footer>
 
   <script src="vendor/jquery-3.7.1.min.js"></script>
   <script src="vendor/chess.min.js"></script>
