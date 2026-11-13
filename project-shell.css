@@ -1,0 +1,284 @@
+/* Shared shell for the working experiments. Their controls and engines stay separate. */
+.project-page {
+  --bg: #e5e5e5;
+  --ink: #141414;
+  --muted: #484848;
+  --text: #141414;
+  --surface: #d6d6d6;
+  --white: #f1f1f1;
+  --gray-100: #dedede;
+  --gray-200: #ccc;
+  --gray-300: #aaa;
+  --line: #aaa;
+  --accent: #f23b42;
+  --accent-strong: #c12029;
+  --signal: #f23b42;
+  --radius: 0;
+  --shadow: none;
+  --fractal-panel: #d6d6d6;
+  --fractal-panel-strong: #dedede;
+  --fractal-control: #eee;
+  --fractal-control-border: #aaa;
+  --fractal-canvas-shadow: none;
+  color: var(--ink);
+  background: var(--bg);
+}
+.project-page .site-header > .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 88px;
+  padding-block: 12px;
+}
+.project-page .brand {
+  display: block;
+}
+.project-page .brand-mark,
+.project-page .brand .eyebrow {
+  display: none;
+}
+.project-page .brand-name {
+  color: #e5e5e5;
+  text-decoration: none;
+  font-size: 20px;
+}
+.project-page .site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  justify-content: flex-end;
+}
+.project-page .site-nav a {
+  font-size: 14px;
+}
+.project-page .site-nav a[aria-current="page"] {
+  color: #ff6268;
+}
+.project-page .eyebrow {
+  display: none;
+}
+.project-page h1 {
+  font-size: clamp(52px, 6vw, 88px);
+  max-width: 13ch;
+  line-height: 0.96;
+  margin-bottom: 28px;
+}
+.project-page h2 {
+  font-size: 32px;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.project-page h3 {
+  font-size: 28px;
+}
+.project-page .section {
+  padding-block: 56px;
+}
+.project-page .lead {
+  max-width: 55ch;
+  font-size: 18px;
+}
+.project-page .hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.project-page .hero-panel,
+.project-page .card {
+  border: 0;
+  border-radius: 0;
+  background: #d6d6d6;
+  padding: 24px;
+  box-shadow: none;
+}
+.project-page .hero-panel {
+  align-self: stretch;
+}
+.project-page .panel-label {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+.project-page .panel-list {
+  padding-left: 20px;
+}
+.project-page .panel-list li {
+  margin-bottom: 10px;
+}
+.project-page .button {
+  min-height: 48px;
+  gap: 16px;
+  padding: 12px 20px;
+}
+.project-page .button-primary {
+  color: #141414;
+  background: #f23b42;
+  border-color: #f23b42;
+}
+.project-page .button-secondary {
+  color: #141414;
+  background: #ccc;
+  border-color: #aaa;
+}
+.project-page .button-primary:hover,
+.project-page .button-secondary:hover {
+  color: #e5e5e5;
+  background: #141414;
+}
+.project-page .chess-board-card,
+.project-page .learn-hero-panel {
+  background: #d6d6d6;
+}
+.project-page .engine-controls {
+  background: #e5e5e5;
+  border-radius: 0;
+}
+.project-page .learn-tabs {
+  position: relative;
+  top: auto;
+  box-shadow: none;
+  backdrop-filter: none;
+  background: #ccc;
+  border: 0;
+  border-radius: 0;
+  flex-wrap: wrap;
+  overflow: visible;
+}
+.project-page .learn-tab {
+  border-radius: 0;
+  flex: 1 1 90px;
+}
+.project-page .learn-tab.is-active {
+  background: #141414;
+  color: #e5e5e5;
+}
+.project-page .metric-card,
+.project-page .study-goal,
+.project-page .deck-card,
+.project-page .study-card,
+.project-page .empty-state,
+.project-page .settings-panel,
+.project-page .data-panel {
+  border-radius: 0;
+  box-shadow: none;
+  background: #dedede;
+}
+.project-page .control-panel,
+.project-page .viewer {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.project-page .control-panel h1 {
+  font-size: 48px;
+  max-width: 9ch;
+}
+.project-page .viewer {
+  overflow: hidden;
+}
+.project-page .app-shell {
+  width: var(--wrap);
+  max-width: 1800px;
+}
+.project-page input,
+.project-page select,
+.project-page textarea {
+  accent-color: #c12029;
+}
+.project-page select,
+.project-page textarea,
+.project-page input[type="text"],
+.project-page input[type="number"] {
+  color: #141414;
+  background: #eee;
+  max-width: 100%;
+}
+.project-page .site-footer,
+.project-page > footer {
+  padding: 32px 0;
+  background: #ccc;
+  color: #141414;
+}
+.project-page [hidden] {
+  display: none !important;
+}
+@media (max-width: 900px) {
+  .project-page .chess-hero-grid,
+  .project-page .sorting-hero-grid,
+  .project-page .learn-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-page .chess-layout {
+    grid-template-columns: 1fr;
+  }
+  .project-page .app-shell {
+    grid-template-columns: 1fr;
+  }
+  .project-page .site-header > .wrap {
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .project-page .site-nav {
+    gap: 4px 16px;
+  }
+  .project-page .sorting-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .project-page .site-header > .wrap {
+    display: block;
+    padding-block: 20px;
+  }
+  .project-page .site-nav {
+    justify-content: flex-start;
+    gap: 4px 16px;
+    margin-top: 12px;
+  }
+  .project-page .site-nav a {
+    padding: 4px 0;
+  }
+  .project-page h1 {
+    font-size: 52px;
+    max-width: 12ch;
+  }
+  .project-page .section {
+    padding-block: 36px;
+  }
+  .project-page .sorting-controls {
+    grid-template-columns: 1fr;
+  }
+  .project-page .sorting-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-page .chess-board-card {
+    padding: 12px;
+  }
+  .project-page .hero-panel,
+  .project-page .card {
+    padding: 20px;
+  }
+  .project-page .app-shell {
+    padding-top: 24px;
+  }
+  .project-page .control-panel {
+    padding: 20px;
+  }
+  .project-page .learn-tabs {
+    gap: 4px;
+  }
+  .project-page .learn-tab {
+    min-width: 70px;
+    font-size: 14px;
+    padding: 12px 8px;
+  }
+  .project-page .lead {
+    font-size: 16px;
+  }
+  .project-page .viewer {
+    min-width: 0;
+  }
+}

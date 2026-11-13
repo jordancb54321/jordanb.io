@@ -1,3 +1,8 @@
 *.7z
 .DS_Store
 Thumbs.db
+.taste-skill/
+dist/
+__pycache__/
+node_modules/
+.wrangler/
