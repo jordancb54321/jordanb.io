@@ -6,6 +6,7 @@ const output = new URL("dist/", root);
 // Explicit site-only allowlist; captures, tests, source notes and tooling never ship.
 const paths = [
   "index.html",
+  "404.html",
   "styles.css",
   "site.js",
   "project-shell.css",
