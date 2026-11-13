@@ -56,6 +56,7 @@ with sync_playwright() as playwright:
     plain = fallback.new_page()
     plain.goto(BASE + '/')
     expect(plain.locator('h1')).to_have_text('Jordan Betts')
+    expect(plain.locator('a[href="mailto:jordanb03@protonmail.com"]').first).to_be_visible()
     for target in ['fractal/', 'learn', 'chess', 'sorting']:
         assert plain.locator(f'a[href="{target}"]').first.is_visible()
     assert plain.locator('img').count() >= 4
