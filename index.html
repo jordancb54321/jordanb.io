@@ -3,37 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jordan Betts | Junior Developer Portfolio</title>
-  <meta
-    name="description"
-    content="Jordan Betts is a Computer Science graduate in Hertfordshire focused on backend development, problem-solving, and efficient web applications."
-  >
+  <script src="/theme.js"></script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <title>Jordan Betts | Junior Software Developer in Durban</title>
+  <meta name="description" content="I'm Jordan Betts, an Application Development graduate in Durban, South Africa. I build software and websites, and I'm looking for a junior developer role.">
   <meta name="theme-color" content="#f4f7f1">
-  <meta property="og:title" content="Jordan Betts | Junior Developer Portfolio">
-  <meta
-    property="og:description"
-    content="Jordan Betts' portfolio: client sites, small JavaScript demos, and notes on the kind of backend work he is aiming for."
-  >
+  <meta property="og:title" content="Jordan Betts | Junior Software Developer in Durban">
+  <meta property="og:description" content="Software projects, freelance websites and a bit about my experience. Based in Durban, South Africa.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jordanb.io/">
+  <link rel="canonical" href="https://jordanb.io/">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/theme.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">JB</span>
-        <div>
-          <p class="eyebrow">Junior developer portfolio</p>
-          <a class="brand-name" href="#top">Jordan Betts</a>
+      <div class="header-identity">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">JB</span>
+          <div>
+            <p class="eyebrow">Junior software developer</p>
+            <a class="brand-name" href="#top">Jordan Betts</a>
+          </div>
         </div>
+        <button class="theme-toggle" type="button" data-theme-toggle hidden>Dark theme</button>
       </div>
-
       <nav class="site-nav" aria-label="Primary">
         <a href="#work">Work</a>
         <a href="#about">About</a>
-        <a href="#stack">Stack</a>
+        <a href="#stack">Skills</a>
         <a href="chess">Chess</a>
         <a href="sorting">Sorting</a>
         <a href="fractal/">Fractal</a>
@@ -46,57 +47,33 @@
     <section class="hero" id="top">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Built by hand, kept lightweight</p>
-          <h1>Backend-focused developer building practical, reliable software.</h1>
+          <p class="eyebrow">Durban, South Africa</p>
+          <h1>Hi, I’m Jordan, a junior software developer.</h1>
           <p class="lead">
-            I'm Jordan, a Computer Science graduate based in Hertfordshire. I
-            like working close to the logic of a system: debugging awkward
-            problems, keeping websites fast, and writing code that is easy to
-            come back to later.
+            I’m an Application Development graduate based in Durban. I’ve worked
+            on live business websites and industrial automation, and I’m looking
+            for a junior software development role.
           </p>
-
           <div class="hero-actions">
-            <a class="button button-primary" href="#work">See projects</a>
+            <a class="button button-primary" href="#work">See my work</a>
             <a class="button button-secondary" href="#contact">Get in touch</a>
           </div>
-
-          <p class="personal-note">
-            Current priority: get into a junior role, become useful quickly, and
-            keep improving by working around better developers.
-          </p>
-
-          <ul class="hero-stats" aria-label="Site highlights">
-            <li>
-              <strong>0</strong>
-              <span>frameworks needed for this site</span>
-            </li>
-            <li>
-              <strong>2024</strong>
-              <span>finished my Computer Science degree</span>
-            </li>
-            <li>
-              <strong>2025</strong>
-              <span>moved to the UK and started client web work</span>
-            </li>
+          <ul class="hero-stats" aria-label="Education and experience">
+            <li><strong>2024</strong><span>graduated in Application Development</span></li>
+            <li><strong>80%+</strong><span>degree average</span></li>
+            <li><strong>2</strong><span>business websites redesigned</span></li>
           </ul>
         </div>
-
         <aside class="hero-panel" aria-label="Profile summary">
-          <p class="panel-label">What I am looking for</p>
+          <p class="panel-label">My experience so far</p>
           <ul class="panel-list">
-            <li>Junior backend or software developer work</li>
-            <li>A team where I can learn from real code reviews</li>
-            <li>Work that rewards careful debugging and clear thinking</li>
+            <li>Software, web and mobile development</li>
+            <li>Freelance WordPress websites and IT support</li>
+            <li>Troubleshooting factory automation</li>
           </ul>
-
           <div class="panel-divider"></div>
-
-          <p class="panel-label">Location</p>
-          <p class="panel-copy">
-            Hertfordshire, United Kingdom. Relocated from South Africa in April
-            2025, so I am currently building up UK experience and looking for a
-            team where I can contribute properly.
-          </p>
+          <p class="panel-label">Looking for work</p>
+          <p class="panel-copy">I’m looking for a junior developer role in Durban where I can put my skills to use and keep learning.</p>
         </aside>
       </div>
     </section>
@@ -104,65 +81,36 @@
     <section class="section" id="work">
       <div class="wrap">
         <div class="section-heading">
-          <p class="eyebrow">Selected work</p>
-          <h2>A few things I have actually built or worked on.</h2>
+          <p class="eyebrow">Work and projects</p>
+          <h2>Here’s what I’ve been working on.</h2>
         </div>
-
         <div class="project-grid">
           <article class="card project-card">
             <p class="card-index">01</p>
-            <h3>Prestige Carpet Cleaning</h3>
-            <p>
-              A real client website, not a mockup. I handled layout, service
-              pages, mobile fixes, and small content updates after launch.
-            </p>
-            <ul class="tag-list" aria-label="Technologies used">
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>Responsive design</li>
-            </ul>
+            <h3><a href="https://prestigecarpetcleaning.co.uk">Prestige Carpet Cleaning</a></h3>
+            <p>I redesigned the website with WordPress, custom CSS and new page layouts. I also updated the content and forms, and helped maintain the site.</p>
+            <p class="work-date">Prestige Carpet Care · Freelance<br>January 2025 – May 2026</p>
+            <ul class="tag-list" aria-label="Technologies used"><li>WordPress</li><li>Custom CSS</li><li>Page layouts</li></ul>
           </article>
-
           <article class="card project-card">
             <p class="card-index">02</p>
-            <h3>Prestige Commercial</h3>
-            <p>
-              Similar client work for a commercial cleaning service. The useful
-              part here was learning to make changes without breaking a live site.
-            </p>
-            <ul class="tag-list" aria-label="Technologies used">
-              <li>Client work</li>
-              <li>Live updates</li>
-              <li>Deployment</li>
-            </ul>
+            <h3><a href="https://prestigecommercial.co.uk">Prestige Commercial</a></h3>
+            <p>I overhauled this site as part of the same freelance role. Alongside the redesign, I handled live updates, hosting, deployment and day-to-day IT support.</p>
+            <p class="work-date">Prestige Carpet Care · Freelance<br>January 2025 – May 2026</p>
+            <ul class="tag-list" aria-label="Work involved"><li>WordPress</li><li>Hosting</li><li>IT support</li></ul>
           </article>
-
           <article class="card project-card">
             <p class="card-index">03</p>
-            <h3>Production support and troubleshooting</h3>
-            <p>
-              Support work taught me to be patient with messy problems: checking
-              logs, isolating causes, documenting fixes, and not guessing.
-            </p>
-            <ul class="tag-list" aria-label="Technologies used">
-              <li>Troubleshooting</li>
-              <li>Documentation</li>
-              <li>Systems support</li>
-            </ul>
+            <h3>Plastic Products International</h3>
+            <p>As a technical operator, I fixed faults in robots on injection-moulding lines. I also adjusted machine programs and helped with setup and calibration.</p>
+            <p class="work-date">Technical Operator<br>April 2025 – December 2025</p>
+            <ul class="tag-list" aria-label="Work involved"><li>Automation</li><li>Troubleshooting</li><li>Machine setup</li></ul>
           </article>
-
           <article class="card project-card">
             <p class="card-index">04</p>
-            <h3>Fractal renderer</h3>
-            <p>
-              A browser canvas project I added because I like visual debugging:
-              tweak a value, render again, see immediately what changed.
-            </p>
-            <ul class="tag-list" aria-label="Technologies used">
-              <li>Canvas</li>
-              <li>JavaScript</li>
-              <li>Interactive rendering</li>
-            </ul>
+            <h3><a href="fractal/">Fractal renderer</a></h3>
+            <p>A JavaScript project for exploring fractals in the browser. Pick a fractal, change the settings, and zoom in to see the detail.</p>
+            <ul class="tag-list" aria-label="Technologies used"><li>Canvas</li><li>JavaScript</li><li>Interactive rendering</li></ul>
           </article>
         </div>
       </div>
@@ -170,87 +118,40 @@
 
     <section class="section section-accent" id="about">
       <div class="wrap info-grid">
-        <div>
-          <p class="eyebrow">About</p>
-          <h2>I would rather make the boring part solid than hide it behind polish.</h2>
-        </div>
-
+        <div><p class="eyebrow">About</p><h2>A bit about my background.</h2></div>
         <div class="flow">
-          <p>
-            My background is a mix of development, support, and fixing things
-            that are already in use. That has made me fairly practical: before I
-            reach for a clever solution, I want to understand what is actually
-            failing and who it affects.
-          </p>
-          <p>
-            Backend development appeals to me because the work is measurable.
-            The code either handles the case correctly, stores the data safely,
-            responds quickly enough, and gives the next person enough context to
-            maintain it.
-          </p>
+          <p>I graduated in 2024 with a Bachelor of Computer and Information Sciences in Application Development from Varsity College, now Emeris, in South Africa. My average was 80%+.</p>
+          <p>My studies covered software development, databases, web and mobile development, application design and systems analysis.</p>
+          <p>Since then, I’ve worked on business websites and spent time on a factory floor fixing automation problems. I’m now looking for my first junior software development role in Durban.</p>
         </div>
       </div>
     </section>
 
     <section class="section" id="stack">
       <div class="wrap">
-        <div class="section-heading">
-          <p class="eyebrow">Stack</p>
-          <h2>Tools I have used enough to be useful with.</h2>
-        </div>
-
+        <div class="section-heading"><p class="eyebrow">Skills</p><h2>What I work with.</h2></div>
         <div class="feature-grid">
-          <article class="card feature-card">
-            <h3>Programming</h3>
-            <p>
-              C#, Java, and Python. I am most comfortable when I can break a
-              problem into smaller pieces and test the behaviour as I go.
-            </p>
-          </article>
-
-          <article class="card feature-card">
-            <h3>Web development</h3>
-            <p>
-              HTML, CSS, JavaScript, React, ASP.NET MVC, and WordPress. This
-              site is deliberately plain static HTML because it does not need more.
-            </p>
-          </article>
-
-          <article class="card feature-card">
-            <h3>Systems and databases</h3>
-            <p>
-              MySQL, MongoDB, Git, Linux, and Windows troubleshooting. I have
-              also spent time around production support, where small details matter.
-            </p>
-          </article>
+          <article class="card feature-card"><h3>Programming</h3><p>C#, Java and Python. My degree also included Android development with Java and XML.</p></article>
+          <article class="card feature-card"><h3>Web development</h3><p>HTML, CSS, JavaScript, React, ASP.NET MVC and WordPress. My freelance work has mainly involved WordPress and custom CSS.</p></article>
+          <article class="card feature-card"><h3>Databases and tools</h3><p>MySQL, MongoDB, Git and Linux. I’ve also handled hosting, deployment and IT support for the websites I worked on.</p></article>
         </div>
       </div>
     </section>
 
     <section class="section section-contact" id="contact">
       <div class="wrap contact-grid">
-        <div>
-          <p class="eyebrow">Contact</p>
-          <h2>Open to junior developer opportunities.</h2>
-        </div>
-
+        <div><p class="eyebrow">Contact</p><h2>Have a junior developer role in Durban? I’d like to hear from you.</h2></div>
         <div class="card contact-card">
-          <p>Email</p>
-          <a href="mailto:jordanb03@protonmail.com">jordanb03@protonmail.com</a>
-          <p>Phone</p>
-          <a href="tel:07387454468">07387 454 468</a>
-          <p>Based in</p>
-          <span>Hertfordshire, UK</span>
+          <!--email_off-->
+          <p>Email</p><a href="mailto:jordanb03@protonmail.com">jordanb03@protonmail.com</a>
+          <!--/email_off-->
+          <p>Phone</p><a href="tel:07387454468">07387 454 468</a>
+          <p>Based in</p><span>Durban, South Africa</span>
+          <p>GitHub</p><a href="https://github.com/jordancb54321">github.com/jordancb54321</a>
         </div>
       </div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="wrap footer-row">
-      <p>Hand-built static site. No template, no tracking scripts, no build step.</p>
-      <a href="#top">Back to top</a>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="wrap footer-row"><p>Jordan Betts · Durban, South Africa</p><a href="#top">Back to top</a></div></footer>
 </body>
 </html>

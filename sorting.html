@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/theme.js"></script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Jordan Betts | Sorting Visualizer</title>
   <meta
     name="description"
@@ -11,24 +13,28 @@
   <meta name="theme-color" content="#f4f7f1">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="sorting.css">
+  <link rel="stylesheet" href="/theme.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">JB</span>
-        <div>
-          <p class="eyebrow">Interactive project</p>
-          <a class="brand-name" href="./">Jordan Betts</a>
+      <div class="header-identity">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">JB</span>
+          <div>
+            <p class="eyebrow">Interactive project</p>
+            <a class="brand-name" href="./">Jordan Betts</a>
+          </div>
         </div>
+        <button class="theme-toggle" type="button" data-theme-toggle hidden>Dark theme</button>
       </div>
 
       <nav class="site-nav" aria-label="Primary">
         <a href="./#work">Work</a>
         <a href="./#about">About</a>
-        <a href="./#stack">Stack</a>
+        <a href="./#stack">Skills</a>
         <a href="chess">Chess</a>
         <a href="sorting" aria-current="page">Sorting</a>
         <a href="fractal/">Fractal</a>
@@ -42,12 +48,8 @@
       <div class="wrap sorting-hero-grid">
         <div>
           <p class="eyebrow">Sorting playground</p>
-          <h1>Same numbers, different ways of putting them in order.</h1>
-          <p class="lead">
-            This is a visual way to compare algorithms I had mostly seen in
-            code or diagrams. Pick a few sorts, change the bar count, and watch
-            where the simple approaches start to struggle.
-          </p>
+          <h1>See how sorting algorithms work.</h1>
+          <p class="lead">Choose a few algorithms and run them on the same numbers. Change the array size or speed, and open the code to follow each step.</p>
 
           <div class="hero-actions">
             <button class="button button-primary" id="shuffle" type="button">
@@ -345,7 +347,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-row">
-      <p>Sorting demos in plain JavaScript, with the rough edges kept visible.</p>
+      <p>Sorting visualiser by Jordan Betts.</p>
       <a href="./">Back to portfolio</a>
     </div>
   </footer>

@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/theme.js"></script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <title>Jordan Betts | Chess Engine Demo</title>
   <meta
     name="description"
@@ -12,24 +14,28 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="vendor/chessboard-1.0.0.min.css">
   <link rel="stylesheet" href="chess.css">
+  <link rel="stylesheet" href="/theme.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">JB</span>
-        <div>
-          <p class="eyebrow">Interactive project</p>
-          <a class="brand-name" href="./">Jordan Betts</a>
+      <div class="header-identity">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">JB</span>
+          <div>
+            <p class="eyebrow">Interactive project</p>
+            <a class="brand-name" href="./">Jordan Betts</a>
+          </div>
         </div>
+        <button class="theme-toggle" type="button" data-theme-toggle hidden>Dark theme</button>
       </div>
 
       <nav class="site-nav" aria-label="Primary">
         <a href="./#work">Work</a>
         <a href="./#about">About</a>
-        <a href="./#stack">Stack</a>
+        <a href="./#stack">Skills</a>
         <a href="chess" aria-current="page">Chess</a>
         <a href="sorting">Sorting</a>
         <a href="fractal/">Fractal</a>
@@ -43,12 +49,8 @@
       <div class="wrap chess-hero-grid">
         <div>
           <p class="eyebrow">Chess experiment</p>
-          <h1>A small chess page that got more serious than planned.</h1>
-          <p class="lead">
-            I started this as a way to understand minimax properly. It now has
-            my own worker-based bot, a local Stockfish.js option, and a bot-vs-bot
-            mode so I can compare how badly my engine gets punished.
-          </p>
+          <h1>Play a game of chess.</h1>
+          <p class="lead">Play against a chess bot I wrote, or try Stockfish. You can also let the engines play each other.</p>
 
           <div class="hero-actions">
             <button class="button button-primary" id="new-game" type="button">
@@ -61,13 +63,13 @@
         </div>
 
         <aside class="hero-panel chess-summary" aria-label="Engine summary">
-          <p class="panel-label">What is running here</p>
+          <p class="panel-label">About the engines</p>
           <ul class="panel-list">
-            <li>My bot uses minimax, alpha-beta pruning, and simple move ordering</li>
-            <li>It has a small evaluation function for material, squares, pawns, and development</li>
-            <li>The search runs in a Web Worker so dragging pieces still feels normal</li>
-            <li>Stockfish.js is included locally for a much stronger comparison</li>
-            <li>Bot-vs-bot mode is mostly there because watching engines argue is useful</li>
+            <li>My bot uses minimax with alpha-beta pruning and move ordering</li>
+            <li>It scores positions using material, piece placement, pawns and development</li>
+            <li>The search runs in a Web Worker to keep the board responsive</li>
+            <li>Stockfish is included if you want a stronger opponent</li>
+            <li>Choose the engine for each side in bot-vs-bot mode</li>
           </ul>
         </aside>
       </div>
@@ -146,8 +148,7 @@
             <p class="panel-label">How it works</p>
             <p class="status-copy">
               Normal mode lets you play White. Bot-vs-bot mode hands both sides
-              to the selected engines. It is not meant to be a polished chess
-              product, just a working browser experiment.
+              to the selected engines. You can change the search depth and Stockfish move time above.
             </p>
           </div>
         </div>
@@ -157,7 +158,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-row">
-      <p>Built as a learning project, then left visible because it shows the work.</p>
+      <p>Chess project by Jordan Betts.</p>
       <a href="./">Back to portfolio</a>
     </div>
   </footer>
